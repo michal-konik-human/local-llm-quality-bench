@@ -157,6 +157,7 @@ the machine. Before trusting a new judge, calibrate it against your own labels:
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Why each design choice, and which published guidance it follows |
 | [docs/WRITING-CASES.md](docs/WRITING-CASES.md) | Case schema, every scorer, environments, the freeze checklist |
 | [docs/REPLICATE.md](docs/REPLICATE.md) | Reproduce one sample by hand, or a whole run on your machine |
+| [docs/AGENT-PLAYBOOK.md](docs/AGENT-PLAYBOOK.md) | System prompt for a small model that runs evaluations for you |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Good first contributions, ground rules, dev setup |
 | [local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results) | The reference rig's published runs and leaderboard |
 
