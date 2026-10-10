@@ -152,7 +152,7 @@ def build_contract():
     sla = {
         "pl": [f"Opłata Miesięczna wynosi {fee:,} zł netto i jest płatna z dołu w terminie 21 dni od doręczenia faktury.".replace(",", " "),
                f"Dostawca zapewnia Dostępność Systemu na poziomie co najmniej {str(target).replace('.', ',')}% w każdym miesiącu kalendarzowym.",
-               "Czas Niedostępności liczy się w pełnych minutach, od chwili rozpoczęcia Niedostępności do chwili przywrócenia funkcji podstawowych.",
+               "Czas Niedostępności liczy się w pełnych minutach, od chwili rozpoczęcia Niedostępności do chwili przywrócenia funkcji podstawowych. Niedostępność trwającą na przełomie miesięcy dzieli się między te miesiące według czasu przypadającego na każdy z nich.",
                "Dopuszczalny czas Niedostępności w danym miesiącu (Limit) oblicza się jako 0,5% liczby minut w tym miesiącu.",
                f"Za każdą rozpoczętą godzinę Niedostępności przekraczającej Limit Dostawca zapłaci karę umowną w wysokości {str(rate_old).replace('.0', '')}% Opłaty Miesięcznej.",
                "Do czasu Niedostępności nie wlicza się: (a) prac w Oknie Serwisowym zapowiedzianym Zamawiającemu co najmniej 72 godziny wcześniej, o ile pojedyncze okno nie przekracza 4 godzin; (b) przerw spowodowanych siłą wyższą, potwierdzoną pisemnie przez obie Strony.",
@@ -160,7 +160,7 @@ def build_contract():
                "Kary umowne za dany miesiąc pomniejsza się o kwotę rekompensat (kredytów serwisowych) przyznanych przez Dostawcę za ten sam miesiąc."],
         "en": [f"The Monthly Fee is PLN {fee:,} net, payable in arrears within 21 days of receipt of the invoice.",
                f"The Provider shall ensure System Availability of at least {target}% in each calendar month.",
-               "Unavailability is counted in full minutes, from the moment it starts until the core functions are restored.",
+               "Unavailability is counted in full minutes, from the moment it starts until the core functions are restored. Unavailability spanning the turn of a month is split between the months according to the time falling in each of them.",
                "The permitted Unavailability in a month (the Allowance) is 0.5% of the number of minutes in that month.",
                f"For each started hour of Unavailability exceeding the Allowance the Provider shall pay a contractual penalty of {str(rate_old).replace('.0', '')}% of the Monthly Fee.",
                "Unavailability does not include: (a) work in a Maintenance Window announced to the Customer at least 72 hours in advance, provided a single window does not exceed 4 hours; (b) interruptions caused by force majeure confirmed in writing by both Parties.",
@@ -174,6 +174,12 @@ def build_contract():
                ("Projekt Aneksu nr 2 (NIEPODPISANY – do dalszych negocjacji)",
                 ["Proponuje się podniesienie kary za rozpoczętą godzinę ponad Limit do 5% Opłaty Miesięcznej oraz zniesienie limitu z §6 ust. 6.",
                  "Projekt nie został przyjęty przez Dostawcę."]),
+               ("Załącznik nr 5a – Protokół z przeglądu jakości za sierpień 2026 r.",
+                ["Dostawca przyznał Zamawiającemu kredyt serwisowy w kwocie 300 zł netto za sierpień 2026 r.",
+                 "Strony nie stwierdziły innych odstępstw od poziomu usług."]),
+               ("Aneks nr 3 (podpisany 30 września 2026 r.)",
+                ["§6 ust. 6 otrzymuje brzmienie: „Łączna wysokość kar umownych za dany miesiąc nie może przekroczyć 8% Opłaty Miesięcznej.”",
+                 "Aneks obowiązuje od 1 października 2026 r."]),
                ("Załącznik nr 5 – Protokół z przeglądu jakości za wrzesień 2026 r.",
                 [f"Dostawca przyznał Zamawiającemu jednorazowy kredyt serwisowy w kwocie {credit} zł netto za wrzesień 2026 r. w związku z incydentem z 3 września.",
                  "Strony potwierdzają, że przerwa z 24 września 2026 r. (awaria regionalnej sieci energetycznej) stanowi siłę wyższą w rozumieniu §6 ust. 5 lit. b."])],
@@ -183,11 +189,18 @@ def build_contract():
                ("Draft Amendment No. 2 (NOT SIGNED – subject to further negotiation)",
                 ["It is proposed to raise the penalty per started hour above the Allowance to 5% of the Monthly Fee and to remove the cap in §6(6).",
                  "The draft was not accepted by the Provider."]),
+               ("Annex 5a – Minutes of the service quality review for August 2026",
+                ["The Provider granted the Customer a service credit of PLN 300 net for August 2026.",
+                 "The Parties found no other deviations from the service levels."]),
+               ("Amendment No. 3 (signed on 30 September 2026)",
+                ["§6(6) is replaced by: \"Total contractual penalties for a month may not exceed 8% of the Monthly Fee.\"",
+                 "The amendment applies from 1 October 2026."]),
                ("Annex 5 – Minutes of the service quality review for September 2026",
                 [f"The Provider granted the Customer a one-off service credit of PLN {credit} net for September 2026 in connection with the incident of 3 September.",
                  "The Parties confirm that the interruption of 24 September 2026 (regional power grid failure) constitutes force majeure within the meaning of §6(5)(b)."])],
     }
-    outages = [  # (day, minutes, kind, notice_h)
+    outages = [  # (day, minutes in September, kind, notice_h); the case prompt lists the same outages
+        (1, 60, "unplanned", None),  # 31 Aug 23:20 - 1 Sep 01:00: 100 min, of which 60 fall in September
         (3, 95, "unplanned", None), (10, 180, "planned", 96), (17, 300, "planned", 48), (24, 50, "force_majeure", None)]
     # ---- answer, computed
     minutes_month = 30 * 24 * 60
@@ -270,31 +283,33 @@ def build_minutes():
         (2, "new", "D-07", "Premia roczna wypłacana w marcu.", "The annual bonus is paid in March."),
         (3, "reject", "D-05", "Wniosek o uchylenie D-05 (spotkania online) odrzucono – D-05 obowiązuje.", "A motion to revoke D-05 (meetings online) was rejected – D-05 stays in force."),
         (3, "new", "D-08", "Nowy dostawca kawy od listopada.", "New coffee supplier from November."),
-        (3, "replace", "D-04", "D-04 zastępujemy decyzją D-09.", "D-04 is replaced by D-09."),
         (3, "new", "D-09", "Leasing 12 laptopów zamiast zakupu.", "Leasing 12 laptops instead of buying them."),
+        (3, "replace", "D-04", "Decyzję o zakupie laptopów dla działu sprzedaży zastępuje decyzja D-09.", "The decision to purchase laptops for the sales department is replaced by D-09."),
         (4, "new", "D-10", "Praca zdalna do 3 dni w tygodniu.", "Remote work up to 3 days a week."),
-        (4, "revoke", "D-07", "Uchylamy D-07.", "D-07 is revoked."),
+        (4, "revoke", "D-07", "Uchyla się decyzję o wypłacie premii rocznej w marcu.", "The decision to pay the annual bonus in March is revoked."),
         (4, "new", "D-11", "Premia roczna wypłacana w lutym.", "The annual bonus is paid in February."),
         (4, "amend", "D-01", "D-01 zmieniamy: budżet marketingu 150 000 zł (nadal obowiązuje).", "D-01 is amended: marketing budget PLN 150,000 (still in force)."),
         (5, "new", "D-12", "Zakaz lotów krajowych w podróżach służbowych.", "No domestic flights for business travel."),
-        (5, "revoke", "D-08", "Uchylamy D-08 – zostajemy przy obecnym dostawcy.", "D-08 is revoked – we keep the current supplier."),
+        (5, "revoke", "D-08", "Uchyla się decyzję w sprawie nowego dostawcy kawy – zostajemy przy obecnym.", "The decision on a new coffee supplier is revoked – we keep the current one."),
         (5, "new", "D-13", "Szkolenie z bezpieczeństwa obowiązkowe do końca roku.", "Security training mandatory by year end."),
-        (6, "reinstate", "D-07", "Przywracamy D-07 i uchylamy D-11 (premia jednak w marcu).", "D-07 is reinstated and D-11 revoked (the bonus is paid in March after all)."),
+        (6, "reinstate", "D-07", "Przywraca się decyzję D-07 i uchyla decyzję o wypłacie premii w lutym (premia jednak w marcu).", "D-07 is reinstated and the decision to pay the bonus in February is revoked (the bonus is paid in March after all)."),
         (6, "revoke", "D-11", "", ""),
         (6, "new", "D-14", "Biuro zamknięte 24 i 31 grudnia.", "The office is closed on 24 and 31 December."),
-        (6, "replace", "D-10", "D-10 zastępujemy D-15.", "D-10 is replaced by D-15."),
         (6, "new", "D-15", "Praca zdalna do 2 dni w tygodniu.", "Remote work up to 2 days a week."),
+        (6, "replace", "D-10", "D-10 zastępujemy D-15.", "D-10 is replaced by D-15."),
         (7, "new", "D-16", "Nowy regulamin parkingu od stycznia.", "New parking rules from January."),
+        (7, "new", "D-18", "Karta sportowa dla pracowników od listopada, pod warunkiem zgody rady nadzorczej.", "A sports card for employees from November, subject to the supervisory board's consent."),
         (7, "postpone", "D-12", "Wniosek o uchylenie D-12 dla tras powyżej 600 km odłożono do kolejnego posiedzenia – D-12 obowiązuje.", "A motion to revoke D-12 for routes over 600 km was postponed to the next meeting – D-12 stays in force."),
         (8, "new", "D-17", "Zespół wsparcia pracuje od 7:00 do 19:00.", "The support team works from 7:00 to 19:00."),
-        (8, "replace", "D-03", "D-03 zastępujemy D-17.", "D-03 is replaced by D-17."),
-        (8, "revoke", "D-16", "Uchylamy D-16 – regulamin parkingu bez zmian.", "D-16 is revoked – parking rules unchanged."),
+        (8, "replace", "D-03", "Decyzja D-17 zastępuje wcześniejszą decyzję o godzinach pracy zespołu wsparcia.", "D-17 replaces the earlier decision on the support team's working hours."),
+        (8, "revoke", "D-16", "Uchyla się decyzję o nowym regulaminie parkingu – regulamin bez zmian.", "The decision on new parking rules is revoked – parking rules unchanged."),
+        (8, "condition_failed", "D-18", "Rada nadzorcza nie wyraziła zgody na wprowadzenie karty sportowej.", "The supervisory board did not consent to the sports card."),
     ]
     in_force = {}
     for m, op, did, *_ in D:
         if op in ("new", "reinstate"):
             in_force[did] = True
-        elif op in ("revoke", "replace"):
+        elif op in ("revoke", "replace", "condition_failed"):
             in_force[did] = False
         # "reject" and "postpone": a motion that did NOT change anything (traps)
     ANSWERS["minutes"] = {"in_force": sorted(d for d, v in in_force.items() if v)}
@@ -319,16 +334,22 @@ def build_minutes():
             L += [f"## {'Posiedzenie' if lang == 'pl' else 'Meeting'} nr {m} – {dates[m - 1]}", "",
                   ("Obecni: A. Nowak, P. Zieliński, K. Wiśniewska, T. Wójcik." if lang == "pl" else
                    "Present: A. Nowak, P. Zieliński, K. Wiśniewska, T. Wójcik."), ""]
-            for _ in range(16):
-                L.append(" ".join(rng.sample(F, 4)))
-                L.append("")
-            L.append("**Ustalenia:**" if lang == "pl" else "**Resolutions:**")
+            paras = [" ".join(rng.sample(F, 4)) for _ in range(16)]
+            # resolutions are sentences inside the discussion, in order, not a list at the end
+            res = []
             for mm, op, did, tpl, ten in D:
-                if mm != m or not (tpl if lang == "pl" else ten):
-                    continue
                 text = tpl if lang == "pl" else ten
-                L.append(f"- {did}: {text}" if op == "new" else f"- {text}")
-            L.append("")
+                if mm != m or not text:
+                    continue
+                if op == "new":
+                    text = (f"Zarząd podjął decyzję {did}: {text}" if lang == "pl" else f"The board adopted resolution {did}: {text}")
+                res.append(text)
+            slots = sorted(rng.sample(range(16), len(res)))
+            for slot, text in zip(slots, res):
+                paras[slot] += " " + text
+            for ptxt in paras:
+                L.append(ptxt)
+                L.append("")
             for _ in range(4):
                 L.append(" ".join(rng.sample(F, 2)))
                 L.append("")
@@ -342,7 +363,8 @@ def build_financial():
            "support": {"2025": [5.1, 5.3, 5.2], "2026": [5.6, 5.4, 5.8]}}
     restated_q1_2025_cloud = 11.9   # Note 12
     one_off_q2_2026_cloud = 1.8     # Note 7
-    c25 = restated_q1_2025_cloud + seg["cloud"]["2025"][1] + seg["cloud"]["2025"][2]
+    one_off_q3_2025_cloud = 0.6     # Note 19
+    c25 = restated_q1_2025_cloud + seg["cloud"]["2025"][1] + seg["cloud"]["2025"][2] - one_off_q3_2025_cloud
     c26 = sum(seg["cloud"]["2026"]) - one_off_q2_2026_cloud
     ANSWERS["financial"] = {"cloud_2025_restated": round(c25, 2), "cloud_2026_adjusted": round(c26, 2),
                             "growth_pct": round((c26 / c25 - 1) * 100, 1)}
@@ -380,14 +402,34 @@ def build_financial():
         L += ["## Noty objaśniające" if lang == "pl" else "## Notes", ""]
         notes = []
         for i in range(1, 31):
-            if i == 7:
-                notes.append((f"Nota {i}. Zdarzenia jednorazowe" if lang == "pl" else f"Note {i}. One-off items",
+            if i == 3:
+                notes.append((f"Nota {i}" if lang == "pl" else f"Note {i}",
+                              ("Alternatywne pomiary wyników. Dynamika porównywalna to zmiana rok do roku obliczona na danych porównawczych "
+                               "po wszystkich przekształceniach, z wyłączeniem zdarzeń jednorazowych w obu porównywanych okresach." if lang == "pl" else
+                               "Alternative performance measures. Like-for-like growth is the year-on-year change computed on comparatives after "
+                               "all restatements, excluding one-off items in both periods compared.")))
+            elif i == 19:
+                notes.append((f"Nota {i}" if lang == "pl" else f"Note {i}",
+                              (f"Przychody segmentu {n['cloud']} w III kwartale 2025 r. obejmowały jednorazowe rozliczenie ugody z klientem "
+                               f"w kwocie {dec(one_off_q3_2025_cloud)} mln zł." if lang == "pl" else
+                               f"{n['cloud']} revenue in Q3 2025 included a one-off settlement with a customer of PLN {dec(one_off_q3_2025_cloud)}m.")))
+            elif i == 23:
+                notes.append((f"Nota {i}" if lang == "pl" else f"Note {i}",
+                              (f"Przychody segmentu {n['licences']} w II kwartale 2026 r. obejmują jednorazową sprzedaż licencji wieczystej "
+                               f"w kwocie {dec(1.1)} mln zł." if lang == "pl" else
+                               f"{n['licences']} revenue in Q2 2026 includes a one-off perpetual licence sale of PLN {dec(1.1)}m.")))
+            elif i == 26:
+                notes.append((f"Nota {i}" if lang == "pl" else f"Note {i}",
+                              (f"Przychody segmentu {n['licences']} za II kwartał 2025 r. przekształcono z {dec(7.9)} do {dec(7.6)} mln zł." if lang == "pl" else
+                               f"{n['licences']} revenue for Q2 2025 was restated from {dec(7.9)} to PLN {dec(7.6)}m.")))
+            elif i == 7:
+                notes.append((f"Nota {i}" if lang == "pl" else f"Note {i}",
                               (f"Przychody segmentu {n['cloud']} w II kwartale 2026 r. obejmują jednorazową opłatę za migrację klienta w kwocie {dec(one_off_q2_2026_cloud)} mln zł, "
                                "która nie powtórzy się w kolejnych okresach." if lang == "pl" else
                                f"{n['cloud']} revenue in Q2 2026 includes a one-off customer migration fee of PLN {dec(one_off_q2_2026_cloud)}m, "
                                "which will not recur in later periods.")))
             elif i == 12:
-                notes.append((f"Nota {i}. Przekształcenie danych porównawczych" if lang == "pl" else f"Note {i}. Restatement of comparatives",
+                notes.append((f"Nota {i}" if lang == "pl" else f"Note {i}",
                               (f"W wyniku korekty rozpoznania przychodów przychody segmentu {n['cloud']} za I kwartał 2025 r. przekształcono z "
                                f"{dec(seg['cloud']['2025'][0])} do {dec(restated_q1_2025_cloud)} mln zł. Pozostałe kwartały nie uległy zmianie." if lang == "pl" else
                                f"Following a revenue recognition correction, {n['cloud']} revenue for Q1 2025 was restated from "
@@ -407,29 +449,34 @@ def build_policy():
         ("1.1", "Polityka dotyczy wszystkich pracowników i współpracowników.", "The policy applies to all employees and contractors."),
         ("1.2", "Podróż służbową zleca bezpośredni przełożony.", "Business travel is ordered by the direct manager."),
         ("2.1", "Bilety kolejowe kupuje się w klasie 2.", "Train tickets are bought in 2nd class."),
-        ("2.2", "Podróże samolotem wymagają zgody dyrektora.", "Air travel requires the director's approval."),
+        ("2.2", "Podróże samolotem wymagają zgody dyrektora.", "Air travel requires the approval of the director or the CFO."),  # DIFF: who approves
         ("3.1", "Nocleg rezerwuje dział administracji.", "Accommodation is booked by the administration department."),
         ("3.2", "Limit za nocleg w Polsce wynosi 450 zł za dobę.", "The accommodation limit in Poland is PLN 500 per night."),       # DIFF
         ("3.3", "Śniadanie wliczone w cenę noclegu pomniejsza dietę o 25%.", "Breakfast included in the room rate reduces the per diem by 25%."),
         ("4.1", "Samochód prywatny wymaga umowy na jego używanie.", "Using a private car requires a usage agreement."),
         ("4.2", "Stawka za kilometr wynosi 1,15 zł.", "The mileage rate is PLN 1.15 per km."),
-        ("5.1", "Rozliczenie podróży składa się w ciągu 14 dni od jej zakończenia.", "The trip settlement is filed within 30 days of its end."),   # DIFF
+        ("5.1", "Rozliczenie podróży składa się w ciągu 14 dni od jej zakończenia.", "The trip settlement is filed within 14 business days of its end."),   # DIFF: unit
         ("5.2", "Do rozliczenia dołącza się oryginały lub skany faktur.", "Originals or scans of invoices are attached to the settlement."),
         ("6.1", "Zaliczkę wypłaca się na 3 dni przed podróżą.", "Advances are paid 3 days before the trip."),
-        ("6.2", "Niewykorzystaną zaliczkę zwraca się w ciągu 7 dni.", "Unused advances are returned within 7 days."),
+        ("6.2", "Niewykorzystaną zaliczkę zwraca się w ciągu 7 dni.", "Unused advances are deducted from the next salary payment."),  # DIFF: condition
         ("7.1", "Dieta krajowa wynosi 45 zł.", "The domestic per diem is PLN 45."),
         ("7.2", "Przy podróży krótszej niż 8 godzin dieta nie przysługuje.", "No per diem is due for trips shorter than 8 hours."),
         ("7.3", "Diety zagraniczne określa załącznik do rozporządzenia.", "Foreign per diems are set out in the annex to the regulation."),
-        ("7.4", "Dieta w Niemczech wynosi 49 euro.", "The per diem in Germany is EUR 54."),                                              # DIFF
+        ("7.4", "Dieta w Niemczech wynosi 49 euro.", "The per diem in Germany is EUR 54."),                                              # DIFF: amount
         ("8.1", "Koszty reprezentacji wymagają podania uczestników.", "Hospitality costs require listing the participants."),
         ("8.2", "Napiwki nie podlegają zwrotowi.", "Tips are not reimbursed."),
-        ("9.1", "Wydatki powyżej 2 000 zł wymagają zgody dyrektora finansowego.", "Expenses above PLN 3,000 require the CFO's approval."),   # DIFF
+        ("9.1", "Wydatki powyżej 2 000 zł wymagają zgody dyrektora finansowego.", "Expenses of PLN 2,000 or more require the CFO's approval."),   # DIFF: boundary
         ("9.2", "Polityka wchodzi w życie 1 października 2026 r.", "The policy takes effect on 1 October 2026."),
         ("9.3", "Pytania dotyczące polityki kieruje się do działu finansów.", "Questions about the policy go to the finance department."),
     ]
     # cosmetic (non-substantive) differences: wording only, same meaning
-    cosmetic_en = {"2.1": "Train tickets must be purchased in second class.", "8.2": "Gratuities are not refundable."}
-    ANSWERS["policy"] = {"differ": ["3.2", "5.1", "7.4", "9.1"]}
+    cosmetic_en = {"1.2": "Business trips are ordered by the employee's direct manager.",
+                   "2.1": "Train tickets must be purchased in second class.",
+                   "4.2": "Mileage is reimbursed at PLN 1.15 per kilometre.",
+                   "8.2": "Gratuities are not refundable.",
+                   "13.2": "Changes to bookings must be reported to the administration department."}
+    substantive_en = {"15.3": "Travel insurance is arranged and paid for by the employee."}  # PL: provided by the employer
+    ANSWERS["policy"] = {"differ": ["2.2", "3.2", "5.1", "6.2", "7.4", "9.1", "15.3"]}
     fill_pl = ["Postanowienie stosuje się odpowiednio do współpracowników.", "Wyjątki od zasady zatwierdza dział finansów.",
                "W razie wątpliwości stosuje się przepisy prawa pracy.", "Dział administracji prowadzi ewidencję w systemie HR."]
     fill_en = ["The provision applies accordingly to contractors.", "Exceptions are approved by the finance department.",
@@ -453,7 +500,7 @@ def build_policy():
         extra = rng.randrange(1, 4)
         idx = rng.sample(range(4), extra)
         pl.append(f"§{num} {tpl} " + " ".join(fill_pl[i] for i in idx))
-        en.append(f"§{num} {cosmetic_en.get(num, ten)} " + " ".join(fill_en[i] for i in idx))
+        en.append(f"§{num} {substantive_en.get(num, cosmetic_en.get(num, ten))} " + " ".join(fill_en[i] for i in idx))
         pl.append("")
         en.append("")
     write("policy-pl.md", "\n".join(pl))
@@ -525,8 +572,9 @@ def build_thread():
 
 # ======================================================================================== 7. regulation + amendments
 def build_regulation():
-    ANSWERS["regulation"] = {"days": 21, "oncall_days": 4, "rate": 12, "cap": 220, "oncall": 5,
-                             "answer_pln": min(21 * 12, 220) + 4 * 5}
+    # November 2026: 15 days of 8 h + 3 days of 5 h (all count: §4 amended to 4 h), on-call on 5 of them
+    ANSWERS["regulation"] = {"days": 18, "oncall_days": 5, "rate": 12, "cap": 220, "oncall": 5,
+                             "answer_pln": min(18 * 12, 220) + 5 * 5}
     pl = """# Regulamin pracy zdalnej – Kwadrat Sp. z o.o.
 
 ## Tekst pierwotny (obowiązuje od 1 kwietnia 2024 r.)
@@ -545,6 +593,7 @@ def build_regulation():
 
 1. §2 otrzymuje brzmienie: „Ryczałt wynosi 12 zł za każdy dzień pracy zdalnej, nie więcej niż 220 zł miesięcznie.”
 2. Dodaje się §2a: „Za każdy dzień pracy zdalnej, w którym pracownik pełni dyżur pod telefonem, przysługuje dodatek 5 zł. Limit z §2 nie dotyczy dodatku.”
+3. §4 otrzymuje brzmienie: „Dniem pracy zdalnej jest dzień, w którym pracownik wykonywał pracę zdalnie przez co najmniej 4 godziny.”
 
 ## Aneks nr 3 (obowiązuje od 1 stycznia 2027 r.)
 
@@ -568,6 +617,7 @@ def build_regulation():
 
 1. §2 is replaced by: "The allowance is PLN 12 for each day of remote work, up to PLN 220 per month."
 2. §2a is added: "For each remote work day on which the employee is on phone on-call duty, a supplement of PLN 5 is due. The limit in §2 does not apply to the supplement."
+3. §4 is replaced by: "A remote work day is a day on which the employee worked remotely for at least 4 hours."
 
 ## Amendment No. 3 (in force from 1 January 2027)
 
@@ -586,8 +636,13 @@ def build_regulation():
         q = qs[i % len(qs)]
         faq_pl.append(f"**Pytanie {i + 1}. {q[0]}** {q[1]} " + rng.choice(["Szczegóły w intranecie.", "Wyjaśnienia udziela dział HR.", "Zasada obowiązuje bez wyjątków."]))
         faq_en.append(f"**Question {i + 1}. {q[2]}** {q[3]} " + rng.choice(["Details on the intranet.", "HR can explain further.", "The rule has no exceptions."]))
-    write("regulation-pl.md", pl + "\n## Najczęstsze pytania\n\n" + "\n\n".join(faq_pl))
-    write("regulation-en.md", en + "\n## Frequently asked questions\n\n" + "\n\n".join(faq_en))
+    # an outdated FAQ answer that contradicts Amendment 2 (the FAQ is explicitly non-binding)
+    faq_pl[86] = "**Pytanie 87. Czy dodatek za dyżur wlicza się do miesięcznego limitu?** Tak, limit obejmuje ryczałt razem z dodatkiem za dyżur."
+    faq_en[86] = "**Question 87. Does the on-call supplement count towards the monthly limit?** Yes, the limit covers the allowance together with the on-call supplement."
+    write("regulation-pl.md", pl + "\n## Najczęstsze pytania\n\nOdpowiedzi mają charakter pomocniczy i mogą być nieaktualne. W razie rozbieżności "
+          "wiążący jest tekst regulaminu wraz z aneksami.\n\n" + "\n\n".join(faq_pl))
+    write("regulation-en.md", en + "\n## Frequently asked questions\n\nThe answers are for guidance only and may be out of date. In case of any "
+          "discrepancy, the text of the regulation and its amendments prevails.\n\n" + "\n\n".join(faq_en))
 
 
 # ======================================================================================== 8. orders vs invoices

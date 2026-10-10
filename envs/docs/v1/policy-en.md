@@ -2,11 +2,11 @@
 
 §1.1 The policy applies to all employees and contractors. The provision applies accordingly to contractors.
 
-§1.2 Business travel is ordered by the direct manager. The administration department keeps records in the HR system. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
+§1.2 Business trips are ordered by the employee's direct manager. The administration department keeps records in the HR system. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
 
 §2.1 Train tickets must be purchased in second class. Exceptions are approved by the finance department. The administration department keeps records in the HR system. In case of doubt, labour law applies.
 
-§2.2 Air travel requires the director's approval. The provision applies accordingly to contractors.
+§2.2 Air travel requires the approval of the director or the CFO. The provision applies accordingly to contractors.
 
 §3.1 Accommodation is booked by the administration department. The administration department keeps records in the HR system.
 
@@ -16,15 +16,15 @@
 
 §4.1 Using a private car requires a usage agreement. The administration department keeps records in the HR system. The provision applies accordingly to contractors.
 
-§4.2 The mileage rate is PLN 1.15 per km. The administration department keeps records in the HR system. Exceptions are approved by the finance department. In case of doubt, labour law applies.
+§4.2 Mileage is reimbursed at PLN 1.15 per kilometre. The administration department keeps records in the HR system. Exceptions are approved by the finance department. In case of doubt, labour law applies.
 
-§5.1 The trip settlement is filed within 30 days of its end. Exceptions are approved by the finance department.
+§5.1 The trip settlement is filed within 14 business days of its end. Exceptions are approved by the finance department.
 
 §5.2 Originals or scans of invoices are attached to the settlement. The provision applies accordingly to contractors. In case of doubt, labour law applies. The administration department keeps records in the HR system.
 
 §6.1 Advances are paid 3 days before the trip. The provision applies accordingly to contractors. The administration department keeps records in the HR system. Exceptions are approved by the finance department.
 
-§6.2 Unused advances are returned within 7 days. Exceptions are approved by the finance department. The provision applies accordingly to contractors. In case of doubt, labour law applies.
+§6.2 Unused advances are deducted from the next salary payment. Exceptions are approved by the finance department. The provision applies accordingly to contractors. In case of doubt, labour law applies.
 
 §7.1 The domestic per diem is PLN 45. Exceptions are approved by the finance department.
 
@@ -38,7 +38,7 @@
 
 §8.2 Gratuities are not refundable. Exceptions are approved by the finance department.
 
-§9.1 Expenses above PLN 3,000 require the CFO's approval. The administration department keeps records in the HR system. Exceptions are approved by the finance department.
+§9.1 Expenses of PLN 2,000 or more require the CFO's approval. The administration department keeps records in the HR system. Exceptions are approved by the finance department.
 
 §9.2 The policy takes effect on 1 October 2026. In case of doubt, labour law applies.
 
@@ -76,7 +76,7 @@
 
 §13.1 Travel insurance is provided by the employer. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
 
-§13.2 Booking changes are reported to the administration department. The administration department keeps records in the HR system. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
+§13.2 Changes to bookings must be reported to the administration department. The administration department keeps records in the HR system. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
 
 §13.3 Travel requests are filed in the HR system. Exceptions are approved by the finance department. The administration department keeps records in the HR system.
 
@@ -98,7 +98,7 @@
 
 §15.2 Bookings are made at least 7 days in advance. The administration department keeps records in the HR system. In case of doubt, labour law applies.
 
-§15.3 Travel insurance is provided by the employer. In case of doubt, labour law applies. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
+§15.3 Travel insurance is arranged and paid for by the employee. In case of doubt, labour law applies. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
 
 §15.4 Booking changes are reported to the administration department. In case of doubt, labour law applies. The provision applies accordingly to contractors. Exceptions are approved by the finance department.
 

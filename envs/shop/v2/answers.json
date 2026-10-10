@@ -26,7 +26,8 @@
  "cto": {
   "company": "Sensilo",
   "cto": "Joanna Kruk",
-  "outdated_cto": "Marek Lis"
+  "outdated_cto": "Marek Lis",
+  "future_cto": "Paweł Zych"
  },
  "laptop": {
   "url": "https://tanie-laptopy.example/laptop/l8",
@@ -48,13 +49,14 @@
   "since": "2026-07-01"
  },
  "count": {
-  "count": 5,
+  "count": 6,
   "shops": [
    "agd-swiat.example",
    "kuchnia24.example",
    "elektromarket.example",
    "tanioagd.example",
-   "sklep-kwanta.example"
+   "sklep-kwanta.example",
+   "agdmax.example"
   ]
  }
 }

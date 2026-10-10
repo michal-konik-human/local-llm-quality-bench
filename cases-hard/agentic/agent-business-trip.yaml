@@ -371,8 +371,8 @@ langs:
       ale nie zgaduj danych, których nie da się sprawdzić narzędziami. Na koniec krótko powiedz, co zrobiłeś.'
     messages:
     - role: user
-      content: 'Zorganizuj mi wyjazd na warsztaty z klientem Bałtyk w Gdańsku w przyszłym tygodniu, zgodnie z polityką
-        podróży z moich notatek: pociąg tam i z powrotem oraz nocleg.'
+      content: 'Zorganizuj mi wyjazd na warsztaty z klientem Bałtyk w Gdańsku (termin jest w moim kalendarzu), zgodnie
+        z polityką podróży z moich notatek: pociąg tam i z powrotem oraz nocleg.'
   en:
     system: 'Today is Thursday, 8 October 2026. Time zone: Europe/Warsaw. You are the user''s (Michał''s) personal
       assistant with access to his calendar, mail, contacts, notes, to-do list and company tools. This is a one-shot
@@ -380,8 +380,8 @@ langs:
       cannot check with the tools. Finish by briefly saying what you did.'
     messages:
     - role: user
-      content: 'Arrange my trip to the workshop with client Bałtyk in Gdańsk next week, following the travel policy
-        in my notes: train there and back, and a hotel.'
+      content: 'Arrange my trip to the workshop with client Bałtyk in Gdańsk (the dates are in my calendar), following
+        the travel policy in my notes: train there and back, and a hotel.'
 checks:
 - scorer: env_state
   source: Goal state computed from the seeded environment by the solver in the case generator (see notes).

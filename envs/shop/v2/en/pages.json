@@ -703,6 +703,33 @@
   "text": "On 1 September 2026 Joanna Kruk became CTO. The previous CTO, Marek Lis, moved to the supervisory board."
  },
  {
+  "url": "https://sensilo.example/news/succession",
+  "title": "Sensilo: board succession plan",
+  "keywords": [
+   "sensilo",
+   "cto",
+   "aktualności",
+   "news",
+   "sukcesja",
+   "succession",
+   "zarząd",
+   "board"
+  ],
+  "text": "On 5 October 2026 Joanna Kruk, Sensilo's CTO, announced she will leave the company at the end of the year. She remains CTO until 31 December 2026; from 1 January 2027 the CTO role passes to Paweł Zych, currently head of R&D."
+ },
+ {
+  "url": "https://profile-zawodowe.example/pawel-zych",
+  "title": "Paweł Zych – CTO, Sensilo",
+  "keywords": [
+   "sensilo",
+   "cto",
+   "profil",
+   "profile",
+   "zych"
+  ],
+  "text": "Paweł Zych. CTO at Sensilo (from 2027). Previously head of R&D at Sensilo."
+ },
+ {
   "url": "https://termix.example/about",
   "title": "Termix – about us",
   "keywords": [
@@ -1119,5 +1146,71 @@
    "electric"
   ],
   "text": "Kwanta K2 kettle, 1.7 l. Condition: new. Price: PLN 169.00. Delivery: PLN 9.99. In stock."
+ },
+ {
+  "url": "https://sklep-agd24.example/czajnik-kwanta-k2",
+  "title": "Kwanta K2 kettle – sklep-agd24.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Kwanta K2 kettle, 1.7 l. Condition: new. Price: PLN 185.00. Delivery PLN 14.99, free from PLN 199.00. In stock."
+ },
+ {
+  "url": "https://agdmax.example/czajnik-kwanta-k2",
+  "title": "Kwanta K2 kettle – agdmax.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Kwanta K2 kettle, 1.7 l. Condition: new. Price: PLN 189.00. Delivery PLN 12.99, free from PLN 150.00. In stock."
+ },
+ {
+  "url": "https://elektro-dom.example/czajnik-kwanta-k2-pro",
+  "title": "Kwanta K2 Pro kettle – elektro-dom.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric",
+   "pro"
+  ],
+  "text": "Kwanta K2 Pro kettle, 1.7 l. Condition: new. Price: PLN 149.00. Delivery: free. In stock."
+ },
+ {
+  "url": "https://dom-i-kuchnia.example/czajnik-kwanta-k2",
+  "title": "Kwanta K2 kettle – dom-i-kuchnia.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Kwanta K2 kettle, 1.7 l. Condition: new. Price: PLN 179.00. Delivery: free. Pre-order: ships from 16 November 2026."
+ },
+ {
+  "url": "https://kuchenne.example/czajnik-kwanta-k2",
+  "title": "Kwanta K2 kettle – kuchenne.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Kwanta K2 kettle, 1.7 l. Condition: new. Price: PLN 199.00. Promotion: PLN 179.00 until 30 September 2026. Delivery: free. In stock."
  }
 ]

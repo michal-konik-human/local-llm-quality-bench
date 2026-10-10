@@ -16,12 +16,15 @@
 
 1. §2 otrzymuje brzmienie: „Ryczałt wynosi 12 zł za każdy dzień pracy zdalnej, nie więcej niż 220 zł miesięcznie.”
 2. Dodaje się §2a: „Za każdy dzień pracy zdalnej, w którym pracownik pełni dyżur pod telefonem, przysługuje dodatek 5 zł. Limit z §2 nie dotyczy dodatku.”
+3. §4 otrzymuje brzmienie: „Dniem pracy zdalnej jest dzień, w którym pracownik wykonywał pracę zdalnie przez co najmniej 4 godziny.”
 
 ## Aneks nr 3 (obowiązuje od 1 stycznia 2027 r.)
 
 §2 otrzymuje brzmienie: „Ryczałt wynosi 15 zł za każdy dzień pracy zdalnej, nie więcej niż 300 zł miesięcznie.”
 
 ## Najczęstsze pytania
+
+Odpowiedzi mają charakter pomocniczy i mogą być nieaktualne. W razie rozbieżności wiążący jest tekst regulaminu wraz z aneksami.
 
 **Pytanie 1. Czy ryczałt przysługuje w czasie urlopu?** Nie, ryczałt przysługuje wyłącznie za dni pracy zdalnej. Szczegóły w intranecie.
 
@@ -195,7 +198,7 @@
 
 **Pytanie 86. Czy można pracować zdalnie z zagranicy?** Tak, po uzyskaniu zgody przełożonego i działu HR. Zasada obowiązuje bez wyjątków.
 
-**Pytanie 87. Kto zapewnia sprzęt?** Pracodawca zapewnia laptop i monitor. Zasada obowiązuje bez wyjątków.
+**Pytanie 87. Czy dodatek za dyżur wlicza się do miesięcznego limitu?** Tak, limit obejmuje ryczałt razem z dodatkiem za dyżur.
 
 **Pytanie 88. Jak zgłosić awarię sprzętu?** Przez portal serwisowy IT. Zasada obowiązuje bez wyjątków.
 

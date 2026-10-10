@@ -31,7 +31,7 @@ zawarta 2 stycznia 2026 r. pomiędzy Kwadrat Sp. z o.o. (Zamawiający) a Chmurex
 
 §6. Poziom usług i kary umowne
 1. Dostawca zapewnia Dostępność Systemu na poziomie co najmniej 99,5% w każdym miesiącu kalendarzowym.
-2. Czas Niedostępności liczy się w pełnych minutach, od chwili rozpoczęcia Niedostępności do chwili przywrócenia funkcji podstawowych.
+2. Czas Niedostępności liczy się w pełnych minutach, od chwili rozpoczęcia Niedostępności do chwili przywrócenia funkcji podstawowych. Niedostępność trwającą na przełomie miesięcy dzieli się między te miesiące według czasu przypadającego na każdy z nich.
 3. Dopuszczalny czas Niedostępności w danym miesiącu (Limit) oblicza się jako 0,5% liczby minut w tym miesiącu.
 4. Za każdą rozpoczętą godzinę Niedostępności przekraczającej Limit Dostawca zapłaci karę umowną w wysokości 2% Opłaty Miesięcznej.
 5. Do czasu Niedostępności nie wlicza się: (a) prac w Oknie Serwisowym zapowiedzianym Zamawiającemu co najmniej 72 godziny wcześniej, o ile pojedyncze okno nie przekracza 4 godzin; (b) przerw spowodowanych siłą wyższą, potwierdzoną pisemnie przez obie Strony.
@@ -366,6 +366,14 @@ Załącznik nr 2 – Aneks nr 1 (podpisany 14 sierpnia 2026 r.)
 Projekt Aneksu nr 2 (NIEPODPISANY – do dalszych negocjacji)
 - Proponuje się podniesienie kary za rozpoczętą godzinę ponad Limit do 5% Opłaty Miesięcznej oraz zniesienie limitu z §6 ust. 6.
 - Projekt nie został przyjęty przez Dostawcę.
+
+Załącznik nr 5a – Protokół z przeglądu jakości za sierpień 2026 r.
+- Dostawca przyznał Zamawiającemu kredyt serwisowy w kwocie 300 zł netto za sierpień 2026 r.
+- Strony nie stwierdziły innych odstępstw od poziomu usług.
+
+Aneks nr 3 (podpisany 30 września 2026 r.)
+- §6 ust. 6 otrzymuje brzmienie: „Łączna wysokość kar umownych za dany miesiąc nie może przekroczyć 8% Opłaty Miesięcznej.”
+- Aneks obowiązuje od 1 października 2026 r.
 
 Załącznik nr 5 – Protokół z przeglądu jakości za wrzesień 2026 r.
 - Dostawca przyznał Zamawiającemu jednorazowy kredyt serwisowy w kwocie 800 zł netto za wrzesień 2026 r. w związku z incydentem z 3 września.
