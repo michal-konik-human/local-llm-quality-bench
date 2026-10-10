@@ -1,0 +1,19 @@
+name: qwen3-next-80b
+display: Qwen3-Next-80B-A3B-Instruct
+family: qwen
+vendor: Alibaba Qwen
+params: 80B total / 3B active (MoE)
+license: Apache-2.0
+weights:
+  repo: https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct
+  gguf: https://huggingface.co/unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF
+  file: Q4_1/Qwen3-Next-80B-A3B-Instruct-Q4_1-00001-of-00002.gguf
+  quant: Q4_1
+endpoint: {base_url: "http://127.0.0.1:8080/v1", model: qwen3-next-80b}
+perf: {decode_tps: 71.59, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
+max_tokens: 8192
+default_preset: recommended
+presets:
+  recommended:
+    source: "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct best practices: temp 0.7, top_p 0.8, top_k 20, min_p 0 (instruct only, no thinking mode)"
+    sampling: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0}

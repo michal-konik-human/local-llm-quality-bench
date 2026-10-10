@@ -1,0 +1,17 @@
+# Example: any model served by vLLM / SGLang / LM Studio / Ollama (OpenAI-compatible API).
+# Copy to models/<name>.yaml (without the leading underscore) and edit. Files starting with "_" are ignored.
+name: my-model-vllm
+display: Llama-3.3-70B-Instruct (vLLM, FP8)
+family: llama                 # used to keep judges away from their own family
+license: Llama 3.3 Community License
+weights: {repo: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct", quant: FP8}
+endpoint:
+  base_url: http://127.0.0.1:8000/v1      # vLLM default port; Ollama: http://127.0.0.1:11434/v1
+  model: meta-llama/Llama-3.3-70B-Instruct
+  # strict_openai: true                   # uncomment if the server rejects top_k / min_p / repeat_penalty
+  # api_key_env: VLLM_API_KEY
+max_tokens: 4096
+presets:
+  recommended:
+    source: "Put the URL of the vendor's recommended settings here"
+    sampling: {temperature: 0.6, top_p: 0.9, top_k: 0, min_p: 0.0}

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Thin wrapper so `bin/qbench ...` works from anywhere (symlink it into your PATH if you like).
+here="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null || realpath "$0")")/.." && pwd)"
+cd "$here" && exec python3 -m qbench "$@"

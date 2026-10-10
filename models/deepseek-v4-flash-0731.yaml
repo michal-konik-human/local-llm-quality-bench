@@ -1,0 +1,31 @@
+name: deepseek-v4-flash-0731
+display: DeepSeek-V4-Flash-0731
+family: deepseek
+vendor: DeepSeek
+params: MoE (see model card)
+license: MIT
+weights:
+  repo: https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731
+  gguf: https://huggingface.co/unsloth/DeepSeek-V4-Flash-0731-GGUF
+  file: UD-IQ3_XXS/DeepSeek-V4-Flash-0731-UD-IQ3_XXS-00001-of-00004.gguf
+  quant: UD-IQ3_XXS
+endpoint: {base_url: "http://127.0.0.1:8080/v1", model: deepseek-v4-flash-0731, timeout: 3600}
+perf: {decode_tps: 23.85, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
+max_tokens: 8192
+default_preset: recommended
+presets:
+  recommended:
+    source: "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731 : temperature 1.0, top_p 0.95 for agentic scenarios (1.0 otherwise); thinking on by default in the Unsloth GGUF template"
+    sampling: {temperature: 1.0, top_p: 0.95, top_k: 0, min_p: 0.0}
+  chat:
+    inherit: recommended
+    source: "Same card: top_p 1.0 for non-agentic use"
+    sampling: {top_p: 1.0}
+  no-thinking:
+    inherit: recommended
+    source: "Unsloth GGUF docs: chat_template_kwargs enable_thinking=false switches to non-thinking chat mode"
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}
+  judge:
+    source: "Judge use: non-thinking mode for fast checklist verdicts; samplers are overridden by judges/default.yaml"
+    sampling: {temperature: 0.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}

@@ -1,0 +1,31 @@
+name: gpt-oss-120b
+display: gpt-oss-120b
+family: gpt-oss
+vendor: OpenAI
+params: 117B total / 5.1B active (MoE)
+license: Apache-2.0
+weights:
+  repo: https://huggingface.co/openai/gpt-oss-120b
+  gguf: https://huggingface.co/ggml-org/gpt-oss-120b-GGUF
+  file: gpt-oss-120b-MXFP4.gguf
+  quant: MXFP4
+endpoint: {base_url: "http://127.0.0.1:8080/v1", model: gpt-oss-120b}
+perf: {decode_tps: 94.3, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
+max_tokens: 6144
+default_preset: recommended
+presets:
+  recommended:
+    source: "https://github.com/openai/gpt-oss (temperature 1.0, top_p 1.0); reasoning effort low/medium/high via the chat template, default medium"
+    sampling: {temperature: 1.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+    extra_body: {chat_template_kwargs: {reasoning_effort: medium}}
+  reasoning-low:
+    inherit: recommended
+    extra_body: {chat_template_kwargs: {reasoning_effort: low}}
+  reasoning-high:
+    inherit: recommended
+    extra_body: {chat_template_kwargs: {reasoning_effort: high}}
+    max_tokens: 12288
+  judge:
+    source: "Judge use: low reasoning effort keeps verdicts fast; samplers are overridden by judges/default.yaml"
+    sampling: {temperature: 0.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+    extra_body: {chat_template_kwargs: {reasoning_effort: low}}

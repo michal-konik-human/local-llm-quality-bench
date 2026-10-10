@@ -1,0 +1,27 @@
+name: bielik-11b
+display: Bielik-11B-v3.0-Instruct
+family: bielik
+vendor: SpeakLeash & ACK Cyfronet AGH
+params: 11B (dense)
+license: Apache-2.0
+weights:
+  repo: https://huggingface.co/speakleash/Bielik-11B-v3.0-Instruct
+  gguf: https://huggingface.co/speakleash/Bielik-11B-v3.0-Instruct-GGUF
+  file: Bielik-11B-v3.0-Instruct.Q8_0.gguf
+  quant: Q8_0
+endpoint: {base_url: "http://127.0.0.1:8080/v1", model: bielik-11b}
+perf: {decode_tps: 44.75, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
+notes: >
+  Served with a Hermes-3 style tool template (one space after <tool_call>), because the embedded
+  template has no tool support; see the llama-swap note in the perf bench repo. Tool calls that
+  arrive as text are parsed by qbench and flagged `tool_parse: fallback`.
+max_tokens: 4096
+default_preset: recommended
+presets:
+  recommended:
+    source: "SpeakLeash GGUF card / Ollama Modfile set only temperature 0.1; other samplers neutral"
+    sampling: {temperature: 0.1, top_p: 1.0, top_k: 0, min_p: 0.0}
+  warm:
+    inherit: recommended
+    source: "Sweep variant: temperature 0.7"
+    sampling: {temperature: 0.7}

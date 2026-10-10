@@ -1,0 +1,23 @@
+name: qwen3-235b-q3
+display: Qwen3-235B-A22B
+family: qwen
+vendor: Alibaba Qwen
+params: 235B total / 22B active (MoE)
+license: Apache-2.0
+weights:
+  repo: https://huggingface.co/Qwen/Qwen3-235B-A22B
+  gguf: https://huggingface.co/unsloth/Qwen3-235B-A22B-GGUF
+  file: UD-Q3_K_XL/Qwen3-235B-A22B-UD-Q3_K_XL-00001-of-00003.gguf
+  quant: UD-Q3_K_XL
+endpoint: {base_url: "http://127.0.0.1:8080/v1", model: qwen3-235b-q3, timeout: 3600}
+perf: {decode_tps: 32.74, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
+max_tokens: 8192
+default_preset: thinking
+presets:
+  thinking:
+    source: "https://huggingface.co/Qwen/Qwen3-235B-A22B best practices: thinking temp 0.6, top_p 0.95, top_k 20, min_p 0"
+    sampling: {temperature: 0.6, top_p: 0.95, top_k: 20, min_p: 0.0}
+  no-thinking:
+    source: "Same card: non-thinking temp 0.7, top_p 0.8, top_k 20, min_p 0; enable_thinking=false"
+    sampling: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0}
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}

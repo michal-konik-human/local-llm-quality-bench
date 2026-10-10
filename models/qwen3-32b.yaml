@@ -1,0 +1,27 @@
+name: qwen3-32b
+display: Qwen3-32B
+family: qwen
+vendor: Alibaba Qwen
+params: 32B (dense)
+license: Apache-2.0
+weights:
+  repo: https://huggingface.co/Qwen/Qwen3-32B
+  gguf: https://huggingface.co/bartowski/Qwen_Qwen3-32B-GGUF
+  file: Qwen_Qwen3-32B-Q4_K_M.gguf
+  quant: Q4_K_M
+endpoint: {base_url: "http://127.0.0.1:8080/v1", model: qwen3-32b}
+perf: {decode_tps: 27.07, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
+max_tokens: 8192
+default_preset: thinking
+presets:
+  thinking:
+    source: "https://huggingface.co/Qwen/Qwen3-32B best practices: thinking mode temp 0.6, top_p 0.95, top_k 20, min_p 0 (no greedy decoding)"
+    sampling: {temperature: 0.6, top_p: 0.95, top_k: 20, min_p: 0.0}
+  no-thinking:
+    source: "Same card: non-thinking temp 0.7, top_p 0.8, top_k 20, min_p 0; enable_thinking=false"
+    sampling: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0}
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}
+  thinking-presence-1.5:
+    inherit: thinking
+    source: "Qwen GGUF card suggests presence_penalty 1.5 for quantized models"
+    sampling: {presence_penalty: 1.5}

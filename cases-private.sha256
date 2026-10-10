@@ -1,0 +1,5 @@
+# sha256 (review line masked, as qbench computes it) of the held-out cases in cases-private/ (not published)
+3abfdeaec04ad03d97d078264bf6d445251b492293c8376bbe30d2b90af79d17  priv-tool-parking-price  tool_calling
+748de7c25264946955249b2bec29aa7e76da069cc8166380e6d43a9d407dadc3  priv-agent-cancel-and-tell  agentic
+0e41722fa916cd927af858a0ff5c8e50df8ad20a9dec76a8da6798be26247be2  priv-if-two-paragraphs  instruction_following
+10d807296def3343856244d425cc283cfd7db513f7ef1e4059de39cacbb3b025  priv-reason-split-bill  reasoning

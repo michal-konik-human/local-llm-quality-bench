@@ -1,0 +1,35 @@
+# Model profile: where the model is served and which settings to test it with.
+# Copy this file to add any other open model; nothing else in the bench needs to change.
+name: gpt-oss-20b
+display: gpt-oss-20b
+family: gpt-oss              # judges never grade their own family
+vendor: OpenAI
+params: 21B total / 3.6B active (MoE)
+license: Apache-2.0
+weights:
+  repo: https://huggingface.co/openai/gpt-oss-20b
+  gguf: https://huggingface.co/ggml-org/gpt-oss-20b-GGUF
+  file: gpt-oss-20b-MXFP4.gguf
+  quant: MXFP4
+endpoint:
+  base_url: http://127.0.0.1:8080/v1      # llama-swap in front of llama.cpp llama-server
+  model: gpt-oss-20b                      # model id the server expects
+  # api_key_env: OPENAI_API_KEY           # name of an env var holding a key, if your server needs one
+  # strict_openai: true                   # drop non-OpenAI sampler keys (top_k, min_p, ...) for strict servers
+perf:                                     # speed from the sibling perf bench (local-llm-perf-bench)
+  decode_tps: 149.5
+  source: https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md
+max_tokens: 6144
+default_preset: recommended
+presets:
+  recommended:
+    source: "OpenAI gpt-oss model card: temperature 1.0, top_p 1.0; reasoning effort set in the system/developer message (default medium)"
+    sampling: {temperature: 1.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+    extra_body: {chat_template_kwargs: {reasoning_effort: medium}}
+  reasoning-low:
+    inherit: recommended
+    extra_body: {chat_template_kwargs: {reasoning_effort: low}}
+  reasoning-high:
+    inherit: recommended
+    extra_body: {chat_template_kwargs: {reasoning_effort: high}}
+    max_tokens: 12288

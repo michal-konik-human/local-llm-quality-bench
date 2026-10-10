@@ -1,0 +1,8 @@
+name: fake-model
+display: Fake model (tests only)
+family: fake
+endpoint: {base_url: "http://fake/v1", model: fake}
+presets:
+  recommended:
+    source: "test fixture"
+    sampling: {temperature: 0.0}

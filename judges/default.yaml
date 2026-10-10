@@ -1,0 +1,16 @@
+# Judge configuration for `rubric` checks.
+#
+# `judges` is a preference list. For each run the FIRST judge whose model family differs from the
+# candidate's family is used, so no model family ever grades its own answers. Each entry names a model
+# profile (models/<name>.yaml) and optionally which of its presets to use. With local judges everything
+# stays on your machine, and anyone with the same GGUF files can reproduce the grades. Any
+# OpenAI-compatible endpoint (local or hosted) works: point a profile at it and list it here.
+judges:
+  - {profile: deepseek-v4-flash-0731, preset: judge}   # strongest local model on the reference rig
+  - {profile: gpt-oss-120b, preset: judge}             # used when the candidate is a DeepSeek model
+# Samplers applied on top of the judge preset: greedy + fixed per-verdict seed, so grading is repeatable.
+sampling: {temperature: 0.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+max_tokens: 4096
+# Language of the judge instructions: `match` (= language of the case), `en` or `pl`.
+# Recorded with every verdict; calibrate per language before trusting Polish verdicts.
+prompt_lang: match
