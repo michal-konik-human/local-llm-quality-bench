@@ -10,7 +10,6 @@ weights:
   file: gpt-oss-120b-MXFP4.gguf
   quant: MXFP4
 endpoint: {base_url: "http://127.0.0.1:8080/v1", model: gpt-oss-120b}
-perf: {decode_tps: 94.3, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
 max_tokens: 6144
 default_preset: recommended
 presets:

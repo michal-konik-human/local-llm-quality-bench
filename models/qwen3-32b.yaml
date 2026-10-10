@@ -10,7 +10,6 @@ weights:
   file: Qwen_Qwen3-32B-Q4_K_M.gguf
   quant: Q4_K_M
 endpoint: {base_url: "http://127.0.0.1:8080/v1", model: qwen3-32b}
-perf: {decode_tps: 27.07, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
 max_tokens: 8192
 default_preset: thinking
 presets:

@@ -10,7 +10,6 @@ weights:
   file: Q4_1/Qwen3-Next-80B-A3B-Instruct-Q4_1-00001-of-00002.gguf
   quant: Q4_1
 endpoint: {base_url: "http://127.0.0.1:8080/v1", model: qwen3-next-80b}
-perf: {decode_tps: 71.59, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
 max_tokens: 8192
 default_preset: recommended
 presets:

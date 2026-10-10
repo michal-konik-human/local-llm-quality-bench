@@ -10,22 +10,32 @@ from .cases import FAMILIES
 from .grade import load_grades
 from .manifest import load_manifest, now
 from .stats import bootstrap_ci, items as group_items, lang_gap, summarize
-from .util import REPO, write_json
+from .util import METHODOLOGY_URL, RESULTS_DIR, write_json
 
 FAMILY_LABEL = {"tool_calling": "Tools", "agentic": "Agent", "web_shopping": "Shop",
                 "instruction_following": "Instr.", "writing": "Writing", "reasoning": "Reason.", "coding": "Code"}
 RELIABILITY_FAMILIES = ("tool_calling", "agentic", "web_shopping")
-CALIB_DIR = os.path.join(REPO, "judges", "calibration")
+CALIB_DIR = os.path.join(RESULTS_DIR, "calibration")
 
 
 def pct(x):
     return "–" if x is None else f"{100 * x:.0f}"
 
 
-def pct_ci(s):
+def spct(x):
+    """Signed points for differences: +3, −2 (true minus sign), 0."""
+    if x is None:
+        return "–"
+    v = round(100 * x)
+    return f"+{v}" if v > 0 else (f"\u2212{-v}" if v < 0 else "0")
+
+
+def pct_ci(s, signed=False):
     if not s or s.get("mean") is None:
         return "–"
-    lo, hi = s["ci"]
+    lo, hi = (s.get("ci") or [None, None])
+    if signed:
+        return spct(s["mean"]) + (f" ({spct(lo)} to {spct(hi)})" if lo is not None else "")
     return f"{pct(s['mean'])}" + (f" ({pct(lo)}–{pct(hi)})" if lo is not None else "")
 
 
@@ -168,7 +178,7 @@ def render_report(summary, manifest, grades):
     L += ["", "_pass^1: share of samples that pass every check. pass^k: chance that all k samples of a task pass. "
           "worst@k: expected score of the worst of k samples._"]
     gap = summary["lang_gap"]
-    L += ["", f"**PL − EN gap** on parallel tasks: {pct_ci({'mean': gap['gap'], 'ci': gap['ci']})} points "
+    L += ["", f"**PL − EN gap** on parallel tasks: {pct_ci({'mean': gap['gap'], 'ci': gap['ci']}, signed=True)} points "
           f"({gap['n_cases']} paired tasks; negative = worse in Polish).", ""]
     c = summary["cost"]
     L += [f"**Cost:** median {c['median_completion_tokens']} completion tokens per sample, "
@@ -197,9 +207,9 @@ def write_report(run_dir):
 
 
 def publish(run_dir):
-    """Copy a graded run into results/<run_id>/ (tracked in git) and refresh the leaderboard."""
+    """Copy a graded run into <results>/<run_id>/ ($QBENCH_RESULTS, default ./results) and refresh the leaderboard."""
     summary = write_report(run_dir)
-    dest = os.path.join(REPO, "results", summary["run_id"])
+    dest = os.path.join(RESULTS_DIR, summary["run_id"])
     if os.path.abspath(dest) != os.path.abspath(run_dir):
         os.makedirs(dest, exist_ok=True)
         for name in ("manifest.json", "samples.jsonl", "grades.jsonl", "grades-meta.json", "judgments.jsonl",
@@ -213,7 +223,7 @@ def publish(run_dir):
 
 def update_leaderboard():
     rows = []
-    for path in sorted(glob.glob(os.path.join(REPO, "results", "*", "summary.json"))):
+    for path in sorted(glob.glob(os.path.join(RESULTS_DIR, "*", "summary.json"))):
         with open(path, encoding="utf-8") as f:
             rows.append(json.load(f))
     fams = [f for f in FAMILIES if any(f in (r["langs"].get(l) or {}).get("families", {}) for r in rows for l in ("pl", "en"))]
@@ -247,11 +257,13 @@ def update_leaderboard():
               "|---|---|---|---|"]
         for r in sorted(gaps, key=lambda r: r["lang_gap"]["gap"]):
             g = r["lang_gap"]
-            L.append(f"| {r['model']['display']} | `{r['preset']['name']}` | {pct_ci({'mean': g['gap'], 'ci': g['ci']})} | {g['n_cases']} |")
+            L.append(f"| {r['model']['display']} | `{r['preset']['name']}` | {pct_ci({'mean': g['gap'], 'ci': g['ci']}, signed=True)} | {g['n_cases']} |")
         L.append("")
     judges = sorted({(r.get("judge") or "none") for r in rows})
     L += [f"Judges used: {', '.join(judges)}. Rubric checks are judged by a model from a *different family* than the "
-          "candidate. See [docs/METHODOLOGY.md](../docs/METHODOLOGY.md).", ""]
-    with open(os.path.join(REPO, "results", "leaderboard.md"), "w", encoding="utf-8") as f:
+          f"candidate. Method: [local-llm-quality-bench METHODOLOGY]({METHODOLOGY_URL}).", ""]
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+    with open(os.path.join(RESULTS_DIR, "leaderboard.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(L))
     return rows
+

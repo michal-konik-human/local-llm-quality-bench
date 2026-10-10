@@ -18,14 +18,16 @@ Every result is a **pair**: the graded answer, plus a complete record of how it 
 file, server build, chat-template hash, every sampler, the seed and the exact request body). An
 outsider can reproduce any single number on their own machine.
 
-<!-- RESULTS:START -->
-<!-- RESULTS:END -->
+> 📊 **Results** from the reference rig (4× Radeon AI PRO R9700, llama.cpp + llama-swap) live in their own
+> repo, **[local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results)**: the
+> leaderboard, every transcript, and quality next to speed. This repo is just the tool, so you can point it at
+> your own models and keep your own results.
 
 ```bash
 git clone https://github.com/michal-konik-human/local-llm-quality-bench.git && cd local-llm-quality-bench
 python3 -m qbench run --model gpt-oss-20b --k 3           # generate: 115 items x 3 samples
 python3 -m qbench grade runs/<run-id>                     # score: code checks + LLM judge
-python3 -m qbench report runs/<run-id> --publish          # report.md + results/leaderboard.md
+python3 -m qbench report runs/<run-id> --publish          # report.md + leaderboard.md in $QBENCH_RESULTS
 ```
 
 Speed is measured by the sibling repo **[local-llm-perf-bench](https://github.com/michal-konik-human/local-llm-perf-bench)**
@@ -76,7 +78,7 @@ flowchart LR
     S --> G["qbench grade<br/>code scorers first,<br/>LLM judge for rubrics"]
     G --> Q[("grades.jsonl")]
     Q --> T["qbench report<br/>CIs, pass^k, PL−EN gap"]
-    T --> L["results/leaderboard.md"]
+    T --> L["leaderboard.md<br/>in $QBENCH_RESULTS"]
 ```
 
 **Generate once, grade many times.** Samples are immutable, so you can re-grade with a
@@ -136,8 +138,12 @@ python3 -m qbench report runs/<run-id> --publish
 python3 -m qbench compare runs/<A> runs/<B>          # paired difference with CI, per language and family
 ```
 
+Scratch runs go to `./runs`. Published runs and the leaderboard go to `$QBENCH_RESULTS` (default
+`./results`, git-ignored). Point it at a repo of your own, e.g.
+`export QBENCH_RESULTS=~/my-llm-results/quality`, and share that repo.
+
 Requirements: Python 3.10+ and PyYAML. No GPU code, no framework. The engine is ~3k lines of
-stdlib Python that you can read in an afternoon, with 39 unit tests (`python3 -m unittest discover -s tests`).
+stdlib Python that you can read in an afternoon, with 47 unit tests (`python3 -m unittest discover -s tests`).
 
 The judge is configured in `judges/default.yaml`: a preference list of model profiles, local or hosted.
 The reference setup uses two local judges, DeepSeek-V4-Flash-0731 and gpt-oss-120b, so nothing leaves
@@ -151,7 +157,8 @@ the machine. Before trusting a new judge, calibrate it against your own labels:
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Why each design choice, and which published guidance it follows |
 | [docs/WRITING-CASES.md](docs/WRITING-CASES.md) | Case schema, every scorer, environments, the freeze checklist |
 | [docs/REPLICATE.md](docs/REPLICATE.md) | Reproduce one sample by hand, or a whole run on your machine |
-| [results/leaderboard.md](results/leaderboard.md) | All published runs side by side |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Good first contributions, ground rules, dev setup |
+| [local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results) | The reference rig's published runs and leaderboard |
 
 ## Limitations, stated plainly
 
@@ -164,14 +171,40 @@ the machine. Before trusting a new judge, calibrate it against your own labels:
 - **No simulated user yet.** Agent tasks are one user turn plus tool turns.
 - **The coding sandbox** is a guard against accidents, not a security boundary.
 
+## Roadmap: help wanted
+
+- [ ] **Native-speaker review of the Polish cases.** All 59 PL items are `pending-owner`; reviewing one takes about 5 minutes.
+- [ ] **Judge calibration data.** Human labels in PL and EN (`qbench calibrate export`), to publish judge–human agreement.
+- [ ] **More cases**, especially multi-turn agent tasks, RAG over longer documents, and Polish public-administration tasks.
+- [ ] **A simulated user** for multi-turn agent tasks (τ-bench style), with the simulator recorded in the manifest.
+- [ ] **More languages**: the case format is generic; counting rules and register checks need a section per language.
+- [ ] **Runs on other stacks** (vLLM, SGLang, Ollama, NVIDIA, Apple Silicon) to check that scores reproduce across them.
+
 ## Contributing
 
-The most valuable contributions are **cases**, especially native Polish ones, and **runs of models I
-don't have**. Each case needs a `source` for its expected answer. Each run should come with its
-`manifest.json`. If your numbers on the same weights fall outside my CIs, open an issue; that is a
-finding about the serving stack.
+Contributions are very welcome, and you don't need to touch the engine. The most valuable are
+**cases** (especially native Polish ones), **reviews of the existing Polish cases**, **model profiles**
+and **runs on models or hardware I don't have**. Start with [CONTRIBUTING.md](CONTRIBUTING.md); issue
+templates exist for wrong grades, case ideas and shared results. If your numbers on the same weights
+fall outside my CIs, please open an issue: that is a finding about the serving stack, and worth knowing.
+
+## Citation
+
+If you use the bench or its cases, please cite it (GitHub's "Cite this repository" button uses
+[CITATION.cff](CITATION.cff)):
+
+```bibtex
+@software{konik_local_llm_quality_bench_2026,
+  author = {Konik, Michał},
+  title  = {local-llm-quality-bench: bilingual (Polish/English) quality evals for locally served LLMs},
+  year   = {2026},
+  url    = {https://github.com/michal-konik-human/local-llm-quality-bench}
+}
+```
 
 ## License
 
-MIT. The cases are fictional (shops under the reserved `.example` domain, invented people and
-companies). Any resemblance to real ones is accidental.
+**MIT** for the code *and* the cases: use them, fork them, ship them in your own eval suite. The cases
+are fictional (shops under the reserved `.example` domain, invented people and companies); any
+resemblance to real ones is accidental. The held-out split (`cases-private/`) is intentionally not
+published.

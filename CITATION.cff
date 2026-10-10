@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this bench or its cases, please cite it."
+title: "local-llm-quality-bench: bilingual (Polish/English) quality evals for locally served LLMs as agents and assistants"
+authors:
+  - family-names: Konik
+    given-names: Michał
+repository-code: "https://github.com/michal-konik-human/local-llm-quality-bench"
+license: MIT
+version: 1.0.0
+date-released: 2026-10-10
+keywords: [llm, evaluation, polish, agents, tool-calling, llama.cpp, benchmark]

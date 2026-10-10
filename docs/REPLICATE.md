@@ -1,15 +1,16 @@
 # Replicating a result
 
-Every number in `results/` can be reproduced from what is in this repository, plus the
-same model weights and a server that speaks the OpenAI chat-completions API.
+Every published run (for the reference rig: [local-llm-bench-results/quality](https://github.com/michal-konik-human/local-llm-bench-results/tree/main/quality))
+can be reproduced from what is in that run's folder and in this repository, plus the same model
+weights and a server that speaks the OpenAI chat-completions API.
 
 ## Level 1: one sample, by hand (no qbench needed)
 
-Each line of `results/<run>/samples.jsonl` is one graded answer. Its `request` field is the
+Each line of `<run>/samples.jsonl` is one graded answer. Its `request` field is the
 **exact JSON body** that was POSTed, with every sampler, the seed, the tools and the messages:
 
 ```bash
-RUN=results/<run-id>
+RUN=path/to/<run-id>      # e.g. local-llm-bench-results/quality/<run-id>
 python3 - "$RUN" tool-weather-diacritics pl 0 <<'EOF' > request.json
 import json, sys
 run, case, lang, sample = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4])
@@ -47,10 +48,12 @@ agent sample: every tool call, and what the mock environment answered.
    python3 -m qbench run --model <name> --preset <preset> --k <k>
    python3 -m qbench grade runs/<new-run>            # same judge profiles, or --judge <yours>
    python3 -m qbench report runs/<new-run>
-   python3 -m qbench compare runs/<new-run> results/<published-run>
+   python3 -m qbench compare runs/<new-run> path/to/<published-run>
    ```
-4. **Check the suite is identical.** `manifest.json → suite.suite_sha256` must match. If a case
-   file differs, grading refuses (or warns with `--allow-changed`).
+4. **Check the suite is identical.** Check out the bench commit recorded in `manifest.json → bench.commit`
+   (the results repo also names the tagged release). `suite.suite_sha256` must match. If only a case's
+   *checks* changed since, grading still works and lists the case as "checks revised"; if its *prompt*
+   changed, grading refuses (unless `--allow-changed`).
 
 ## What "reproduced" means
 

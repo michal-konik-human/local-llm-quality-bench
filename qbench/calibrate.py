@@ -18,9 +18,9 @@ import yaml
 from .grade import load_grades, load_run_cases
 from .manifest import load_manifest
 from .stats import cohen_kappa
-from .util import REPO, read_jsonl, write_json
+from .util import REPO, RESULTS_DIR, RUNS_DIR, read_jsonl, write_json
 
-CALIB_DIR = os.path.join(REPO, "judges", "calibration")
+CALIB_DIR = os.path.join(RESULTS_DIR, "calibration")
 
 
 def export(run_dirs, n=40, seed=0):
@@ -68,9 +68,9 @@ def import_labels(path):
         items = yaml.safe_load(f)
     pairs, by_lang, judges = [], {"pl": [], "en": []}, set()
     for it in items:
-        rd = os.path.join(REPO, "runs", it["run"])
+        rd = os.path.join(RUNS_DIR, it["run"])
         if not os.path.isdir(rd):
-            rd = os.path.join(REPO, "results", it["run"])
+            rd = os.path.join(RESULTS_DIR, it["run"])
         verdicts = None
         for g in load_grades(rd):
             if g["key"] == it["key"]:
@@ -84,7 +84,7 @@ def import_labels(path):
                 pairs.append(p)
                 by_lang[it["lang"]].append(p)
     acc, kappa = cohen_kappa(pairs)
-    res = {"date": dt.date.today().isoformat(), "source": os.path.relpath(path, REPO), "n": len(pairs),
+    res = {"date": dt.date.today().isoformat(), "source": os.path.basename(path), "n": len(pairs),
            "accuracy": acc, "kappa": kappa, "judges": sorted(j for j in judges if j),
            "by_lang": {l: dict(zip(("accuracy", "kappa"), cohen_kappa(v)), n=len(v)) for l, v in by_lang.items()}}
     outs = []

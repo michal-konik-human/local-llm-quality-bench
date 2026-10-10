@@ -1,5 +1,6 @@
-# scratch runs (publish with `qbench report --publish`, which copies into results/)
+# scratch runs, and published results (they belong in a results repo: set QBENCH_RESULTS)
 runs/
+results/
 # held-out split: never published, only its hashes (cases-private.sha256)
 cases-private/*
 !cases-private/README.md

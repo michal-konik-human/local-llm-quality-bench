@@ -7,6 +7,11 @@ import unicodedata
 import zlib
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Published results (graded runs, leaderboard, judge calibrations). Keep them OUT of the tool repo by pointing
+# this at a results repo, e.g. QBENCH_RESULTS=~/local-llm-bench-results/quality. Scratch runs stay in ./runs.
+RESULTS_DIR = os.path.abspath(os.path.expanduser(os.environ.get("QBENCH_RESULTS") or os.path.join(REPO, "results")))
+RUNS_DIR = os.path.abspath(os.path.expanduser(os.environ.get("QBENCH_RUNS") or os.path.join(REPO, "runs")))
+METHODOLOGY_URL = "https://github.com/michal-konik-human/local-llm-quality-bench/blob/main/docs/METHODOLOGY.md"
 
 
 def sha256_bytes(data):

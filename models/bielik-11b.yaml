@@ -10,7 +10,6 @@ weights:
   file: Bielik-11B-v3.0-Instruct.Q8_0.gguf
   quant: Q8_0
 endpoint: {base_url: "http://127.0.0.1:8080/v1", model: bielik-11b}
-perf: {decode_tps: 44.75, source: "https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md"}
 notes: >
   Served with a Hermes-3 style tool template (one space after <tool_call>), because the embedded
   template has no tool support; see the llama-swap note in the perf bench repo. Tool calls that

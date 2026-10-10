@@ -7,15 +7,15 @@ import os
 import sys
 
 from .cases import LANGS, load_cases, validate_all
-from .util import REPO
+from .util import REPO, RESULTS_DIR, RUNS_DIR
 
 
 def _run_dir(arg):
-    for base in ("", os.path.join(REPO, "runs"), os.path.join(REPO, "results")):
+    for base in ("", RUNS_DIR, RESULTS_DIR):
         p = os.path.join(base, arg) if base else arg
         if os.path.isfile(os.path.join(p, "manifest.json")):
             return p
-    raise SystemExit(f"no run directory {arg!r} (looked in ., runs/, results/)")
+    raise SystemExit(f"no run directory {arg!r} (looked in ., {RUNS_DIR}, {RESULTS_DIR})")
 
 
 def cmd_validate(a):
@@ -48,8 +48,7 @@ def cmd_list(a):
         p = load_profile(name)
         print(f"  {name:28s} family={p['family']:10s} presets: {', '.join(p['presets'])}")
     print("\nRuns:")
-    for base in ("runs", "results"):
-        d = os.path.join(REPO, base)
+    for base, d in (("runs", RUNS_DIR), ("results", RESULTS_DIR)):
         for r in sorted(os.listdir(d)) if os.path.isdir(d) else []:
             if os.path.exists(os.path.join(d, r, "manifest.json")):
                 graded = os.path.exists(os.path.join(d, r, "grades.jsonl"))
@@ -70,7 +69,7 @@ def cmd_run(a):
         raise SystemExit("no cases selected")
     preset_name = a.preset or prof.get("default_preset") or next(iter(prof["presets"]))
     run_id = a.run_id or f"{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}-{prof['name']}-{preset_name}"
-    run_dir = a.out or os.path.join(REPO, "runs", run_id)
+    run_dir = a.out or os.path.join(RUNS_DIR, run_id)
     run_suite(prof, preset_name, cases, a.k, run_dir, langs=a.lang or LANGS, argv=sys.argv)
     print(run_dir)
     return 0
@@ -99,13 +98,13 @@ def cmd_report(a):
         rd = _run_dir(r)
         if a.publish:
             dest = publish(rd)
-            print(f"published -> {os.path.relpath(dest, REPO)}/report.md")
+            print(f"published -> {dest}/report.md")
         else:
             write_report(rd)
             print(f"{os.path.join(rd, 'report.md')}")
     if a.publish or not a.runs:
         update_leaderboard()
-        print("results/leaderboard.md updated")
+        print(f"{os.path.join(RESULTS_DIR, 'leaderboard.md')} updated")
     return 0
 
 
@@ -124,7 +123,7 @@ def cmd_compare(a):
         sa = {k: v for k, v in ia.items() if pred(k, v)}
         sb = {k: v for k, v in ib.items() if pred(k, v)}
         d = paired_diff(sa, sb)
-        print(f"{name:24s} {pct_ci({'mean': d['diff'], 'ci': d['ci']}):>28s}  {d['n_items']}")
+        print(f"{name:24s} {pct_ci({'mean': d['diff'], 'ci': d['ci']}, signed=True):>28s}  {d['n_items']}")
     print("\nA difference is credible only when its CI excludes 0.")
     return 0
 
@@ -162,12 +161,11 @@ def cmd_calibrate(a):
     from .calibrate import export, import_labels
     if a.action == "export":
         path, n = export([_run_dir(r) for r in a.items], n=a.n)
-        print(f"wrote {n} items to {os.path.relpath(path, REPO)}; fill in `human:` then run "
-              f"`qbench calibrate import {os.path.relpath(path, REPO)}`")
+        print(f"wrote {n} items to {path}; fill in `human:` then run `qbench calibrate import {path}`")
     else:
         res, outs = import_labels(a.items[0])
         print(json.dumps(res, indent=2))
-        print("saved:", ", ".join(os.path.relpath(o, REPO) for o in outs))
+        print("saved:", ", ".join(outs))
     return 0
 
 
@@ -225,7 +223,7 @@ def main(argv=None):
                    help="execute code_tests for a run generated on another host (runs that run's model output)")
     s.set_defaults(fn=cmd_grade)
 
-    s = sub.add_parser("report", help="write report.md/summary.json; --publish copies into results/ + leaderboard")
+    s = sub.add_parser("report", help="write report.md/summary.json; --publish copies into $QBENCH_RESULTS + leaderboard")
     s.add_argument("runs", nargs="*")
     s.add_argument("--publish", action="store_true")
     s.set_defaults(fn=cmd_report)

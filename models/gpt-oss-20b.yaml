@@ -16,9 +16,6 @@ endpoint:
   model: gpt-oss-20b                      # model id the server expects
   # api_key_env: OPENAI_API_KEY           # name of an env var holding a key, if your server needs one
   # strict_openai: true                   # drop non-OpenAI sampler keys (top_k, min_p, ...) for strict servers
-perf:                                     # speed from the sibling perf bench (local-llm-perf-bench)
-  decode_tps: 149.5
-  source: https://github.com/michal-konik-human/local-llm-perf-bench/blob/main/results/all-benchmark-results.md
 max_tokens: 6144
 default_preset: recommended
 presets:
