@@ -99,7 +99,7 @@ def build_basket():
 
 # ------------------------------------------------------------------------------------------ 2. multi-hop CTO
 def build_cto():
-    ANSWERS["cto"] = {"company": "Sensilo", "cto": "Joanna Kruk", "outdated_cto": "Marek Lis"}
+    ANSWERS["cto"] = {"company": "Sensilo", "cto": "Joanna Kruk", "outdated_cto": "Marek Lis", "future_cto": "Paweł Zych"}
     for lang in ("pl", "en"):
         pl = lang == "pl"
         page(lang, "https://zloty-bit.example/2026", "Złoty Bit 2026 – laureaci" if pl else "Golden Bit 2026 – winners",
@@ -119,6 +119,17 @@ def build_cto():
              ("1 września 2026 r. funkcję CTO objęła Joanna Kruk. Dotychczasowy CTO Marek Lis przeszedł do rady nadzorczej.") if pl else
              ("On 1 September 2026 Joanna Kruk became CTO. The previous CTO, Marek Lis, moved to the supervisory board."),
              ("sensilo", "cto", "aktualności", "news", "zmiana", "new"))
+        page(lang, "https://sensilo.example/aktualnosci/sukcesja" if pl else "https://sensilo.example/news/succession",
+             "Sensilo: plan sukcesji w zarządzie" if pl else "Sensilo: board succession plan",
+             ("5 października 2026 r. Joanna Kruk, CTO Sensilo, ogłosiła, że z końcem roku odchodzi z firmy. Do 31 grudnia 2026 r. "
+              "pełni funkcję CTO; od 1 stycznia 2027 r. funkcję CTO obejmie Paweł Zych, obecnie szef działu R&D.") if pl else
+             ("On 5 October 2026 Joanna Kruk, Sensilo's CTO, announced she will leave the company at the end of the year. She "
+              "remains CTO until 31 December 2026; from 1 January 2027 the CTO role passes to Paweł Zych, currently head of R&D."),
+             ("sensilo", "cto", "aktualności", "news", "sukcesja", "succession", "zarząd", "board"))
+        page(lang, "https://profile-zawodowe.example/pawel-zych", "Paweł Zych – CTO, Sensilo" if pl else "Paweł Zych – CTO, Sensilo",
+             ("Paweł Zych. CTO w Sensilo (od 2027). Wcześniej szef działu R&D w Sensilo.") if pl else
+             ("Paweł Zych. CTO at Sensilo (from 2027). Previously head of R&D at Sensilo."),
+             ("sensilo", "cto", "profil", "profile", "zych"))
         page(lang, "https://termix.example/o-nas" if pl else "https://termix.example/about", "Termix – o nas" if pl else "Termix – about us",
              ("CTO Termix: Piotr Wilk.") if pl else ("Termix CTO: Piotr Wilk."), ("termix", "cto", "o nas", "about"))
 
@@ -222,28 +233,56 @@ def build_relief():
 
 
 # ------------------------------------------------------------------------------------------ 6. count offers
-KETTLES = [  # shop, condition, price, delivery, in_stock
-    ("agd-swiat.example", "new", 179.0, 0.0, True), ("czajniki.example", "new", 189.0, 15.0, True),      # 204: over
-    ("kuchnia24.example", "new", 159.0, 19.99, True), ("outlet-agd.example", "used", 99.0, 0.0, True),    # used
-    ("domowe.example", "new", 195.0, 0.0, False), ("elektromarket.example", "new", 198.99, 0.0, True),    # out of stock; 198.99 ok
-    ("megasklep.example", "new", 185.0, 14.0, True), ("tanioagd.example", "new", 149.0, 49.0, True),      # 199.00 = not below
-    ("sklep-kwanta.example", "new", 169.0, 9.99, True)]
+# shop, model, condition, price, delivery rule, availability, note
+#   delivery rule: number (flat) or (fee, free_from); availability: stock | out | preorder
+KETTLES = [
+    ("agd-swiat.example", "K2", "new", 179.0, 0.0, "stock", None),
+    ("czajniki.example", "K2", "new", 189.0, 15.0, "stock", None),                  # 204.00
+    ("kuchnia24.example", "K2", "new", 159.0, 19.99, "stock", None),                # 178.99
+    ("outlet-agd.example", "K2", "used", 99.0, 0.0, "stock", None),                 # used
+    ("domowe.example", "K2", "new", 195.0, 0.0, "out", None),                       # out of stock
+    ("elektromarket.example", "K2", "new", 198.99, 0.0, "stock", None),             # 198.99
+    ("megasklep.example", "K2", "new", 185.0, 14.0, "stock", None),                 # 199.00, not below
+    ("tanioagd.example", "K2", "new", 149.0, 49.0, "stock", None),                  # 198.00
+    ("sklep-kwanta.example", "K2", "new", 169.0, 9.99, "stock", None),              # 178.99
+    ("sklep-agd24.example", "K2", "new", 185.0, (14.99, 199.0), "stock", None),     # free only from 199 -> 199.99
+    ("agdmax.example", "K2", "new", 189.0, (12.99, 150.0), "stock", None),          # free from 150 -> 189.00
+    ("elektro-dom.example", "K2 Pro", "new", 149.0, 0.0, "stock", None),            # a different model
+    ("dom-i-kuchnia.example", "K2", "new", 179.0, 0.0, "preorder", None),           # pre-order
+    ("kuchenne.example", "K2", "new", 199.0, 0.0, "stock", "promo_expired"),        # promo price 179 ended 30 Sep
+]
+
+
+def kettle_total(price, rule):
+    if isinstance(rule, tuple):
+        fee, free_from = rule
+        return round(price + (0.0 if price >= free_from else fee), 2)
+    return round(price + rule, 2)
 
 
 def build_count():
-    ok = [k for k in KETTLES if k[1] == "new" and k[4] and round(k[2] + k[3], 2) < 199.0]
+    ok = [k for k in KETTLES if k[1] == "K2" and k[2] == "new" and k[5] == "stock" and kettle_total(k[3], k[4]) < 199.0]
     ANSWERS["count"] = {"count": len(ok), "shops": [k[0] for k in ok]}
     for lang in ("pl", "en"):
         pl = lang == "pl"
-        for shop, cond, price, dl, stock in KETTLES:
-            if pl:
-                t = (f"Czajnik Kwanta K2, 1,7 l. Stan: {'nowy' if cond == 'new' else 'używany'}. Cena: {zl(price, lang)}. "
-                     f"Dostawa: {'gratis' if dl == 0 else zl(dl, lang)}. {'Dostępny.' if stock else 'Brak w magazynie.'}")
+        for shop, model, cond, price, rule, avail, note in KETTLES:
+            name = f"Czajnik Kwanta {model}" if pl else f"Kwanta {model} kettle"
+            if isinstance(rule, tuple):
+                dl = (f"Dostawa {zl(rule[0], lang)}, gratis od {zl(rule[1], lang)}." if pl else
+                      f"Delivery {zl(rule[0], lang)}, free from {zl(rule[1], lang)}.")
             else:
-                t = (f"Kwanta K2 kettle, 1.7 l. Condition: {'new' if cond == 'new' else 'used'}. Price: {zl(price, lang)}. "
-                     f"Delivery: {'free' if dl == 0 else zl(dl, lang)}. {'In stock.' if stock else 'Out of stock.'}")
-            page(lang, f"https://{shop}/czajnik-kwanta-k2", f"Czajnik Kwanta K2 – {shop}" if pl else f"Kwanta K2 kettle – {shop}", t,
-                 ("czajnik", "kettle", "kwanta", "k2", "elektryczny", "electric"))
+                dl = (f"Dostawa: {'gratis' if rule == 0 else zl(rule, lang)}." if pl else
+                      f"Delivery: {'free' if rule == 0 else zl(rule, lang)}.")
+            av = {"stock": ("Dostępny.", "In stock."), "out": ("Brak w magazynie.", "Out of stock."),
+                  "preorder": ("Przedsprzedaż: wysyłka od 16 listopada 2026 r.", "Pre-order: ships from 16 November 2026.")}[avail][0 if pl else 1]
+            pr = (f"Cena: {zl(price, lang)}." if pl else f"Price: {zl(price, lang)}.")
+            if note == "promo_expired":
+                pr += (f" Promocja: {zl(179.0, lang)} do 30 września 2026 r." if pl else f" Promotion: {zl(179.0, lang)} until 30 September 2026.")
+            t = (f"{name}, 1,7 l. Stan: {'nowy' if cond == 'new' else 'używany'}. {pr} {dl} {av}" if pl else
+                 f"{name}, 1.7 l. Condition: {cond}. {pr} {dl} {av}")
+            slug = "czajnik-kwanta-" + model.lower().replace(" ", "-")
+            page(lang, f"https://{shop}/{slug}", f"{name} – {shop}", t,
+                 ("czajnik", "kettle", "kwanta", "k2", "elektryczny", "electric") + (("pro",) if "Pro" in model else ()))
 
 
 if __name__ == "__main__":

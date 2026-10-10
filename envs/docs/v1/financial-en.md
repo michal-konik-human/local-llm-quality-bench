@@ -212,112 +212,112 @@ Perpetual licence revenue declined as expected. The group continued its shift to
 
 ### Note 3
 
-42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model.
+Alternative performance measures. Like-for-like growth is the year-on-year change computed on comparatives after all restatements, excluding one-off items in both periods compared.
 
 ### Note 4
 
-Data-centre energy costs rose less than assumed. Perpetual licence revenue declined as expected. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model. 42 new enterprise customers were signed in Q3.
+42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model.
 
 ### Note 5
 
-The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. Data-centre energy costs rose less than assumed. 42 new enterprise customers were signed in Q3.
+Data-centre energy costs rose less than assumed. Perpetual licence revenue declined as expected. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model. 42 new enterprise customers were signed in Q3.
 
 ### Note 6
 
-42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model. Customer churn was 1.9% per quarter.
+The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. Data-centre energy costs rose less than assumed. 42 new enterprise customers were signed in Q3.
 
-### Note 7. One-off items
+### Note 7
 
 Cloud services revenue in Q2 2026 includes a one-off customer migration fee of PLN 1.8m, which will not recur in later periods.
 
 ### Note 8
 
-The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model. Customer churn was 1.9% per quarter. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed.
+42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model. Customer churn was 1.9% per quarter.
 
 ### Note 9
 
-Customer churn was 1.9% per quarter. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3.
+The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model. Customer churn was 1.9% per quarter. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed.
 
 ### Note 10
 
-The board keeps its operating margin guidance at 14–16%. Data-centre energy costs rose less than assumed. Customer churn was 1.9% per quarter. 42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected.
+Customer churn was 1.9% per quarter. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3.
 
 ### Note 11
 
-The group continued its shift towards a subscription model. Perpetual licence revenue declined as expected. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter.
+The board keeps its operating margin guidance at 14–16%. Data-centre energy costs rose less than assumed. Customer churn was 1.9% per quarter. 42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected.
 
-### Note 12. Restatement of comparatives
+### Note 12
 
 Following a revenue recognition correction, Cloud services revenue for Q1 2025 was restated from 12.4 to PLN 11.9m. Other quarters are unchanged.
 
 ### Note 13
 
-42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model.
+The group continued its shift towards a subscription model. Perpetual licence revenue declined as expected. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter.
 
 ### Note 14
 
-The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. Data-centre energy costs rose less than assumed. 42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected.
+42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model.
 
 ### Note 15
 
-Customer churn was 1.9% per quarter. 42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model.
+The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. Data-centre energy costs rose less than assumed. 42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected.
 
 ### Note 16
 
-Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%.
+Customer churn was 1.9% per quarter. 42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model.
 
 ### Note 17
 
-42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. Customer churn was 1.9% per quarter.
+Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%.
 
 ### Note 18
 
-42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model.
+42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. Customer churn was 1.9% per quarter.
 
 ### Note 19
 
-The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. Data-centre energy costs rose less than assumed. 42 new enterprise customers were signed in Q3.
+Cloud services revenue in Q3 2025 included a one-off settlement with a customer of PLN 0.6m.
 
 ### Note 20
 
-42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. Customer churn was 1.9% per quarter.
+42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The group continued its shift towards a subscription model.
 
 ### Note 21
 
-The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter. Data-centre energy costs rose less than assumed.
+The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. Data-centre energy costs rose less than assumed. 42 new enterprise customers were signed in Q3.
 
 ### Note 22
 
-Perpetual licence revenue declined as expected. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model.
+42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%. Customer churn was 1.9% per quarter.
 
 ### Note 23
 
-Customer churn was 1.9% per quarter. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model. 42 new enterprise customers were signed in Q3. Data-centre energy costs rose less than assumed.
+Licences revenue in Q2 2026 includes a one-off perpetual licence sale of PLN 1.1m.
 
 ### Note 24
 
-Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter.
+The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter. Data-centre energy costs rose less than assumed.
 
 ### Note 25
 
-Data-centre energy costs rose less than assumed. Perpetual licence revenue declined as expected. 42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model.
+Perpetual licence revenue declined as expected. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model.
 
 ### Note 26
 
-42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%.
+Licences revenue for Q2 2025 was restated from 7.9 to PLN 7.6m.
 
 ### Note 27
 
-Data-centre energy costs rose less than assumed. Perpetual licence revenue declined as expected. 42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model.
+Customer churn was 1.9% per quarter. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model. 42 new enterprise customers were signed in Q3. Data-centre energy costs rose less than assumed.
 
 ### Note 28
 
-Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model. Customer churn was 1.9% per quarter. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%.
+Perpetual licence revenue declined as expected. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%. 42 new enterprise customers were signed in Q3. Customer churn was 1.9% per quarter.
 
 ### Note 29
 
-42 new enterprise customers were signed in Q3. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model.
+Data-centre energy costs rose less than assumed. Perpetual licence revenue declined as expected. 42 new enterprise customers were signed in Q3. The board keeps its operating margin guidance at 14–16%. The group continued its shift towards a subscription model.
 
 ### Note 30
 
-42 new enterprise customers were signed in Q3. Data-centre energy costs rose less than assumed. The board keeps its operating margin guidance at 14–16%. Perpetual licence revenue declined as expected. The group continued its shift towards a subscription model.
+42 new enterprise customers were signed in Q3. Perpetual licence revenue declined as expected. Customer churn was 1.9% per quarter. The group continued its shift towards a subscription model. The board keeps its operating margin guidance at 14–16%.

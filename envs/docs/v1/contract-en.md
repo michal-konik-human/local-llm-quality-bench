@@ -31,7 +31,7 @@ concluded on 2 January 2026 between Kwadrat Sp. z o.o. (the Customer) and Chmure
 
 §6. Service levels and contractual penalties
 1. The Provider shall ensure System Availability of at least 99.5% in each calendar month.
-2. Unavailability is counted in full minutes, from the moment it starts until the core functions are restored.
+2. Unavailability is counted in full minutes, from the moment it starts until the core functions are restored. Unavailability spanning the turn of a month is split between the months according to the time falling in each of them.
 3. The permitted Unavailability in a month (the Allowance) is 0.5% of the number of minutes in that month.
 4. For each started hour of Unavailability exceeding the Allowance the Provider shall pay a contractual penalty of 2% of the Monthly Fee.
 5. Unavailability does not include: (a) work in a Maintenance Window announced to the Customer at least 72 hours in advance, provided a single window does not exceed 4 hours; (b) interruptions caused by force majeure confirmed in writing by both Parties.
@@ -366,6 +366,14 @@ Annex 2 – Amendment No. 1 (signed on 14 August 2026)
 Draft Amendment No. 2 (NOT SIGNED – subject to further negotiation)
 - It is proposed to raise the penalty per started hour above the Allowance to 5% of the Monthly Fee and to remove the cap in §6(6).
 - The draft was not accepted by the Provider.
+
+Annex 5a – Minutes of the service quality review for August 2026
+- The Provider granted the Customer a service credit of PLN 300 net for August 2026.
+- The Parties found no other deviations from the service levels.
+
+Amendment No. 3 (signed on 30 September 2026)
+- §6(6) is replaced by: "Total contractual penalties for a month may not exceed 8% of the Monthly Fee."
+- The amendment applies from 1 October 2026.
 
 Annex 5 – Minutes of the service quality review for September 2026
 - The Provider granted the Customer a one-off service credit of PLN 800 net for September 2026 in connection with the incident of 3 September.

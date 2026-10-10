@@ -7,10 +7,10 @@
  },
  "contract": {
   "allowance_min": 216.0,
-  "counted_min": 395,
-  "started_hours": 3,
-  "penalty_before_credit": 4320.0,
-  "answer_pln": 3520.0
+  "counted_min": 455,
+  "started_hours": 4,
+  "penalty_before_credit": 5760.0,
+  "answer_pln": 4960.0
  },
  "minutes": {
   "in_force": [
@@ -27,16 +27,19 @@
   ]
  },
  "financial": {
-  "cloud_2025_restated": 38.9,
+  "cloud_2025_restated": 38.3,
   "cloud_2026_adjusted": 49.1,
-  "growth_pct": 26.2
+  "growth_pct": 28.2
  },
  "policy": {
   "differ": [
+   "2.2",
    "3.2",
    "5.1",
+   "6.2",
    "7.4",
-   "9.1"
+   "9.1",
+   "15.3"
   ]
  },
  "thread": {
@@ -51,12 +54,12 @@
   "owner_A-03": "Aleksandra Mazur"
  },
  "regulation": {
-  "days": 21,
-  "oncall_days": 4,
+  "days": 18,
+  "oncall_days": 5,
   "rate": 12,
   "cap": 220,
   "oncall": 5,
-  "answer_pln": 240
+  "answer_pln": 241
  },
  "reconciliation": {
   "follow_up": [

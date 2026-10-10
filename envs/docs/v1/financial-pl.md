@@ -212,112 +212,112 @@ Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. G
 
 ### Nota 3
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+Alternatywne pomiary wyników. Dynamika porównywalna to zmiana rok do roku obliczona na danych porównawczych po wszystkich przekształceniach, z wyłączeniem zdarzeń jednorazowych w obu porównywanych okresach.
 
 ### Nota 4
 
-Wzrost kosztów energii w centrach danych był niższy niż zakładano. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
 
 ### Nota 5
 
-Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wzrost kosztów energii w centrach danych był niższy niż zakładano. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
+Wzrost kosztów energii w centrach danych był niższy niż zakładano. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
 
 ### Nota 6
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
+Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wzrost kosztów energii w centrach danych był niższy niż zakładano. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
 
-### Nota 7. Zdarzenia jednorazowe
+### Nota 7
 
 Przychody segmentu Usługi chmurowe w II kwartale 2026 r. obejmują jednorazową opłatę za migrację klienta w kwocie 1,8 mln zł, która nie powtórzy się w kolejnych okresach.
 
 ### Nota 8
 
-Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
 
 ### Nota 9
 
-Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
+Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano.
 
 ### Nota 10
 
-Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami.
+Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
 
 ### Nota 11
 
-Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
+Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami.
 
-### Nota 12. Przekształcenie danych porównawczych
+### Nota 12
 
 W wyniku korekty rozpoznania przychodów przychody segmentu Usługi chmurowe za I kwartał 2025 r. przekształcono z 12,4 do 11,9 mln zł. Pozostałe kwartały nie uległy zmianie.
 
 ### Nota 13
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
 
 ### Nota 14
 
-Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wzrost kosztów energii w centrach danych był niższy niż zakładano. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
 
 ### Nota 15
 
-Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wzrost kosztów energii w centrach danych był niższy niż zakładano. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami.
 
 ### Nota 16
 
-Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%.
+Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
 
 ### Nota 17
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
+Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%.
 
 ### Nota 18
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
 
 ### Nota 19
 
-Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wzrost kosztów energii w centrach danych był niższy niż zakładano. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
+Przychody segmentu Usługi chmurowe w III kwartale 2025 r. obejmowały jednorazowe rozliczenie ugody z klientem w kwocie 0,6 mln zł.
 
 ### Nota 20
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
 
 ### Nota 21
 
-Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Wzrost kosztów energii w centrach danych był niższy niż zakładano.
+Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wzrost kosztów energii w centrach danych był niższy niż zakładano. W III kwartale pozyskano 42 nowych klientów korporacyjnych.
 
 ### Nota 22
 
-Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
 
 ### Nota 23
 
-Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wzrost kosztów energii w centrach danych był niższy niż zakładano.
+Przychody segmentu Licencje w II kwartale 2026 r. obejmują jednorazową sprzedaż licencji wieczystej w kwocie 1,1 mln zł.
 
 ### Nota 24
 
-Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
+Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Wzrost kosztów energii w centrach danych był niższy niż zakładano.
 
 ### Nota 25
 
-Wzrost kosztów energii w centrach danych był niższy niż zakładano. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
 
 ### Nota 26
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%.
+Przychody segmentu Licencje za II kwartał 2025 r. przekształcono z 7,9 do 7,6 mln zł.
 
 ### Nota 27
 
-Wzrost kosztów energii w centrach danych był niższy niż zakładano. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wzrost kosztów energii w centrach danych był niższy niż zakładano.
 
 ### Nota 28
 
-Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%.
+Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie.
 
 ### Nota 29
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+Wzrost kosztów energii w centrach danych był niższy niż zakładano. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. W III kwartale pozyskano 42 nowych klientów korporacyjnych. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
 
 ### Nota 30
 
-W III kwartale pozyskano 42 nowych klientów korporacyjnych. Wzrost kosztów energii w centrach danych był niższy niż zakładano. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego.
+W III kwartale pozyskano 42 nowych klientów korporacyjnych. Przychody ze sprzedaży licencji wieczystych spadały zgodnie z oczekiwaniami. Wskaźnik odejść klientów (churn) wyniósł 1,9% kwartalnie. Grupa kontynuowała transformację w kierunku modelu subskrypcyjnego. Zarząd utrzymuje prognozę marży operacyjnej na poziomie 14–16%.

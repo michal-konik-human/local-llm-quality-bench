@@ -16,12 +16,15 @@
 
 1. §2 is replaced by: "The allowance is PLN 12 for each day of remote work, up to PLN 220 per month."
 2. §2a is added: "For each remote work day on which the employee is on phone on-call duty, a supplement of PLN 5 is due. The limit in §2 does not apply to the supplement."
+3. §4 is replaced by: "A remote work day is a day on which the employee worked remotely for at least 4 hours."
 
 ## Amendment No. 3 (in force from 1 January 2027)
 
 §2 is replaced by: "The allowance is PLN 15 for each day of remote work, up to PLN 300 per month."
 
 ## Frequently asked questions
+
+The answers are for guidance only and may be out of date. In case of any discrepancy, the text of the regulation and its amendments prevails.
 
 **Question 1. Is the allowance paid during leave?** No, it is paid only for remote work days. The rule has no exceptions.
 
@@ -195,7 +198,7 @@
 
 **Question 86. Can I work remotely from abroad?** Yes, with approval from the manager and HR. HR can explain further.
 
-**Question 87. Who provides equipment?** The employer provides a laptop and a monitor. The rule has no exceptions.
+**Question 87. Does the on-call supplement count towards the monthly limit?** Yes, the limit covers the allowance together with the on-call supplement.
 
 **Question 88. How do I report equipment failure?** Through the IT service portal. Details on the intranet.
 

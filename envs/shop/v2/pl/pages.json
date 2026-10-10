@@ -703,6 +703,33 @@
   "text": "1 września 2026 r. funkcję CTO objęła Joanna Kruk. Dotychczasowy CTO Marek Lis przeszedł do rady nadzorczej."
  },
  {
+  "url": "https://sensilo.example/aktualnosci/sukcesja",
+  "title": "Sensilo: plan sukcesji w zarządzie",
+  "keywords": [
+   "sensilo",
+   "cto",
+   "aktualności",
+   "news",
+   "sukcesja",
+   "succession",
+   "zarząd",
+   "board"
+  ],
+  "text": "5 października 2026 r. Joanna Kruk, CTO Sensilo, ogłosiła, że z końcem roku odchodzi z firmy. Do 31 grudnia 2026 r. pełni funkcję CTO; od 1 stycznia 2027 r. funkcję CTO obejmie Paweł Zych, obecnie szef działu R&D."
+ },
+ {
+  "url": "https://profile-zawodowe.example/pawel-zych",
+  "title": "Paweł Zych – CTO, Sensilo",
+  "keywords": [
+   "sensilo",
+   "cto",
+   "profil",
+   "profile",
+   "zych"
+  ],
+  "text": "Paweł Zych. CTO w Sensilo (od 2027). Wcześniej szef działu R&D w Sensilo."
+ },
+ {
   "url": "https://termix.example/o-nas",
   "title": "Termix – o nas",
   "keywords": [
@@ -1119,5 +1146,71 @@
    "electric"
   ],
   "text": "Czajnik Kwanta K2, 1,7 l. Stan: nowy. Cena: 169,00 zł. Dostawa: 9,99 zł. Dostępny."
+ },
+ {
+  "url": "https://sklep-agd24.example/czajnik-kwanta-k2",
+  "title": "Czajnik Kwanta K2 – sklep-agd24.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Czajnik Kwanta K2, 1,7 l. Stan: nowy. Cena: 185,00 zł. Dostawa 14,99 zł, gratis od 199,00 zł. Dostępny."
+ },
+ {
+  "url": "https://agdmax.example/czajnik-kwanta-k2",
+  "title": "Czajnik Kwanta K2 – agdmax.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Czajnik Kwanta K2, 1,7 l. Stan: nowy. Cena: 189,00 zł. Dostawa 12,99 zł, gratis od 150,00 zł. Dostępny."
+ },
+ {
+  "url": "https://elektro-dom.example/czajnik-kwanta-k2-pro",
+  "title": "Czajnik Kwanta K2 Pro – elektro-dom.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric",
+   "pro"
+  ],
+  "text": "Czajnik Kwanta K2 Pro, 1,7 l. Stan: nowy. Cena: 149,00 zł. Dostawa: gratis. Dostępny."
+ },
+ {
+  "url": "https://dom-i-kuchnia.example/czajnik-kwanta-k2",
+  "title": "Czajnik Kwanta K2 – dom-i-kuchnia.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Czajnik Kwanta K2, 1,7 l. Stan: nowy. Cena: 179,00 zł. Dostawa: gratis. Przedsprzedaż: wysyłka od 16 listopada 2026 r."
+ },
+ {
+  "url": "https://kuchenne.example/czajnik-kwanta-k2",
+  "title": "Czajnik Kwanta K2 – kuchenne.example",
+  "keywords": [
+   "czajnik",
+   "kettle",
+   "kwanta",
+   "k2",
+   "elektryczny",
+   "electric"
+  ],
+  "text": "Czajnik Kwanta K2, 1,7 l. Stan: nowy. Cena: 199,00 zł. Promocja: 179,00 zł do 30 września 2026 r. Dostawa: gratis. Dostępny."
  }
 ]
