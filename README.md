@@ -36,6 +36,17 @@ at which settings, for which job*.
 
 ---
 
+## Project map
+
+Four repos, one job each:
+
+| Repo | What it is | It changes when… |
+|---|---|---|
+| [local-llm-perf-bench](https://github.com/michal-konik-human/local-llm-perf-bench) | **Tool**: how fast a model runs (llama.cpp, any GGUF, 1–n GPUs) | the way speed is measured changes |
+| [local-llm-quality-bench](https://github.com/michal-konik-human/local-llm-quality-bench) | **Tool**: how good a model is as an agent/assistant, in Polish and English | cases, scorers or model profiles change |
+| [local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results) | **Data**: everything measured on the reference rig, quality next to speed | a benchmark run finishes |
+| [radeon-r9700-rocm-notes](https://github.com/michal-konik-human/radeon-r9700-rocm-notes) | **Platform**: making 4× Radeon AI PRO R9700 + ROCm work (setup, traps, monitoring, tuning) | hardware, drivers or the serving stack change, or a new trap is found |
+
 ## Why another eval?
 
 Public leaderboards answer a different question. They test a model in the vendor's precision, through
