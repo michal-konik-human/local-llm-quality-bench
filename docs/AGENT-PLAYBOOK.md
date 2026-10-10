@@ -21,6 +21,7 @@ Run them from the `local-llm-quality-bench` directory, one at a time.
 | `python3 -m qbench list` | Model profiles (`models/*.yaml`) and existing runs |
 | `python3 -m qbench validate` | Checks cases and profiles. Must say `VALID` before anything else |
 | `python3 -m qbench run --model <profile> --k 3` | Generates 115 items × 3 samples. Its last output line is the run directory |
+| `python3 -m qbench run --model <profile> --suite hard --k 3` | The hard suite: 40 items × 3, with long documents and long agent runs; several hours |
 | `python3 -m qbench grade <run-id>` | Scores the run: code checks, then the LLM judge for rubric checks |
 | `python3 -m qbench report <run-id> --publish` | Writes `report.md` and adds the run to the leaderboard |
 | `python3 -m qbench compare <A> <B>` | Paired difference between two runs, with 95% CIs |

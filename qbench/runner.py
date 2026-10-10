@@ -12,7 +12,7 @@ import os
 import time
 
 from .adapters import normalize
-from .cases import resolve
+from .cases import render, resolve
 from .client import Client, HTTPError
 from .envs import make_env
 from .manifest import (build_manifest, compare_sampling, effective_sampling, now,
@@ -20,14 +20,16 @@ from .manifest import (build_manifest, compare_sampling, effective_sampling, now
 from .profiles import NON_OPENAI_KEYS, preset as resolve_preset
 from .util import append_jsonl, error_class, read_jsonl, scrub_home, seed_for
 
-DEFAULT_MAX_TURNS = {"agentic": 10, "web_shopping": 12}
+DEFAULT_MAX_TURNS = {"agentic": 10, "web_shopping": 12, "web_research": 20}
 
 
 def build_messages(case, lang, preset):
     spec = case.lang(lang)
     system = "\n\n".join(s for s in (preset.get("system_prompt"), spec.get("system")) if s)
     msgs = [{"role": "system", "content": system}] if system else []
-    msgs += copy.deepcopy(spec["messages"])
+    for m in copy.deepcopy(spec["messages"]):
+        m["content"] = render(case, m["content"], lang)
+        msgs.append(m)
     return msgs
 
 
@@ -38,9 +40,15 @@ def case_tools(case, env):
     return tools
 
 
-def request_body(prof, preset, messages, tools, seed):
+def max_tokens_for(case, preset):
+    """The preset's budget, raised to the case's `max_tokens` when the case needs more (long documents,
+    long agent runs). Never lowered: a case cannot make a model look worse by starving it."""
+    return max(int(preset["max_tokens"]), int(case.get("max_tokens") or 0))
+
+
+def request_body(prof, preset, messages, tools, seed, max_tokens=None):
     body = {"model": prof["endpoint"]["model"], "messages": messages, "stream": False,
-            "max_tokens": preset["max_tokens"], "seed": seed, "cache_prompt": False}
+            "max_tokens": max_tokens or preset["max_tokens"], "seed": seed, "cache_prompt": False}
     body.update(preset["sampling"])
     if tools:
         body["tools"] = tools
@@ -85,7 +93,7 @@ def run_sample(client, prof, preset, case, lang, sample_idx, run_id):
            "latency_s": 0.0, "error": None}
     first_body = None
     for turn in range(max_turns):
-        body = request_body(prof, preset, messages, tools, seed + turn)
+        body = request_body(prof, preset, messages, tools, seed + turn, max_tokens_for(case, preset))
         if first_body is None:
             first_body = copy.deepcopy(body)
         t0 = time.time()
@@ -127,7 +135,7 @@ def run_sample(client, prof, preset, case, lang, sample_idx, run_id):
     return scrub_home(rec)
 
 
-def run_suite(prof, preset_name, cases, k, run_dir, langs=None, client=None, argv=(), log=print):
+def run_suite(prof, preset_name, cases, k, run_dir, langs=None, client=None, argv=(), log=print, suite="core"):
     os.makedirs(run_dir, exist_ok=True)
     run_id = os.path.basename(os.path.normpath(run_dir))
     preset = resolve_preset(prof, preset_name)
@@ -143,7 +151,7 @@ def run_suite(prof, preset_name, cases, k, run_dir, langs=None, client=None, arg
                              f"{manifest['preset']['name']}; use a new run directory")
         manifest["k"] = max(manifest.get("k") or 0, k)
     else:
-        manifest = build_manifest(run_id, prof, preset, cases, k, langs, list(argv))
+        manifest = build_manifest(run_id, prof, preset, cases, k, langs, list(argv), suite)
     save_manifest(run_dir, manifest)
     # done = has an outcome (a normal answer, or the model ran out of turns: that is its behaviour, not a
     # glitch, so it must not be re-rolled on resume). Transport/server errors are retried.

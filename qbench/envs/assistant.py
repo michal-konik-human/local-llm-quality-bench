@@ -40,7 +40,11 @@ class AssistantEnv(Env):
         "contacts": ["search_contacts"],
         "mail": ["list_emails", "read_email", "send_email"],
         "notes": ["list_notes", "create_note"],
-        "todos": ["list_todos", "add_todo", "complete_todo"],
+        "todos": ["list_todos", "add_todo", "complete_todo", "update_todo"],
+        "freebusy": ["get_free_busy"],
+        "rooms": ["list_rooms", "book_room"],
+        "expenses": ["list_expenses", "submit_expense"],
+        "travel": ["search_trains", "book_train", "search_hotels", "book_hotel"],
     }
 
     def __init__(self, spec, lang):
@@ -53,6 +57,12 @@ class AssistantEnv(Env):
             "sent": [],
             "notes": copy.deepcopy(seed.get("notes", [])),
             "todos": copy.deepcopy(seed.get("todos", [])),
+            "others": copy.deepcopy(seed.get("others", {})),        # email -> [busy {start, end}]
+            "rooms": copy.deepcopy(seed.get("rooms", [])),          # {id, name, capacity, equipment, bookings}
+            "expenses": copy.deepcopy(seed.get("expenses", [])),
+            "trains": copy.deepcopy(seed.get("trains", [])),        # {id, from, to, date, departs, arrives, price, seats}
+            "hotels": copy.deepcopy(seed.get("hotels", [])),        # {id, city, name, price_per_night, refundable, distance_km, rooms_left}
+            "bookings": [],
         }
         self.enabled = spec.get("toolsets") or list(self.TOOLSETS)
         self._counter = 0
@@ -89,6 +99,34 @@ class AssistantEnv(Env):
             "list_todos": _fn("list_todos", "List to-do items.", {}, []),
             "add_todo": _fn("add_todo", "Add a to-do item.", {"text": S, "due": {**S, "description": "YYYY-MM-DD, optional"}}, ["text"]),
             "complete_todo": _fn("complete_todo", "Mark a to-do item as done.", {"todo_id": S}, ["todo_id"]),
+            "update_todo": _fn("update_todo", "Change the text and/or due date of a to-do item.",
+                               {"todo_id": S, "text": S, "due": {**S, "description": "YYYY-MM-DD"}}, ["todo_id"]),
+            "get_free_busy": _fn("get_free_busy", "Busy intervals of a colleague's calendar between two dates (inclusive). "
+                                 "Free time is everything else.",
+                                 {"email": S, "date_from": {**S, "description": "YYYY-MM-DD"},
+                                  "date_to": {**S, "description": "YYYY-MM-DD"}}, ["email", "date_from", "date_to"]),
+            "list_rooms": _fn("list_rooms", "Meeting rooms that are free for the whole interval, with capacity and equipment.",
+                              {"start": {**S, "description": "YYYY-MM-DDTHH:MM"}, "end": {**S, "description": "YYYY-MM-DDTHH:MM"},
+                               "min_capacity": {"type": "integer"}}, ["start", "end"]),
+            "book_room": _fn("book_room", "Book a meeting room for an interval.",
+                             {"room_id": S, "start": {**S, "description": "YYYY-MM-DDTHH:MM"},
+                              "end": {**S, "description": "YYYY-MM-DDTHH:MM"}, "title": S}, ["room_id", "start", "end", "title"]),
+            "list_expenses": _fn("list_expenses", "Expense claims already submitted.", {}, []),
+            "submit_expense": _fn("submit_expense", "Submit one expense claim to accounting.",
+                                  {"employee": {**S, "description": "employee email"},
+                                   "invoice_no": S, "amount_pln": {"type": "number", "description": "gross amount in PLN"},
+                                   "category": {**S, "enum": ["travel", "meals", "hotel", "software", "equipment", "other"]},
+                                   "status": {**S, "enum": ["submitted", "needs_approval"]}},
+                                  ["employee", "invoice_no", "amount_pln", "category", "status"]),
+            "search_trains": _fn("search_trains", "Train connections on a date.",
+                                 {"from": S, "to": S, "date": {**S, "description": "YYYY-MM-DD"}}, ["from", "to", "date"]),
+            "book_train": _fn("book_train", "Book a seat on a connection returned by search_trains.", {"train_id": S}, ["train_id"]),
+            "search_hotels": _fn("search_hotels", "Hotels with free rooms in a city for a stay.",
+                                 {"city": S, "check_in": {**S, "description": "YYYY-MM-DD"},
+                                  "check_out": {**S, "description": "YYYY-MM-DD"}}, ["city", "check_in", "check_out"]),
+            "book_hotel": _fn("book_hotel", "Book a hotel returned by search_hotels.",
+                              {"hotel_id": S, "check_in": {**S, "description": "YYYY-MM-DD"},
+                               "check_out": {**S, "description": "YYYY-MM-DD"}}, ["hotel_id", "check_in", "check_out"]),
         }
         names = [n for ts in self.enabled for n in self.TOOLSETS[ts]]
         return [schemas[n] for n in names]
@@ -201,6 +239,104 @@ class AssistantEnv(Env):
                 t["done"] = True
                 return {"completed": todo_id}
         raise KeyError(f"no to-do with id {todo_id!r}")
+
+    def update_todo(self, todo_id, text=None, due=None):
+        for t in self.st["todos"]:
+            if t["id"] == todo_id:
+                if due is not None:
+                    if not re.match(r"^\d{4}-\d{2}-\d{2}$", str(due)):
+                        raise ValueError("due must be YYYY-MM-DD")
+                    t["due"] = due
+                if text is not None:
+                    t["text"] = _str(text, "text")
+                return {"updated": t}
+        raise KeyError(f"no to-do with id {todo_id!r}")
+
+    # colleagues' calendars (read-only)
+    def get_free_busy(self, email, date_from, date_to):
+        busy = self.st["others"].get(str(email).strip().lower())
+        if busy is None:
+            raise KeyError(f"no calendar access for {email!r}")
+        lo, hi = str(date_from)[:10], str(date_to)[:10]
+        return {"email": email, "busy": [b for b in busy if b["start"][:10] <= hi and b["end"][:10] >= lo]}
+
+    # rooms
+    def _room(self, room_id):
+        for r in self.st["rooms"]:
+            if r["id"] == room_id:
+                return r
+        raise KeyError(f"no room with id {room_id!r}")
+
+    def list_rooms(self, start, end, min_capacity=0):
+        _dt(start, "start"), _dt(end, "end")
+        free = []
+        for r in self.st["rooms"]:
+            if r["capacity"] < int(min_capacity or 0):
+                continue
+            if all(not (b["start"] < end and b["end"] > start) for b in r.get("bookings", [])):
+                free.append({k: r[k] for k in ("id", "name", "capacity", "equipment")})
+        return {"rooms": free}
+
+    def book_room(self, room_id, start, end, title):
+        r = self._room(room_id)
+        _dt(start, "start"), _dt(end, "end"), _str(title, "title")
+        if end <= start:
+            raise ValueError("end must be after start")
+        if any(b["start"] < end and b["end"] > start for b in r.get("bookings", [])):
+            raise ValueError(f"room {room_id} is already booked in that interval")
+        r.setdefault("bookings", []).append({"start": start, "end": end, "title": title, "by": "me"})
+        self.st["bookings"].append({"type": "room", "id": room_id, "start": start, "end": end, "title": title})
+        return {"booked": room_id, "start": start, "end": end}
+
+    # expenses
+    def list_expenses(self):
+        return {"expenses": self.st["expenses"]}
+
+    def submit_expense(self, employee, invoice_no, amount_pln, category, status):
+        if category not in ("travel", "meals", "hotel", "software", "equipment", "other"):
+            raise ValueError("unknown category")
+        if status not in ("submitted", "needs_approval"):
+            raise ValueError("status must be submitted or needs_approval")
+        if not isinstance(amount_pln, (int, float)) or isinstance(amount_pln, bool) or amount_pln <= 0:
+            raise ValueError("amount_pln must be a positive number")
+        e = {"id": self._id("x"), "employee": _str(employee, "employee").lower(), "invoice_no": _str(invoice_no, "invoice_no"),
+             "amount_pln": round(float(amount_pln), 2), "category": category, "status": status}
+        self.st["expenses"].append(e)
+        return {"submitted": e["id"]}
+
+    # travel
+    def search_trains(self, date, **kw):
+        frm, to = fold(kw.get("from", "")), fold(kw.get("to", ""))
+        hits = [t for t in self.st["trains"] if t["date"] == str(date)[:10]
+                and fold(t["from"]).startswith(frm[:5]) and fold(t["to"]).startswith(to[:5]) and t.get("seats", 1) > 0]
+        return {"connections": [{k: t[k] for k in ("id", "from", "to", "date", "departs", "arrives", "price", "class")
+                                 if k in t} for t in sorted(hits, key=lambda t: t["departs"])]}
+
+    def book_train(self, train_id):
+        for t in self.st["trains"]:
+            if t["id"] == train_id:
+                if t.get("seats", 1) <= 0:
+                    raise ValueError("sold out")
+                t["seats"] = t.get("seats", 1) - 1
+                self.st["bookings"].append({"type": "train", "id": train_id})
+                return {"booked": train_id, "departs": t["departs"], "arrives": t["arrives"], "price": t["price"]}
+        raise KeyError(f"no train with id {train_id!r}")
+
+    def search_hotels(self, city, check_in, check_out):
+        c = fold(city)[:5]
+        hits = [h for h in self.st["hotels"] if fold(h["city"]).startswith(c) and h.get("rooms_left", 1) > 0]
+        nights = (int(str(check_out)[8:10]) - int(str(check_in)[8:10])) if str(check_in)[:7] == str(check_out)[:7] else None
+        return {"hotels": [{**{k: h[k] for k in h if k not in ("rooms_left",)}, "nights": nights} for h in hits]}
+
+    def book_hotel(self, hotel_id, check_in, check_out):
+        for h in self.st["hotels"]:
+            if h["id"] == hotel_id:
+                if h.get("rooms_left", 1) <= 0:
+                    raise ValueError("no rooms left")
+                h["rooms_left"] = h.get("rooms_left", 1) - 1
+                self.st["bookings"].append({"type": "hotel", "id": hotel_id, "check_in": check_in, "check_out": check_out})
+                return {"booked": hotel_id, "check_in": check_in, "check_out": check_out}
+        raise KeyError(f"no hotel with id {hotel_id!r}")
 
     def state(self):
         return copy.deepcopy(self.st)

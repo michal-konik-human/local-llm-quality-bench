@@ -6,7 +6,7 @@ import json
 import os
 import sys
 
-from .cases import LANGS, load_cases, validate_all
+from .cases import LANGS, SUITES, load_cases, validate_all
 from .util import REPO, RESULTS_DIR, RUNS_DIR
 
 
@@ -20,7 +20,8 @@ def _run_dir(arg):
 
 def cmd_validate(a):
     from .profiles import list_profiles, load_profile
-    cases = load_cases(a.paths or None)
+    cases = [c for s in ([a.suite] if a.suite else SUITES) for c in load_cases(a.paths or None, suite=s)] \
+        if not a.paths else load_cases(a.paths)
     errs = validate_all(cases)
     for name in list_profiles():
         try:
@@ -60,7 +61,7 @@ def cmd_run(a):
     from .profiles import load_profile
     from .runner import run_suite
     prof = load_profile(a.model)
-    cases = load_cases(a.cases or None, families=a.family, ids=a.case)
+    cases = load_cases(a.cases or None, families=a.family, ids=a.case, suite=a.suite)
     errs = validate_all(cases)
     if errs:
         print("\n".join(errs))
@@ -68,9 +69,11 @@ def cmd_run(a):
     if not cases:
         raise SystemExit("no cases selected")
     preset_name = a.preset or prof.get("default_preset") or next(iter(prof["presets"]))
-    run_id = a.run_id or f"{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}-{prof['name']}-{preset_name}"
+    tag = "" if a.suite == "core" else f"-{a.suite}"
+    run_id = a.run_id or f"{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}-{prof['name']}-{preset_name}{tag}"
     run_dir = a.out or os.path.join(RUNS_DIR, run_id)
-    run_suite(prof, preset_name, cases, a.k, run_dir, langs=a.lang or LANGS, argv=sys.argv)
+    run_suite(prof, preset_name, cases, a.k, run_dir, langs=a.lang or LANGS, argv=sys.argv,
+              suite=a.suite if not a.cases else "custom")
     print(run_dir)
     return 0
 
@@ -195,6 +198,7 @@ def main(argv=None):
 
     s = sub.add_parser("validate", help="validate case files and model profiles")
     s.add_argument("paths", nargs="*")
+    s.add_argument("--suite", choices=list(SUITES), help="validate one suite only (default: all)")
     s.set_defaults(fn=cmd_validate)
 
     s = sub.add_parser("list", help="list model profiles and runs")
@@ -204,6 +208,8 @@ def main(argv=None):
     s.add_argument("--model", required=True, help="model profile name (models/<name>.yaml) or path")
     s.add_argument("--preset", help="preset name (default: the profile's default_preset)")
     s.add_argument("--k", type=int, default=5, help="samples per item (default 5; use 3 for screening)")
+    s.add_argument("--suite", choices=list(SUITES), default="core",
+                   help="core (60 tasks) or hard (long agentic workflows, multi-hop web research, long documents)")
     s.add_argument("--lang", action="append", choices=LANGS, help="restrict to a language (repeatable)")
     s.add_argument("--family", action="append", help="restrict to a case family (repeatable)")
     s.add_argument("--case", action="append", help="restrict to a case id (repeatable)")
