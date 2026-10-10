@@ -37,7 +37,7 @@ checks:
     regex:
     - '14'
     - (\b8\b|ósm|eight)
-    - (\b15\b|3 ?p\.?m|piętnast|three)
+    - (\b15\b|\b3(:00)? ?p\.?m|piętnast|three)
     - Lipow
 - scorer: rubric
   source: Rubric written for this bench; reference notes describe what a good answer contains.

@@ -18,13 +18,11 @@ langs:
         Podsumuj w 2–3 zdaniach, co dziś zrobiłam, i pochwal mnie.
 checks:
 - scorer: ifeval
-  source: 'Polish past tense agrees with the addressee''s gender: zrobiłaś/wysłałaś, never zrobiłeś/wysłałeś.'
+  source: 'Polish past tense agrees with the addressee''s gender: zrobiłaś/wysłałaś, never zrobiłeś/wysłałeś. Gender-neutral
+    phrasing (Udało Ci się wysłać...) is also correct.'
   rules:
   - check: regex_absent
     patterns:
     - \b\w+łeś\b
-  - check: required_patterns
-    patterns:
-    - \b\w+łaś\b
   - check: language
   - check: has_diacritics
