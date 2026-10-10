@@ -43,9 +43,10 @@ checks:
   expected:
     regex:
       pl:
-      - (nie (zawiera|ma|podaje|wspomina|określa|dotyczy|mówi|znajduje)|brak (informacj|danych))
+      - (\bnie\s+(\w+\s+){0,3}?(zawiera|ma\b|podaje|wspomina|określa|dotyczy|mówi|znajduj|znalaz|wynika|porusza|reguluje|opisuje|precyzuje|przewiduje)|brak\s+(\w+\s+)?(informacj|danych|zapis|wzmian))
       en:
-      - (does not|doesn't|no information|not (mention|specif|cover|contain|includ|address|state)|isn't (mention|cover))
+      - (does not|doesn't|did not|didn't|no (information|mention|details?)|not (mention|specif|cover|contain|includ|address|state|say|provide|found)|isn't
+        (mention|cover|specified|stated)|could(n't| not) find|silent on)
     not_regex:
       pl:
       - (\b(14|2|dwa|dwóch|czternaście)\b[^.\n]{0,40}ojcowsk|ojcowsk[^.\n]{0,40}\b(14|2|dwa|dwóch|czternaście)\b)

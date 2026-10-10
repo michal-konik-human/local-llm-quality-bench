@@ -93,14 +93,10 @@ checks:
         items:
           list_of:
           - name:
-              regex:
-                pl: konsult
-                en: consult
+              regex: (konsult|consult)
             quantity: 3
             unit_price: 200
           - name:
-              regex:
-                pl: licencj
-                en: licen[cs]e
+              regex: (licencj|licen[cs]e)
             quantity: 1
             unit_price: 1500

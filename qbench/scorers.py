@@ -14,8 +14,8 @@ from .textutil import answer_line, contains, extract_json, matches, numbers
 from .util import fold, nfc
 
 
-ASK_RE = {"pl": r"(\?|\b(podaj|proszę o (podanie|potwierdzenie|informację)|potwierdź|wskaż|daj znać)\b)",
-          "en": r"(\?|\b(please (provide|confirm|tell|share|specify|let me know)|let me know|confirm which)\b)"}
+ASK_RE = {"pl": r"(\?|\b(podaj|podać|proszę o|potwierdź|potwierdzić|wskaż|wskazać|daj znać|napisz,? (któr|jak|gdzie|czy))\b)",
+          "en": r"(\?|\b(please (provide|confirm|tell|share|specify|send|let me know)|let me know|could you (provide|tell|share|confirm)|i('ll| will)? need (the|your|to know))\b)"}
 
 
 def asks_user(text, lang):

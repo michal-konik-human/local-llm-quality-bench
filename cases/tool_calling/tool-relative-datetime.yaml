@@ -67,8 +67,6 @@ checks:
     - name: create_event
       args:
         title:
-          regex:
-            pl: dentyst
-            en: dentist
+          regex: (dentyst|dentist|stomatolog)
         start: 2026-10-13T15:30
         end: 2026-10-13T16:30

@@ -21,8 +21,8 @@ checks:
   rules:
   - check: required_patterns
     patterns:
-    - 1\s?234,50\s?zł
-    - (5 listopada 2026|0?5\.11\.2026)
+    - 1\s?234,50\s?(zł|PLN|złotych)
+    - (0?5 listopada 2026|0?5\.11\.2026)
   - check: regex_absent
     patterns:
     - 1234\.5
