@@ -13,8 +13,10 @@ from .stats import bootstrap_ci, items as group_items, lang_gap, summarize
 from .util import METHODOLOGY_URL, RESULTS_DIR, write_json
 
 FAMILY_LABEL = {"tool_calling": "Tools", "agentic": "Agent", "web_shopping": "Shop",
-                "instruction_following": "Instr.", "writing": "Writing", "reasoning": "Reason.", "coding": "Code"}
-RELIABILITY_FAMILIES = ("tool_calling", "agentic", "web_shopping")
+                "instruction_following": "Instr.", "writing": "Writing", "reasoning": "Reason.", "coding": "Code",
+                "web_research": "Research", "long_context": "Long docs"}
+RELIABILITY_FAMILIES = ("tool_calling", "agentic", "web_shopping", "web_research")
+SUITE_TITLE = {"core": "Core suite", "hard": "Hard suite", "custom": "Custom case selection"}
 CALIB_DIR = os.path.join(RESULTS_DIR, "calibration")
 
 
@@ -73,6 +75,7 @@ def summarize_run(run_dir):
     imap = group_items(grades)
     prof = manifest["model"]["profile"]
     out = {"run_id": manifest["run_id"], "generated_at": now(), "k": manifest["k"],
+           "suite": (manifest.get("suite") or {}).get("name", "core"),
            "model": {"name": prof["name"], "display": prof.get("display", prof["name"]), "family": prof["family"],
                      "quant": (prof.get("weights") or {}).get("quant"), "params": prof.get("params"),
                      "license": prof.get("license"), "repo": (prof.get("weights") or {}).get("repo"),
@@ -135,7 +138,8 @@ def _failures(grades, per_family=2):
 
 def render_report(summary, manifest, grades):
     m, p = summary["model"], summary["preset"]
-    L = [f"# Quality run `{summary['run_id']}`: {m['display']} / preset `{p['name']}`", ""]
+    L = [f"# Quality run `{summary['run_id']}`: {m['display']} / preset `{p['name']}`", "",
+         f"**{SUITE_TITLE.get(summary.get('suite', 'core'), summary.get('suite'))}**", ""]
     h = summary["health"]
     cal = summary["judge_calibration"]
     L += ["| | |", "|---|---|",
@@ -221,23 +225,14 @@ def publish(run_dir):
     return dest
 
 
-def update_leaderboard():
-    rows = []
-    for path in sorted(glob.glob(os.path.join(RESULTS_DIR, "*", "summary.json"))):
-        with open(path, encoding="utf-8") as f:
-            rows.append(json.load(f))
+def _suite_section(suite, rows):
+    """Leaderboard section for one suite: a table per language, then the paired PL-EN gap."""
     fams = [f for f in FAMILIES if any(f in (r["langs"].get(l) or {}).get("families", {}) for r in rows for l in ("pl", "en"))]
-    L = ["# Leaderboard", "",
-         "Scores 0–100 with 95% CI (cluster bootstrap over tasks). **Overall** is the mean of family scores, "
-         "so every family weighs the same. **Reliability** is pass^k on tool, agent and shopping tasks: the chance "
-         "that *all k* attempts succeed, which is what an assistant you rely on needs. Configs whose CIs overlap are "
-         "not distinguishable at this sample size.", "",
-         f"_Generated {now()} from `results/*/summary.json` by `qbench report --publish`._", ""]
+    L = [f"# {SUITE_TITLE.get(suite, suite)}", ""]
     for lang, flag in (("pl", "🇵🇱 Polish"), ("en", "🇬🇧 English")):
-        lr = [r for r in rows if lang in r["langs"]]
+        lr = sorted((r for r in rows if lang in r["langs"]), key=lambda r: -(r["langs"][lang]["overall"]["mean"] or 0))
         if not lr:
             continue
-        lr.sort(key=lambda r: -(r["langs"][lang]["overall"]["mean"] or 0))
         L += [f"## {flag}", "",
               "| # | Model | Quant | Preset | **Overall** | " + " | ".join(FAMILY_LABEL[f] for f in fams)
               + " | Reliability pass^k | Tokens/answer | Decode tok/s | Run |",
@@ -251,14 +246,35 @@ def update_leaderboard():
                      f" | {pct(rel.get('pass_k'))} (k={rel.get('k', '–')}) | {r['cost']['median_completion_tokens'] or '–'} | "
                      f"{r['cost']['median_decode_tps'] or '–'} | [{r['run_id']}]({r['run_id']}/report.md) |")
         L.append("")
-    gaps = [r for r in rows if r.get("lang_gap", {}).get("gap") is not None]
+    gaps = [r for r in rows if (r.get("lang_gap") or {}).get("gap") is not None]
     if gaps:
         L += ["## Polish vs English (same tasks, paired)", "", "| Model | Preset | PL − EN (points, 95% CI) | Paired tasks |",
               "|---|---|---|---|"]
         for r in sorted(gaps, key=lambda r: r["lang_gap"]["gap"]):
             g = r["lang_gap"]
-            L.append(f"| {r['model']['display']} | `{r['preset']['name']}` | {pct_ci({'mean': g['gap'], 'ci': g['ci']}, signed=True)} | {g['n_cases']} |")
+            L.append(f"| {r['model']['display']} | `{r['preset']['name']}` | "
+                     f"{pct_ci({'mean': g['gap'], 'ci': g['ci']}, signed=True)} | {g['n_cases']} |")
         L.append("")
+    return L
+
+
+def update_leaderboard():
+    rows = []
+    for path in sorted(glob.glob(os.path.join(RESULTS_DIR, "*", "summary.json"))):
+        with open(path, encoding="utf-8") as f:
+            rows.append(json.load(f))
+    L = ["# Leaderboard", "",
+         "Scores 0–100 with 95% CI (cluster bootstrap over tasks). **Overall** is the mean of family scores, "
+         "so every family weighs the same. **Reliability** is pass^k on tool, agent, shopping and research tasks: the "
+         "chance that *all k* attempts succeed, which is what an assistant you rely on needs. Configs whose CIs overlap "
+         "are not distinguishable at this sample size.", "",
+         "Suites are scored separately and never mixed. The **hard suite** (long agentic workflows, multi-hop web "
+         "research, long documents) is designed so that only frontier models come close to 100.", "",
+         f"_Generated {now()} from `*/summary.json` by `qbench report --publish`._", ""]
+    for suite in ("hard", "core", "custom"):
+        sr = [r for r in rows if r.get("suite", "core") == suite]
+        if sr:
+            L += _suite_section(suite, sr)
     judges = sorted({(r.get("judge") or "none") for r in rows})
     L += [f"Judges used: {', '.join(judges)}. Rubric checks are judged by a model from a *different family* than the "
           f"candidate. Method: [local-llm-quality-bench METHODOLOGY]({METHODOLOGY_URL}).", ""]
@@ -266,4 +282,3 @@ def update_leaderboard():
     with open(os.path.join(RESULTS_DIR, "leaderboard.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(L))
     return rows
-

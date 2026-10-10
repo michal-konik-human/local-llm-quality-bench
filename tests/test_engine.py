@@ -390,5 +390,104 @@ class TestReviewRegressions(unittest.TestCase):
         self.assertEqual(len(sentences("Kopernik urodził się w 1473 r. Zmarł w 1543 r. Był astronomem.", "pl")), 3)
 
 
+class TestHardSuiteFeatures(unittest.TestCase):
+    """Engine features added for the hard suite (cases-hard/)."""
+
+    def _case(self, **kw):
+        c = cases.Case({"id": "x", "version": 1, "family": "long_context", "item_type": "parallel", "review": "pending-owner",
+                        "canary": CANARY, "langs": {"pl": {"messages": [{"role": "user", "content": "{{doc:d}} Pytanie"}]},
+                                                    "en": {"messages": [{"role": "user", "content": "{{doc:d}} Question"}]}},
+                        "documents": {"d": {"pl": "docs/v1/regulation-pl.md", "en": "docs/v1/regulation-en.md"}},
+                        "checks": [{"scorer": "answer", "source": "s", "expected": {"number": 240}}], **kw})
+        return c
+
+    def test_documents_render_per_language_and_enter_the_prompt_hash(self):
+        c = self._case()
+        self.assertIn("Regulamin pracy zdalnej", cases.render(c, c.lang("pl")["messages"][0]["content"], "pl"))
+        self.assertIn("Remote work regulation", cases.render(c, c.lang("en")["messages"][0]["content"], "en"))
+        self.assertEqual(cases.validate(c), [])
+        other = self._case(documents={"d": "docs/v1/policy-pl.md"})
+        self.assertNotEqual(cases.prompt_hash(c), cases.prompt_hash(other))
+        missing = self._case(documents={"d": "docs/v1/nope.md"})
+        self.assertTrue(any("missing" in e for e in cases.validate(missing)))
+
+    def test_case_max_tokens_raises_the_budget_and_the_hash_only_when_set(self):
+        from qbench.runner import max_tokens_for
+        self.assertEqual(max_tokens_for({"max_tokens": 16384}, {"max_tokens": 8192}), 16384)
+        self.assertEqual(max_tokens_for({"max_tokens": 1024}, {"max_tokens": 8192}), 8192)  # never lowered
+        self.assertEqual(max_tokens_for({}, {"max_tokens": 8192}), 8192)
+        self.assertNotEqual(cases.prompt_hash(self._case()), cases.prompt_hash(self._case(max_tokens=16384)))
+
+    def test_per_language_web_snapshot(self):
+        pl = make_env({"type": "shop", "snapshot": "v2"}, "pl")
+        en = make_env({"type": "shop", "snapshot": "v2"}, "en")
+        self.assertIn("Zarząd Sensilo", json.loads(pl.call("fetch_page", {"url": "https://sensilo.example/zespol"}))["text"])
+        self.assertIn("Sensilo management", json.loads(en.call("fetch_page", {"url": "https://sensilo.example/team"}))["text"])
+        self.assertIn("error", json.loads(en.call("fetch_page", {"url": "https://sensilo.example/zespol"})))
+        v1 = make_env({"type": "shop", "snapshot": "v1"}, "en")  # v1 is one shared web
+        self.assertTrue(v1.pages)
+
+    def test_language_keyed_env_validates(self):
+        c = self._case(family="agentic", env={"pl": {"type": "assistant"}, "en": {"type": "assistant"}})
+        self.assertEqual(cases.validate(c), [])
+        bad = self._case(family="agentic", env={"pl": {"type": "assistant"}, "en": {"type": "nope"}})
+        self.assertTrue(any("env.type" in e for e in cases.validate(bad)))
+
+    def test_new_assistant_tools(self):
+        env = make_env({"type": "assistant", "toolsets": ["rooms", "freebusy", "expenses", "travel", "todos"], "state": {
+            "rooms": [{"id": "R1", "name": "A", "capacity": 6, "equipment": ["projector"],
+                       "bookings": [{"start": "2026-10-15T12:00", "end": "2026-10-15T14:00", "title": "x", "by": "other"}]}],
+            "others": {"a@x.pl": [{"start": "2026-10-15T09:00", "end": "2026-10-15T10:00"}]},
+            "trains": [{"id": "T1", "from": "Warszawa Centralna", "to": "Gdańsk Główny", "date": "2026-10-20",
+                        "departs": "06:20", "arrives": "09:05", "price": 89.0, "class": 2, "seats": 1}],
+            "hotels": [{"id": "H1", "city": "Gdańsk", "name": "H", "price_per_night": 395.0, "refundable": True,
+                        "distance_km": 1.9, "rooms_left": 1}],
+            "todos": [{"id": "t1", "text": "a", "due": "2026-10-19", "done": False}]}}, "pl")
+        self.assertEqual(json.loads(env.call("list_rooms", {"start": "2026-10-15T13:00", "end": "2026-10-15T15:00"}))["rooms"], [])
+        self.assertIn("error", json.loads(env.call("book_room", {"room_id": "R1", "start": "2026-10-15T13:00",
+                                                                 "end": "2026-10-15T15:00", "title": "t"})))
+        env.call("book_room", {"room_id": "R1", "start": "2026-10-15T14:00", "end": "2026-10-15T16:00", "title": "t"})
+        self.assertEqual(json.loads(env.call("get_free_busy", {"email": "a@x.pl", "date_from": "2026-10-15",
+                                                               "date_to": "2026-10-15"}))["busy"][0]["end"], "2026-10-15T10:00")
+        self.assertEqual(len(json.loads(env.call("search_trains", {"from": "Warszawa", "to": "Gdańsk", "date": "2026-10-20"}))["connections"]), 1)
+        env.call("book_train", {"train_id": "T1"})
+        self.assertIn("error", json.loads(env.call("book_train", {"train_id": "T1"})))  # sold out
+        env.call("book_hotel", {"hotel_id": "H1", "check_in": "2026-10-20", "check_out": "2026-10-21"})
+        self.assertIn("error", json.loads(env.call("submit_expense", {"employee": "a@x.pl", "invoice_no": "1", "amount_pln": "12",
+                                                                      "category": "hotel", "status": "submitted"})))
+        env.call("update_todo", {"todo_id": "t1", "due": "2026-10-26"})
+        st = env.state()
+        self.assertEqual([b["type"] for b in st["bookings"]], ["room", "train", "hotel"])
+        self.assertEqual(st["todos"][0]["due"], "2026-10-26")
+
+    def test_answer_set_partial_credit_and_env_approx(self):
+        chk = {"expected": {"set": ["D-01", "D-05", "D-07"], "token_regex": r"D-\d{2}"}}
+        exact = scorers.score_answer(chk, {"final": {"content": "ODPOWIEDŹ: D-07, D-01, D-05"}}, None, "pl")
+        self.assertTrue(exact["passed"])
+        part = scorers.score_answer(chk, {"final": {"content": "ODPOWIEDŹ: D-01, D-05, D-09"}}, None, "pl")
+        self.assertFalse(part["passed"])
+        self.assertAlmostEqual(part["score"], 0.5)  # 2 shared / 4 in the union
+        state = {"expenses": [{"invoice_no": "INV-88", "amount_pln": 1322.15}]}
+        ok = scorers.score_env_state({"expect": [{"select": "expenses", "field": "amount_pln", "approx": 1322.149, "tol": 0.01}]},
+                                     {"env_state": state}, None, "pl")
+        self.assertTrue(ok["passed"])
+        off = scorers.score_env_state({"expect": [{"select": "expenses", "field": "amount_pln", "approx": 310}]},
+                                      {"env_state": state}, None, "pl")
+        self.assertFalse(off["passed"])
+
+    def test_core_prompt_hashes_are_stable(self):
+        """Published runs are re-graded only when the prompt hash still matches: new optional keys
+        (documents, max_tokens, per-language webs) must not change the hash of a case that does not use them."""
+        got = {c.id: c.prompt_sha256 for c in cases.load_cases(suite="core")}
+        self.assertEqual(got["tool-weather-diacritics"], "46a7cb7b5d1153b0cc8165f6ed95907eb0e8ea19d20109d7307a1ed6aca40b51")
+        self.assertEqual(got["shop-headphones-total-cost"], "417b033bc39cb954a4d65240cbd85312fec6b27c26e662a7a883cb6b5faaa272")
+
+    def test_suites_are_separate(self):
+        core = {c.id for c in cases.load_cases(suite="core")}
+        hard = {c.id for c in cases.load_cases(suite="hard")}
+        self.assertTrue(core and hard and not core & hard)
+        self.assertEqual(cases.validate_all(cases.load_cases(suite="hard")), [])
+
+
 if __name__ == "__main__":
     unittest.main()

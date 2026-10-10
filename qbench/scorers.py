@@ -113,11 +113,21 @@ def score_answer(check, rec, case, lang):
         tol = float(spec.get("tol", 0.01))
         nums = numbers(text)
         parts.append((any(abs(n - float(spec["number"])) <= tol for n in nums), f"number {spec['number']} ± {tol}"))
+    if "set" in spec:
+        # the answer must list EXACTLY these items (no more, no fewer); items matched by token_regex
+        pat = spec.get("token_regex", r"[A-Za-z]{1,4}-\d{1,4}")
+        got = {fold(t) for t in re.findall(pat, nfc(text))}
+        want = {fold(str(t)) for t in resolve(spec["set"], lang)}
+        missing, extra = sorted(want - got), sorted(got - want)
+        # partial credit = Jaccard overlap (each wrong inclusion costs as much as each omission); passed = exact set
+        jac = len(want & got) / len(want | got) if (want | got) else 1.0
+        parts.append((jac if spec.get("partial", True) else float(jac == 1.0),
+                      f"set: missing {missing}, extra {extra} (overlap {jac:.2f})" if (missing or extra) else "set exact"))
     if not parts:
         return _res(0, False, "empty answer spec")
-    n = sum(ok for ok, _ in parts)
-    return _res(n / len(parts), n == len(parts),
-                f"{where}: " + "; ".join(("ok " if ok else "FAIL ") + d for ok, d in parts))
+    n = sum(float(ok) for ok, _ in parts)
+    return _res(n / len(parts), all(float(ok) == 1.0 for ok, _ in parts),
+                f"{where}: " + "; ".join(("ok " if float(ok) == 1.0 else "FAIL ") + d for ok, d in parts))
 
 
 # --- structured output --------------------------------------------------------
@@ -375,7 +385,7 @@ def _rule(rule, state, lang):
         for v in vals:
             merged += v if isinstance(v, list) else [v]
         vals = [merged]
-    checks = {k: resolve(rule[k], lang) for k in ("eq", "contains_all", "contains_any", "regex", "set", "subset") if k in rule}
+    checks = {k: resolve(rule[k], lang) for k in ("eq", "contains_all", "contains_any", "regex", "set", "subset", "approx") if k in rule}
     def ok_one(v):
         txt = " ".join(map(str, v)) if isinstance(v, list) else str(v or "")
         if "eq" in checks and not ((fold(str(v)) == fold(checks["eq"])) if isinstance(checks["eq"], str) else v == checks["eq"]):
@@ -390,6 +400,12 @@ def _rule(rule, state, lang):
             return False
         if "subset" in checks and not (isinstance(v, list) and {fold(str(x)) for x in checks["subset"]} <= {fold(str(x)) for x in v}):
             return False
+        if "approx" in checks:
+            try:
+                if abs(float(v) - float(checks["approx"])) > float(rule.get("tol", 0.01)):
+                    return False
+            except (TypeError, ValueError):
+                return False
         return True
     ok = all(ok_one(v) for v in vals) if rule.get("all") else any(ok_one(v) for v in vals)
     return ok, f"{label}.{field}: {str(vals)[:120]} vs {checks}"

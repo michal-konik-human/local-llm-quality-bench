@@ -1,0 +1,60 @@
+{
+ "basket": {
+  "total": 771.98,
+  "shops": [
+   "kablownia.example",
+   "netmarket.example",
+   "techhurt.example"
+  ],
+  "plan": {
+   "netmarket.example": [
+    "router"
+   ],
+   "techhurt.example": [
+    "switch"
+   ],
+   "kablownia.example": [
+    "cable"
+   ]
+  },
+  "plan_by_item": {
+   "router": "netmarket.example",
+   "switch": "techhurt.example",
+   "cable": "kablownia.example"
+  }
+ },
+ "cto": {
+  "company": "Sensilo",
+  "cto": "Joanna Kruk",
+  "outdated_cto": "Marek Lis"
+ },
+ "laptop": {
+  "url": "https://tanie-laptopy.example/laptop/l8",
+  "price": 5768.0,
+  "valid": [
+   "l1",
+   "l8",
+   "l10"
+  ]
+ },
+ "event": {
+  "date": "2026-10-22",
+  "city": "Poznań",
+  "train": "EIP 3500",
+  "price": 118.3
+ },
+ "relief": {
+  "limit": 4500,
+  "since": "2026-07-01"
+ },
+ "count": {
+  "count": 5,
+  "shops": [
+   "agd-swiat.example",
+   "kuchnia24.example",
+   "elektromarket.example",
+   "tanioagd.example",
+   "sklep-kwanta.example"
+  ]
+ }
+}

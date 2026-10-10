@@ -1,7 +1,8 @@
 """Frozen web: a search engine and page fetcher over a saved snapshot of shop pages.
 
 Live prices change hourly, so a live "find the cheapest offer" test can never be
-replicated. Here the web is a versioned JSON snapshot (envs/shop/<version>/pages.json):
+replicated. Here the web is a versioned JSON snapshot (envs/shop/<version>/pages.json,
+or envs/shop/<version>/<lang>/pages.json when a snapshot has one web per language):
 the right answer is known exactly and is identical on every machine.
 
 Search is deliberately simple and deterministic: token overlap (with crude prefix
@@ -23,8 +24,17 @@ def _tokens(text):
     return {t[:STEM] for t in TOKEN_RE.findall(fold(text)) if len(t) > 1}
 
 
-def load_snapshot(version):
-    path = os.path.join(REPO, "envs", "shop", version, "pages.json")
+def snapshot_path(version, lang=None):
+    """A per-language web (envs/shop/<version>/<lang>/pages.json) wins over a shared one."""
+    if lang:
+        per_lang = os.path.join(REPO, "envs", "shop", version, lang, "pages.json")
+        if os.path.exists(per_lang):
+            return per_lang
+    return os.path.join(REPO, "envs", "shop", version, "pages.json")
+
+
+def load_snapshot(version, lang=None):
+    path = snapshot_path(version, lang)
     with open(path, encoding="utf-8") as f:
         pages = json.load(f)
     return {p["url"]: p for p in pages}
@@ -36,7 +46,7 @@ class ShopEnv(Env):
     def __init__(self, spec, lang):
         super().__init__(spec, lang)
         self.version = spec.get("snapshot", "v1")
-        self.pages = load_snapshot(self.version)
+        self.pages = load_snapshot(self.version, lang)
         self.max_results = int(spec.get("max_results", 8))
         self.fetched = []
         self.searches = []

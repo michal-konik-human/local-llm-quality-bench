@@ -1,0 +1,641 @@
+2026-10-07T13:00:25Z web-01    INFO  cron: logrotate finished
+2026-10-07T13:00:32Z web-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:00:36Z db-02     INFO  postgres: checkpoint complete: wrote 8942 buffers
+2026-10-07T13:00:50Z web-04    INFO  cron: logrotate finished
+2026-10-07T13:00:52Z web-04    INFO  postgres: checkpoint complete: wrote 5905 buffers
+2026-10-07T13:01:09Z db-01     INFO  nginx: GET /health 200 1334ms
+2026-10-07T13:01:54Z web-02    INFO  app: cache hit ratio 80%
+2026-10-07T13:02:00Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:02:14Z web-04    INFO  app: cache hit ratio 95%
+2026-10-07T13:02:19Z api-02    INFO  postgres: checkpoint complete: wrote 5936 buffers
+2026-10-07T13:02:45Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:02:52Z web-04    WARN  app: slow query 1793ms (threshold 500ms)
+2026-10-07T13:02:56Z web-04    INFO  app: user session created id=0fc867b3
+2026-10-07T13:02:57Z db-01     INFO  nginx: GET /health 200 1835ms
+2026-10-07T13:04:35Z web-02    INFO  nginx: GET /api/v2/orders 200 848ms
+2026-10-07T13:04:40Z api-01    INFO  app: cache hit ratio 84%
+2026-10-07T13:05:12Z api-02    INFO  cron: logrotate finished
+2026-10-07T13:05:25Z web-05    WARN  app: slow query 1064ms (threshold 500ms)
+2026-10-07T13:06:13Z db-01     INFO  postgres: checkpoint complete: wrote 8500 buffers
+2026-10-07T13:06:30Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:06:36Z web-06    INFO  nginx: GET /health 200 443ms
+2026-10-07T13:06:50Z web-01    INFO  postgres: checkpoint complete: wrote 4972 buffers
+2026-10-07T13:06:56Z web-03    WARN  nginx: upstream timed out (110) after 1153ms
+2026-10-07T13:07:18Z api-01    INFO  app: user session created id=f9d5a7ff
+2026-10-07T13:07:21Z web-04    INFO  postgres: checkpoint complete: wrote 1658 buffers
+2026-10-07T13:07:47Z api-01    INFO  app: job sync-catalog finished in 385ms
+2026-10-07T13:07:51Z web-01    INFO  nginx: GET /api/v2/orders 200 881ms
+2026-10-07T13:08:28Z api-01    INFO  nginx: GET /api/v2/orders 200 978ms
+2026-10-07T13:08:51Z web-06    INFO  app: job sync-catalog finished in 1823ms
+2026-10-07T13:08:58Z api-01    INFO  nginx: GET /health 200 1645ms
+2026-10-07T13:09:06Z cache-01  WARN  app: slow query 383ms (threshold 500ms)
+2026-10-07T13:09:18Z web-03    INFO  app: cache hit ratio 97%
+2026-10-07T13:09:45Z db-01     INFO  app: user session created id=e6b1106c
+2026-10-07T13:10:34Z web-06    INFO  app: cache hit ratio 88%
+2026-10-07T13:11:19Z api-03    WARN  nginx: upstream timed out (110) after 1249ms
+2026-10-07T13:11:40Z web-01    INFO  postgres: checkpoint complete: wrote 335 buffers
+2026-10-07T13:11:51Z web-02    INFO  nginx: GET /api/v2/orders 200 241ms
+2026-10-07T13:12:06Z api-02    INFO  app: cache hit ratio 78%
+2026-10-07T13:12:19Z web-03    INFO  nginx: GET /health 200 784ms
+2026-10-07T13:12:19Z web-04    INFO  app: cache hit ratio 83%
+2026-10-07T13:13:04Z web-03    INFO  cron: logrotate finished
+2026-10-07T13:13:08Z web-01    INFO  nginx: GET /health 200 673ms
+2026-10-07T13:13:27Z web-01    INFO  cron: logrotate finished
+2026-10-07T13:13:55Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:13:57Z web-05    INFO  postgres: checkpoint complete: wrote 3615 buffers
+2026-10-07T13:14:30Z cache-01  INFO  nginx: GET /health 200 900ms
+2026-10-07T13:14:35Z web-06    INFO  nginx: GET /health 200 188ms
+2026-10-07T13:15:27Z web-04    INFO  nginx: GET /health 200 981ms
+2026-10-07T13:16:20Z web-06    INFO  postgres: checkpoint complete: wrote 381 buffers
+2026-10-07T13:16:26Z cache-01  INFO  app: user session created id=8044f36e
+2026-10-07T13:16:55Z cache-01  INFO  app: cache hit ratio 89%
+2026-10-07T13:17:11Z api-01    WARN  app: slow query 1756ms (threshold 500ms)
+2026-10-07T13:17:14Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:18:08Z cache-01  INFO  app: cache hit ratio 84%
+2026-10-07T13:18:16Z web-02    INFO  cron: logrotate finished
+2026-10-07T13:19:09Z web-02    INFO  cron: logrotate finished
+2026-10-07T13:19:17Z api-02    INFO  app: cache hit ratio 72%
+2026-10-07T13:19:50Z cache-01  INFO  nginx: GET /api/v2/orders 200 1711ms
+2026-10-07T13:20:11Z api-01    INFO  nginx: GET /health 200 1289ms
+2026-10-07T13:20:46Z api-03    INFO  app: user session created id=1f217b12
+2026-10-07T13:21:15Z web-04    WARN  app: slow query 1852ms (threshold 500ms)
+2026-10-07T13:21:26Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:22:38Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:22:40Z cache-01  WARN  nginx: upstream timed out (110) after 43ms
+2026-10-07T13:23:44Z web-06    INFO  app: job sync-catalog finished in 1253ms
+2026-10-07T13:23:57Z web-06    INFO  nginx: GET /health 200 1473ms
+2026-10-07T13:24:08Z api-02    INFO  nginx: GET /health 200 1160ms
+2026-10-07T13:24:09Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:24:59Z api-02    INFO  postgres: checkpoint complete: wrote 7729 buffers
+2026-10-07T13:25:04Z api-03    INFO  nginx: GET /health 200 385ms
+2026-10-07T13:25:09Z db-02     INFO  postgres: checkpoint complete: wrote 4069 buffers
+2026-10-07T13:25:51Z web-04    INFO  app: job sync-catalog finished in 521ms
+2026-10-07T13:26:17Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:26:25Z web-05    INFO  nginx: GET /api/v2/orders 200 536ms
+2026-10-07T13:26:54Z db-01     INFO  postgres: checkpoint complete: wrote 6039 buffers
+2026-10-07T13:27:05Z api-01    INFO  app: user session created id=08e01772
+2026-10-07T13:27:15Z api-03    INFO  app: cache hit ratio 92%
+2026-10-07T13:28:38Z web-05    INFO  app: job sync-catalog finished in 1704ms
+2026-10-07T13:28:48Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:29:25Z cache-01  INFO  app: cache hit ratio 78%
+2026-10-07T13:30:09Z web-01    INFO  nginx: GET /health 200 249ms
+2026-10-07T13:30:14Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:30:40Z api-02    WARN  app: slow query 1397ms (threshold 500ms)
+2026-10-07T13:31:14Z web-02    WARN  app: slow query 1109ms (threshold 500ms)
+2026-10-07T13:31:19Z api-02    INFO  app: user session created id=613eb634
+2026-10-07T13:31:59Z db-02     INFO  cron: logrotate finished
+2026-10-07T13:32:02Z api-03    INFO  postgres: checkpoint complete: wrote 7810 buffers
+2026-10-07T13:32:15Z cache-01  INFO  nginx: GET /health 200 313ms
+2026-10-07T13:32:22Z web-02    INFO  cron: logrotate finished
+2026-10-07T13:32:46Z api-01    INFO  nginx: GET /health 200 1739ms
+2026-10-07T13:32:53Z web-03    WARN  nginx: upstream timed out (110) after 1806ms
+2026-10-07T13:33:56Z web-04    INFO  app: user session created id=c1e0b9c6
+2026-10-07T13:33:57Z api-03    WARN  app: slow query 537ms (threshold 500ms)
+2026-10-07T13:34:04Z web-06    WARN  nginx: upstream timed out (110) after 1715ms
+2026-10-07T13:34:17Z cache-01  INFO  app: user session created id=4531accb
+2026-10-07T13:34:17Z db-01     INFO  cron: logrotate finished
+2026-10-07T13:34:21Z db-01     WARN  app: slow query 738ms (threshold 500ms)
+2026-10-07T13:34:22Z api-02    INFO  nginx: GET /health 200 233ms
+2026-10-07T13:34:47Z api-01    INFO  app: job sync-catalog finished in 1257ms
+2026-10-07T13:34:51Z cache-01  WARN  nginx: upstream timed out (110) after 520ms
+2026-10-07T13:35:02Z db-01     INFO  cron: logrotate finished
+2026-10-07T13:35:38Z api-02    INFO  app: job sync-catalog finished in 1808ms
+2026-10-07T13:36:11Z web-05    INFO  app: job sync-catalog finished in 1400ms
+2026-10-07T13:36:20Z db-02     INFO  app: cache hit ratio 94%
+2026-10-07T13:36:20Z web-02    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:36:38Z db-01     INFO  nginx: GET /health 200 1170ms
+2026-10-07T13:36:40Z cache-01  INFO  nginx: GET /api/v2/orders 200 981ms
+2026-10-07T13:36:57Z web-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:37:18Z web-03    INFO  app: cache hit ratio 76%
+2026-10-07T13:37:31Z web-06    INFO  nginx: GET /api/v2/orders 200 1571ms
+2026-10-07T13:37:58Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:38:21Z cache-01  INFO  cron: logrotate finished
+2026-10-07T13:38:28Z cache-01  INFO  app: user session created id=b626e7d2
+2026-10-07T13:38:57Z web-06    INFO  postgres: checkpoint complete: wrote 2648 buffers
+2026-10-07T13:39:23Z web-03    INFO  app: user session created id=d9d5dce5
+2026-10-07T13:40:01Z api-03    INFO  app: cache hit ratio 76%
+2026-10-07T13:40:07Z web-04    INFO  app: user session created id=c05cc98e
+2026-10-07T13:41:02Z web-05    INFO  app: cache hit ratio 83%
+2026-10-07T13:41:19Z web-05    WARN  nginx: upstream timed out (110) after 1220ms
+2026-10-07T13:42:24Z web-03    INFO  app: job sync-catalog finished in 1026ms
+2026-10-07T13:42:41Z web-03    INFO  app: cache hit ratio 93%
+2026-10-07T13:42:44Z web-01    WARN  app: slow query 153ms (threshold 500ms)
+2026-10-07T13:42:52Z api-01    INFO  app: user session created id=6dbf7c01
+2026-10-07T13:43:01Z web-06    INFO  nginx: GET /api/v2/orders 200 157ms
+2026-10-07T13:43:44Z api-03    INFO  nginx: GET /api/v2/orders 200 812ms
+2026-10-07T13:43:55Z db-02     WARN  postgres: E-DB-04 lock wait 2.1s (warning only)
+2026-10-07T13:44:06Z web-01    INFO  app: cache hit ratio 91%
+2026-10-07T13:44:10Z api-03    INFO  nginx: GET /health 200 1017ms
+2026-10-07T13:44:20Z db-01     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:44:28Z db-01     INFO  cron: logrotate finished
+2026-10-07T13:45:04Z web-06    WARN  nginx: upstream timed out (110) after 929ms
+2026-10-07T13:45:12Z web-05    INFO  app: cache hit ratio 83%
+2026-10-07T13:45:39Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:46:34Z web-06    WARN  app: slow query 1130ms (threshold 500ms)
+2026-10-07T13:47:00Z web-05    INFO  nginx: GET /health 200 1230ms
+2026-10-07T13:47:23Z web-05    INFO  app: cache hit ratio 74%
+2026-10-07T13:47:27Z web-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:47:37Z api-03    INFO  nginx: GET /health 200 1520ms
+2026-10-07T13:48:11Z web-06    INFO  app: user session created id=a20697ef
+2026-10-07T13:48:20Z cache-01  INFO  app: user session created id=9eb3f6bb
+2026-10-07T13:48:20Z web-06    WARN  nginx: upstream timed out (110) after 939ms
+2026-10-07T13:48:24Z web-04    INFO  app: cache hit ratio 78%
+2026-10-07T13:48:30Z web-04    INFO  nginx: GET /health 200 1226ms
+2026-10-07T13:48:51Z web-02    INFO  app: user session created id=2d0a4673
+2026-10-07T13:49:05Z web-03    WARN  nginx: upstream timed out (110) after 1069ms
+2026-10-07T13:49:06Z web-01    INFO  cron: logrotate finished
+2026-10-07T13:49:11Z web-05    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:50:02Z api-02    INFO  postgres: checkpoint complete: wrote 4035 buffers
+2026-10-07T13:50:23Z cache-01  INFO  nginx: GET /api/v2/orders 200 966ms
+2026-10-07T13:50:42Z cache-01  INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:50:42Z web-01    INFO  nginx: GET /health 200 892ms
+2026-10-07T13:51:03Z cache-01  INFO  app: cache hit ratio 77%
+2026-10-07T13:51:04Z web-01    INFO  app: cache hit ratio 87%
+2026-10-07T13:51:19Z api-02    INFO  app: job sync-catalog finished in 1809ms
+2026-10-07T13:51:26Z cache-01  INFO  app: user session created id=2f06cb94
+2026-10-07T13:51:37Z web-01    INFO  app: user session created id=927ebc75
+2026-10-07T13:51:50Z api-01    INFO  nginx: GET /health 200 1695ms
+2026-10-07T13:52:05Z web-03    INFO  nginx: GET /api/v2/orders 200 141ms
+2026-10-07T13:52:34Z web-03    INFO  app: user session created id=c9cf625d
+2026-10-07T13:53:01Z web-01    WARN  nginx: upstream timed out (110) after 890ms
+2026-10-07T13:53:14Z web-04    INFO  app: cache hit ratio 74%
+2026-10-07T13:53:15Z web-06    INFO  nginx: GET /health 200 887ms
+2026-10-07T13:53:16Z web-01    INFO  app: user session created id=29e8e9a6
+2026-10-07T13:53:53Z web-06    INFO  nginx: GET /health 200 1801ms
+2026-10-07T13:53:55Z web-03    INFO  nginx: GET /health 200 772ms
+2026-10-07T13:54:21Z web-04    WARN  nginx: upstream timed out (110) after 1423ms
+2026-10-07T13:54:33Z web-04    INFO  app: user session created id=079b5482
+2026-10-07T13:54:53Z db-02     INFO  app: job sync-catalog finished in 1030ms
+2026-10-07T13:55:01Z db-01     WARN  nginx: upstream timed out (110) after 1643ms
+2026-10-07T13:55:12Z web-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:55:17Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:55:30Z web-02    WARN  nginx: upstream timed out (110) after 1422ms
+2026-10-07T13:56:14Z db-02     WARN  nginx: upstream timed out (110) after 1628ms
+2026-10-07T13:56:21Z web-02    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T13:56:55Z db-01     INFO  app: job sync-catalog finished in 709ms
+2026-10-07T13:57:01Z web-04    WARN  nginx: upstream timed out (110) after 552ms
+2026-10-07T13:57:32Z web-02    INFO  nginx: GET /health 200 395ms
+2026-10-07T13:57:38Z api-03    INFO  nginx: GET /health 200 342ms
+2026-10-07T13:58:00Z web-04    INFO  nginx: GET /health 200 698ms
+2026-10-07T13:58:02Z db-02     WARN  smartd: W-DISK-01 SMART pre-failure attribute 5 (Reallocated_Sector_Ct) on /dev/nvme1n1
+2026-10-07T13:58:13Z web-06    INFO  app: cache hit ratio 85%
+2026-10-07T13:58:35Z api-02    INFO  cron: logrotate finished
+2026-10-07T13:58:55Z api-02    WARN  app: slow query 375ms (threshold 500ms)
+2026-10-07T14:00:25Z db-01     WARN  app: slow query 958ms (threshold 500ms)
+2026-10-07T14:00:34Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:00:43Z api-03    WARN  app: slow query 276ms (threshold 500ms)
+2026-10-07T14:01:20Z api-01    WARN  app: slow query 808ms (threshold 500ms)
+2026-10-07T14:01:24Z cache-01  INFO  app: job sync-catalog finished in 1859ms
+2026-10-07T14:01:36Z api-02    WARN  nginx: upstream timed out (110) after 1767ms
+2026-10-07T14:01:37Z web-04    WARN  app: E-DISK-03 temporary write error on /var/cache, retry 1/3 succeeded
+2026-10-07T14:01:58Z cache-01  INFO  app: job sync-catalog finished in 1472ms
+2026-10-07T14:02:02Z db-02     WARN  app: slow query 1187ms (threshold 500ms)
+2026-10-07T14:02:11Z web-03    INFO  app: job sync-catalog finished in 1181ms
+2026-10-07T14:02:49Z web-02    INFO  cron: logrotate finished
+2026-10-07T14:03:29Z api-03    INFO  app: job sync-catalog finished in 489ms
+2026-10-07T14:03:30Z web-01    INFO  app: cache hit ratio 73%
+2026-10-07T14:03:31Z db-02     INFO  app: job sync-catalog finished in 1088ms
+2026-10-07T14:03:33Z api-03    INFO  app: job sync-catalog finished in 1460ms
+2026-10-07T14:03:42Z db-02     WARN  app: slow query 1885ms (threshold 500ms)
+2026-10-07T14:04:56Z web-05    INFO  postgres: checkpoint complete: wrote 4267 buffers
+2026-10-07T14:04:59Z db-02     INFO  app: user session created id=6fe7258f
+2026-10-07T14:05:06Z db-02     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:05:40Z cache-01  ERROR redis: E-DISK-02 fsync failed on appendonly.aof: Input/output error
+2026-10-07T14:05:42Z api-03    INFO  nginx: GET /health 200 242ms
+2026-10-07T14:05:47Z web-03    INFO  app: user session created id=a993793b
+2026-10-07T14:05:48Z api-03    INFO  app: cache hit ratio 73%
+2026-10-07T14:06:03Z web-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:06:27Z api-01    INFO  app: user session created id=fbb51ce4
+2026-10-07T14:07:13Z db-02     ERROR postgres: E-DISK-07 could not write to file pg_wal/000000010000004A: No space left on device
+2026-10-07T14:07:22Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:07:24Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:07:40Z web-06    INFO  app: user session created id=b6148779
+2026-10-07T14:07:41Z web-05    INFO  nginx: GET /health 200 1567ms
+2026-10-07T14:08:37Z web-01    INFO  app: job sync-catalog finished in 443ms
+2026-10-07T14:08:41Z web-02    INFO  app: job sync-catalog finished in 1298ms
+2026-10-07T14:09:00Z api-02    WARN  app: slow query 1195ms (threshold 500ms)
+2026-10-07T14:09:13Z api-01    WARN  nginx: upstream timed out (110) after 767ms
+2026-10-07T14:09:19Z api-02    WARN  app: slow query 979ms (threshold 500ms)
+2026-10-07T14:09:25Z api-02    INFO  app: user session created id=cb93e62e
+2026-10-07T14:09:26Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:09:39Z api-03    WARN  nginx: upstream timed out (110) after 592ms
+2026-10-07T14:09:46Z web-06    INFO  nginx: GET /health 200 1160ms
+2026-10-07T14:10:03Z db-02     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:10:05Z api-01    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:10:42Z web-01    INFO  app: cache hit ratio 84%
+2026-10-07T14:10:47Z web-04    INFO  nginx: GET /api/v2/orders 200 979ms
+2026-10-07T14:11:00Z db-01     INFO  cron: logrotate finished
+2026-10-07T14:11:07Z api-03    WARN  nginx: upstream timed out (110) after 981ms
+2026-10-07T14:11:08Z web-01    INFO  app: user session created id=fcc6d1de
+2026-10-07T14:11:11Z api-02    INFO  postgres: checkpoint complete: wrote 6337 buffers
+2026-10-07T14:11:21Z web-02    INFO  cron: logrotate finished
+2026-10-07T14:11:22Z web-05    INFO  nginx: GET /api/v2/orders 200 1123ms
+2026-10-07T14:11:23Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:11:41Z web-02    INFO  app: job sync-catalog finished in 792ms
+2026-10-07T14:12:04Z web-03    INFO  cron: logrotate finished
+2026-10-07T14:12:15Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:12:23Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:12:32Z api-01    INFO  nginx: GET /health 200 1290ms
+2026-10-07T14:12:38Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:13:14Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:13:32Z api-02    WARN  nginx: upstream timed out (110) after 1428ms
+2026-10-07T14:13:48Z db-01     INFO  nginx: GET /health 200 1400ms
+2026-10-07T14:14:02Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:14:09Z web-02    INFO  app: user session created id=ddf980fa
+2026-10-07T14:14:36Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:15:01Z api-02    INFO  nginx: GET /api/v2/orders 200 1263ms
+2026-10-07T14:15:05Z api-03    INFO  nginx: GET /api/v2/orders 200 1389ms
+2026-10-07T14:15:25Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:15:33Z db-01     INFO  nginx: GET /health 200 1141ms
+2026-10-07T14:15:35Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:15:55Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:16:05Z api-03    INFO  cron: logrotate finished
+2026-10-07T14:16:17Z db-02     INFO  nginx: GET /health 200 954ms
+2026-10-07T14:16:30Z cache-01  INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:16:50Z web-05    INFO  app: job sync-catalog finished in 1735ms
+2026-10-07T14:16:52Z api-01    WARN  nginx: upstream timed out (110) after 1384ms
+2026-10-07T14:17:14Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:17:36Z web-06    INFO  app: job sync-catalog finished in 768ms
+2026-10-07T14:17:53Z db-02     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:18:05Z api-03    INFO  cron: logrotate finished
+2026-10-07T14:18:12Z web-02    INFO  app: job sync-catalog finished in 1488ms
+2026-10-07T14:18:24Z db-01     INFO  nginx: GET /health 200 1490ms
+2026-10-07T14:18:31Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:18:34Z api-02    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:18:40Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:18:53Z web-02    WARN  app: slow query 1370ms (threshold 500ms)
+2026-10-07T14:19:12Z web-05    WARN  nginx: upstream timed out (110) after 1322ms
+2026-10-07T14:19:25Z api-01    INFO  nginx: GET /api/v2/orders 200 509ms
+2026-10-07T14:19:28Z cache-01  INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:19:47Z db-01     INFO  postgres: checkpoint complete: wrote 8307 buffers
+2026-10-07T14:19:50Z api-03    INFO  cron: logrotate finished
+2026-10-07T14:19:59Z web-01    WARN  nginx: upstream timed out (110) after 383ms
+2026-10-07T14:20:01Z web-06    INFO  cron: logrotate finished
+2026-10-07T14:20:21Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:20:43Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:20:55Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:21:02Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:21:02Z web-05    INFO  app: cache hit ratio 81%
+2026-10-07T14:21:05Z cache-01  INFO  cron: logrotate finished
+2026-10-07T14:21:25Z web-06    INFO  app: user session created id=d3db2288
+2026-10-07T14:21:28Z db-01     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:21:53Z api-01    INFO  nginx: GET /health 200 281ms
+2026-10-07T14:22:09Z cache-01  INFO  app: job sync-catalog finished in 1251ms
+2026-10-07T14:22:22Z api-03    INFO  app: cache hit ratio 94%
+2026-10-07T14:22:42Z web-04    INFO  nginx: GET /api/v2/orders 200 1177ms
+2026-10-07T14:22:44Z web-06    INFO  nginx: GET /health 200 1198ms
+2026-10-07T14:22:50Z api-02    INFO  postgres: checkpoint complete: wrote 8979 buffers
+2026-10-07T14:23:15Z cache-01  INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:23:17Z cache-01  INFO  app: user session created id=4c93c39d
+2026-10-07T14:23:24Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:23:27Z api-02    INFO  postgres: checkpoint complete: wrote 1293 buffers
+2026-10-07T14:23:38Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:23:43Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:23:52Z api-01    INFO  app: job sync-catalog finished in 1653ms
+2026-10-07T14:23:54Z web-05    INFO  nginx: GET /api/v2/orders 200 130ms
+2026-10-07T14:24:19Z web-04    INFO  nginx: GET /api/v2/orders 200 1238ms
+2026-10-07T14:24:27Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:24:36Z cache-01  WARN  nginx: upstream timed out (110) after 410ms
+2026-10-07T14:24:38Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:24:48Z api-01    INFO  nginx: GET /api/v2/orders 200 1636ms
+2026-10-07T14:24:56Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:24:58Z api-03    INFO  app: cache hit ratio 90%
+2026-10-07T14:25:22Z web-04    INFO  nginx: GET /health 200 825ms
+2026-10-07T14:25:28Z web-03    INFO  app: job sync-catalog finished in 1485ms
+2026-10-07T14:25:30Z db-02     INFO  postgres: checkpoint complete: wrote 3580 buffers
+2026-10-07T14:25:32Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:25:35Z web-04    INFO  app: user session created id=90e45b57
+2026-10-07T14:26:02Z api-01    INFO  postgres: checkpoint complete: wrote 2430 buffers
+2026-10-07T14:27:11Z web-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:27:12Z cache-01  INFO  postgres: checkpoint complete: wrote 8464 buffers
+2026-10-07T14:27:12Z web-04    WARN  app: slow query 492ms (threshold 500ms)
+2026-10-07T14:27:27Z web-03    WARN  nginx: upstream timed out (110) after 771ms
+2026-10-07T14:27:35Z db-01     WARN  nginx: upstream timed out (110) after 403ms
+2026-10-07T14:27:38Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:27:39Z web-05    INFO  postgres: checkpoint complete: wrote 1995 buffers
+2026-10-07T14:27:41Z db-02     INFO  nginx: GET /health 200 1727ms
+2026-10-07T14:28:01Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:28:10Z web-01    INFO  nginx: GET /api/v2/orders 200 700ms
+2026-10-07T14:28:31Z web-02    INFO  app: cache hit ratio 71%
+2026-10-07T14:28:43Z cache-01  WARN  nginx: upstream timed out (110) after 1601ms
+2026-10-07T14:28:57Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:29:04Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:29:21Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:29:28Z cache-01  INFO  postgres: checkpoint complete: wrote 3820 buffers
+2026-10-07T14:29:42Z web-04    WARN  nginx: upstream timed out (110) after 443ms
+2026-10-07T14:30:24Z api-02    INFO  postgres: checkpoint complete: wrote 4903 buffers
+2026-10-07T14:30:48Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:31:05Z db-02     INFO  systemd: restarted postgresql.service
+2026-10-07T14:31:10Z web-02    INFO  app: cache hit ratio 73%
+2026-10-07T14:31:41Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:31:45Z web-02    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:32:00Z db-01     INFO  app: user session created id=07a7e32c
+2026-10-07T14:32:05Z web-02    INFO  cron: logrotate finished
+2026-10-07T14:32:05Z web-06    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:32:24Z db-02     INFO  postgres: checkpoint complete: wrote 8757 buffers
+2026-10-07T14:32:26Z web-03    INFO  cron: logrotate finished
+2026-10-07T14:32:29Z api-03    INFO  postgres: checkpoint complete: wrote 276 buffers
+2026-10-07T14:32:30Z cache-01  INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:32:39Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:33:28Z web-03    WARN  app: slow query 1056ms (threshold 500ms)
+2026-10-07T14:33:46Z web-01    INFO  app: user session created id=e29f7d37
+2026-10-07T14:33:58Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:33:59Z web-05    INFO  cron: logrotate finished
+2026-10-07T14:34:11Z web-03    INFO  nginx: GET /health 200 581ms
+2026-10-07T14:34:49Z api-01    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:34:49Z api-02    INFO  postgres: checkpoint complete: wrote 8342 buffers
+2026-10-07T14:35:00Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:35:04Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:35:05Z web-06    INFO  app: user session created id=8b6421ff
+2026-10-07T14:35:09Z api-02    INFO  app: cache hit ratio 90%
+2026-10-07T14:35:33Z web-05    INFO  nginx: GET /api/v2/orders 200 945ms
+2026-10-07T14:35:41Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:36:06Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:36:12Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:36:15Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:36:31Z api-01    INFO  nginx: GET /api/v2/orders 200 1881ms
+2026-10-07T14:36:32Z web-06    WARN  nginx: upstream timed out (110) after 1219ms
+2026-10-07T14:36:36Z db-02     INFO  app: cache hit ratio 95%
+2026-10-07T14:36:39Z api-01    INFO  app: cache hit ratio 84%
+2026-10-07T14:36:53Z web-03    WARN  nginx: upstream timed out (110) after 771ms
+2026-10-07T14:36:55Z db-02     WARN  nginx: upstream timed out (110) after 1669ms
+2026-10-07T14:37:13Z api-01    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:37:22Z db-01     INFO  nginx: GET /health 200 1037ms
+2026-10-07T14:37:38Z db-01     INFO  cron: logrotate finished
+2026-10-07T14:37:43Z web-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:37:49Z web-06    INFO  postgres: checkpoint complete: wrote 2780 buffers
+2026-10-07T14:38:02Z api-03    INFO  postgres: checkpoint complete: wrote 3577 buffers
+2026-10-07T14:38:16Z web-04    WARN  app: slow query 1678ms (threshold 500ms)
+2026-10-07T14:38:19Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:38:47Z api-03    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:38:54Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:38:58Z api-02    WARN  nginx: upstream timed out (110) after 1458ms
+2026-10-07T14:39:07Z api-01    WARN  nginx: upstream timed out (110) after 1439ms
+2026-10-07T14:39:17Z web-01    INFO  nginx: GET /health 200 786ms
+2026-10-07T14:39:59Z api-03    WARN  nginx: upstream timed out (110) after 910ms
+2026-10-07T14:40:09Z web-02    INFO  postgres: checkpoint complete: wrote 1618 buffers
+2026-10-07T14:40:11Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:40:13Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:40:13Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:40:21Z web-02    INFO  nginx: GET /api/v2/orders 200 240ms
+2026-10-07T14:40:32Z db-01     INFO  app: user session created id=fb5a45bc
+2026-10-07T14:40:45Z web-02    INFO  cron: logrotate finished
+2026-10-07T14:40:49Z web-02    INFO  nginx: GET /api/v2/orders 200 761ms
+2026-10-07T14:41:07Z web-02    INFO  app: job sync-catalog finished in 735ms
+2026-10-07T14:41:16Z web-06    INFO  app: cache hit ratio 77%
+2026-10-07T14:41:54Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:42:39Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:42:44Z web-04    WARN  nginx: upstream timed out (110) after 1023ms
+2026-10-07T14:42:58Z api-02    INFO  nginx: GET /api/v2/orders 200 541ms
+2026-10-07T14:42:58Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:42:58Z web-06    WARN  nginx: upstream timed out (110) after 1897ms
+2026-10-07T14:43:07Z api-02    INFO  nginx: GET /api/v2/orders 200 1374ms
+2026-10-07T14:43:28Z web-01    INFO  app: user session created id=14987b1d
+2026-10-07T14:43:47Z cache-01  INFO  app: job sync-catalog finished in 923ms
+2026-10-07T14:44:01Z api-02    WARN  nginx: upstream timed out (110) after 1202ms
+2026-10-07T14:44:02Z web-06    INFO  nginx: GET /health 200 1229ms
+2026-10-07T14:44:11Z web-02    INFO  app: user session created id=2c38b2ad
+2026-10-07T14:44:16Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:44:16Z web-01    WARN  app: slow query 757ms (threshold 500ms)
+2026-10-07T14:44:17Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:44:18Z api-02    INFO  systemd: restarted api-gateway.service
+2026-10-07T14:44:18Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:44:31Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:44:33Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:44:34Z api-02    INFO  nginx: GET /health 200 87ms
+2026-10-07T14:44:43Z web-04    INFO  nginx: GET /health 200 292ms
+2026-10-07T14:44:59Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:45:32Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:45:32Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:45:37Z web-06    INFO  app: job sync-catalog finished in 5ms
+2026-10-07T14:45:51Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:45:56Z web-05    WARN  app: slow query 1439ms (threshold 500ms)
+2026-10-07T14:46:05Z db-01     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:46:17Z web-05    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:46:24Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:46:30Z web-04    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:46:33Z cache-01  INFO  nginx: GET /api/v2/orders 200 237ms
+2026-10-07T14:47:00Z web-04    INFO  cron: logrotate finished
+2026-10-07T14:47:21Z web-02    INFO  cron: logrotate finished
+2026-10-07T14:47:40Z web-01    WARN  app: slow query 1028ms (threshold 500ms)
+2026-10-07T14:47:45Z web-05    WARN  app: slow query 1167ms (threshold 500ms)
+2026-10-07T14:47:47Z api-03    WARN  nginx: upstream timed out (110) after 735ms
+2026-10-07T14:48:01Z web-04    INFO  nginx: GET /health 200 745ms
+2026-10-07T14:48:02Z web-05    INFO  postgres: checkpoint complete: wrote 2535 buffers
+2026-10-07T14:48:38Z web-05    INFO  nginx: GET /health 200 760ms
+2026-10-07T14:48:38Z web-06    WARN  app: slow query 1043ms (threshold 500ms)
+2026-10-07T14:48:44Z api-03    INFO  cron: logrotate finished
+2026-10-07T14:48:44Z db-01     INFO  nginx: GET /health 200 1258ms
+2026-10-07T14:48:47Z db-02     ERROR postgres: E-DB-04 canceling statement due to lock timeout
+2026-10-07T14:49:14Z api-03    INFO  postgres: checkpoint complete: wrote 1962 buffers
+2026-10-07T14:49:19Z cache-01  INFO  app: job sync-catalog finished in 325ms
+2026-10-07T14:49:55Z db-02     INFO  nginx: GET /api/v2/orders 200 1778ms
+2026-10-07T14:50:03Z api-02    ERROR api: E-API-21 upstream db pool exhausted (pgbouncer)
+2026-10-07T14:50:24Z web-05    INFO  nginx: GET /health 200 1473ms
+2026-10-07T14:50:30Z web-01    WARN  app: slow query 395ms (threshold 500ms)
+2026-10-07T14:50:50Z db-02     ERROR postgres: E-DB-11 connection slot reserved: too many clients
+2026-10-07T14:51:02Z web-03    WARN  app: slow query 159ms (threshold 500ms)
+2026-10-07T14:51:09Z db-02     WARN  app: slow query 877ms (threshold 500ms)
+2026-10-07T14:51:14Z web-03    INFO  postgres: checkpoint complete: wrote 1917 buffers
+2026-10-07T14:51:15Z db-02     ERROR postgres: E-DISK-07 could not extend file base/16384/2619: No space left on device
+2026-10-07T14:51:18Z web-04    INFO  app: cache hit ratio 87%
+2026-10-07T14:51:24Z web-01    INFO  postgres: checkpoint complete: wrote 6473 buffers
+2026-10-07T14:51:25Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:51:31Z web-02    INFO  nginx: GET /health 200 1592ms
+2026-10-07T14:51:50Z cache-01  INFO  nginx: GET /api/v2/orders 200 115ms
+2026-10-07T14:52:09Z api-02    INFO  systemd: restarted pgbouncer.service
+2026-10-07T14:52:25Z api-01    INFO  app: user session created id=4e36b504
+2026-10-07T14:52:35Z web-06    INFO  app: job sync-catalog finished in 1829ms
+2026-10-07T14:52:44Z db-01     INFO  app: cache hit ratio 88%
+2026-10-07T14:53:19Z web-06    INFO  app: user session created id=f770c502
+2026-10-07T14:54:35Z db-02     WARN  nginx: upstream timed out (110) after 1593ms
+2026-10-07T14:55:39Z web-02    INFO  postgres: checkpoint complete: wrote 2230 buffers
+2026-10-07T14:56:02Z cache-01  INFO  app: job sync-catalog finished in 572ms
+2026-10-07T14:56:46Z web-01    INFO  app: cache hit ratio 98%
+2026-10-07T14:56:53Z web-01    INFO  app: job sync-catalog finished in 531ms
+2026-10-07T14:57:26Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T14:57:51Z web-04    INFO  postgres: checkpoint complete: wrote 8588 buffers
+2026-10-07T14:57:57Z api-02    INFO  nginx: GET /health 200 374ms
+2026-10-07T14:58:09Z db-01     WARN  app: slow query 1295ms (threshold 500ms)
+2026-10-07T14:58:16Z cache-01  WARN  nginx: upstream timed out (110) after 1727ms
+2026-10-07T14:58:48Z db-02     WARN  nginx: upstream timed out (110) after 39ms
+2026-10-07T14:58:59Z web-02    INFO  app: cache hit ratio 73%
+2026-10-07T14:59:02Z api-03    INFO  cron: logrotate finished
+2026-10-07T14:59:06Z cache-01  INFO  postgres: checkpoint complete: wrote 8841 buffers
+2026-10-07T14:59:06Z web-06    INFO  postgres: checkpoint complete: wrote 2930 buffers
+2026-10-07T14:59:20Z api-02    INFO  app: cache hit ratio 86%
+2026-10-07T14:59:48Z db-01     INFO  nginx: GET /api/v2/orders 200 1609ms
+2026-10-07T14:59:51Z api-02    INFO  app: cache hit ratio 94%
+2026-10-07T14:59:59Z web-06    WARN  nginx: upstream timed out (110) after 494ms
+2026-10-07T15:00:27Z cache-01  INFO  postgres: checkpoint complete: wrote 5308 buffers
+2026-10-07T15:00:27Z web-03    INFO  postgres: checkpoint complete: wrote 6643 buffers
+2026-10-07T15:00:57Z web-02    WARN  nginx: upstream timed out (110) after 344ms
+2026-10-07T15:01:01Z api-01    INFO  postgres: checkpoint complete: wrote 8676 buffers
+2026-10-07T15:01:11Z web-02    WARN  nginx: upstream timed out (110) after 1485ms
+2026-10-07T15:01:54Z api-02    INFO  nginx: GET /api/v2/orders 200 1474ms
+2026-10-07T15:02:02Z web-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:02:03Z web-02    INFO  app: job sync-catalog finished in 461ms
+2026-10-07T15:02:32Z db-02     WARN  app: slow query 757ms (threshold 500ms)
+2026-10-07T15:02:37Z api-03    INFO  app: job sync-catalog finished in 1813ms
+2026-10-07T15:03:15Z db-01     WARN  nginx: upstream timed out (110) after 70ms
+2026-10-07T15:03:24Z web-04    INFO  nginx: GET /health 200 294ms
+2026-10-07T15:03:28Z web-03    WARN  app: slow query 686ms (threshold 500ms)
+2026-10-07T15:03:43Z web-03    INFO  app: cache hit ratio 90%
+2026-10-07T15:04:09Z web-03    INFO  app: cache hit ratio 84%
+2026-10-07T15:04:10Z api-01    INFO  app: cache hit ratio 82%
+2026-10-07T15:04:13Z web-05    INFO  nginx: GET /api/v2/orders 200 790ms
+2026-10-07T15:05:04Z api-01    INFO  app: job sync-catalog finished in 1617ms
+2026-10-07T15:05:28Z web-03    WARN  nginx: upstream timed out (110) after 275ms
+2026-10-07T15:07:13Z cache-01  INFO  app: cache hit ratio 95%
+2026-10-07T15:07:14Z api-02    INFO  app: cache hit ratio 85%
+2026-10-07T15:07:23Z api-01    INFO  app: cache hit ratio 76%
+2026-10-07T15:07:27Z cache-01  INFO  app: cache hit ratio 73%
+2026-10-07T15:07:37Z cache-01  INFO  app: user session created id=49481151
+2026-10-07T15:07:58Z db-02     INFO  nginx: GET /api/v2/orders 200 923ms
+2026-10-07T15:08:07Z web-03    INFO  app: cache hit ratio 84%
+2026-10-07T15:08:11Z web-03    INFO  postgres: checkpoint complete: wrote 3654 buffers
+2026-10-07T15:08:17Z api-03    WARN  nginx: upstream timed out (110) after 978ms
+2026-10-07T15:08:36Z web-05    INFO  nginx: GET /api/v2/orders 200 313ms
+2026-10-07T15:08:39Z web-01    INFO  cron: logrotate finished
+2026-10-07T15:09:48Z web-05    INFO  app: cache hit ratio 83%
+2026-10-07T15:09:56Z web-06    INFO  nginx: GET /api/v2/orders 200 1024ms
+2026-10-07T15:09:58Z api-02    WARN  nginx: upstream timed out (110) after 1711ms
+2026-10-07T15:10:28Z web-06    INFO  cron: logrotate finished
+2026-10-07T15:10:49Z db-02     INFO  nginx: GET /health 200 1006ms
+2026-10-07T15:11:00Z api-02    INFO  app: cache hit ratio 76%
+2026-10-07T15:11:14Z cache-01  INFO  nginx: GET /api/v2/orders 200 1472ms
+2026-10-07T15:11:54Z web-01    INFO  app: job sync-catalog finished in 68ms
+2026-10-07T15:12:26Z api-02    WARN  app: slow query 1534ms (threshold 500ms)
+2026-10-07T15:12:32Z cache-01  INFO  app: cache hit ratio 88%
+2026-10-07T15:12:57Z api-01    WARN  app: slow query 1800ms (threshold 500ms)
+2026-10-07T15:13:09Z web-02    INFO  nginx: GET /health 200 1446ms
+2026-10-07T15:13:45Z web-03    INFO  app: cache hit ratio 86%
+2026-10-07T15:14:29Z api-03    INFO  postgres: checkpoint complete: wrote 529 buffers
+2026-10-07T15:15:22Z db-01     INFO  cron: logrotate finished
+2026-10-07T15:16:30Z web-01    INFO  app: cache hit ratio 81%
+2026-10-07T15:16:31Z db-01     INFO  app: cache hit ratio 96%
+2026-10-07T15:16:56Z web-03    WARN  nginx: upstream timed out (110) after 810ms
+2026-10-07T15:17:11Z db-02     INFO  cron: logrotate finished
+2026-10-07T15:17:23Z api-02    WARN  nginx: upstream timed out (110) after 761ms
+2026-10-07T15:17:35Z api-02    INFO  cron: logrotate finished
+2026-10-07T15:17:58Z web-05    WARN  app: slow query 574ms (threshold 500ms)
+2026-10-07T15:18:09Z db-01     INFO  postgres: checkpoint complete: wrote 3603 buffers
+2026-10-07T15:18:24Z cache-01  WARN  nginx: upstream timed out (110) after 1745ms
+2026-10-07T15:18:29Z api-02    WARN  app: slow query 226ms (threshold 500ms)
+2026-10-07T15:18:29Z web-04    INFO  app: cache hit ratio 77%
+2026-10-07T15:18:32Z db-02     WARN  app: slow query 48ms (threshold 500ms)
+2026-10-07T15:18:54Z web-01    INFO  nginx: GET /api/v2/orders 200 1194ms
+2026-10-07T15:18:55Z web-02    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:19:09Z web-04    INFO  nginx: GET /api/v2/orders 200 119ms
+2026-10-07T15:19:12Z web-06    INFO  nginx: GET /health 200 1690ms
+2026-10-07T15:19:19Z api-01    INFO  app: cache hit ratio 82%
+2026-10-07T15:19:26Z api-03    INFO  app: job sync-catalog finished in 187ms
+2026-10-07T15:20:00Z web-02    INFO  systemd: restarted node-exporter.service
+2026-10-07T15:20:07Z db-01     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:21:07Z web-03    INFO  postgres: checkpoint complete: wrote 5313 buffers
+2026-10-07T15:21:43Z web-05    INFO  nginx: GET /api/v2/orders 200 386ms
+2026-10-07T15:22:18Z db-02     INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:22:19Z web-05    WARN  app: slow query 581ms (threshold 500ms)
+2026-10-07T15:22:36Z web-03    INFO  nginx: GET /health 200 1345ms
+2026-10-07T15:22:49Z api-02    INFO  app: user session created id=0fe9fd64
+2026-10-07T15:23:00Z web-02    WARN  nginx: upstream timed out (110) after 759ms
+2026-10-07T15:23:06Z api-02    WARN  nginx: upstream timed out (110) after 1384ms
+2026-10-07T15:23:24Z web-02    INFO  nginx: GET /health 200 1564ms
+2026-10-07T15:23:48Z db-01     WARN  app: slow query 1633ms (threshold 500ms)
+2026-10-07T15:24:21Z cache-01  INFO  postgres: checkpoint complete: wrote 814 buffers
+2026-10-07T15:24:23Z web-04    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:24:52Z api-01    WARN  app: slow query 1654ms (threshold 500ms)
+2026-10-07T15:24:54Z web-01    INFO  app: job sync-catalog finished in 1061ms
+2026-10-07T15:25:45Z cache-01  WARN  nginx: upstream timed out (110) after 634ms
+2026-10-07T15:25:45Z web-03    INFO  app: user session created id=0876a072
+2026-10-07T15:25:51Z db-01     INFO  nginx: GET /api/v2/orders 200 881ms
+2026-10-07T15:26:37Z api-02    INFO  app: job sync-catalog finished in 833ms
+2026-10-07T15:26:40Z web-03    INFO  cron: logrotate finished
+2026-10-07T15:26:56Z db-02     INFO  app: cache hit ratio 75%
+2026-10-07T15:26:56Z web-02    INFO  nginx: GET /api/v2/orders 200 1840ms
+2026-10-07T15:27:42Z web-05    WARN  app: slow query 918ms (threshold 500ms)
+2026-10-07T15:28:39Z web-03    INFO  app: user session created id=0de72555
+2026-10-07T15:28:48Z cache-01  INFO  postgres: checkpoint complete: wrote 4100 buffers
+2026-10-07T15:29:01Z web-01    INFO  nginx: GET /health 200 1797ms
+2026-10-07T15:29:02Z web-06    INFO  app: cache hit ratio 88%
+2026-10-07T15:29:18Z web-06    INFO  nginx: GET /api/v2/orders 200 457ms
+2026-10-07T15:29:55Z web-03    INFO  app: user session created id=8cf0baee
+2026-10-07T15:29:58Z cache-01  INFO  app: user session created id=110b3a03
+2026-10-07T15:30:50Z web-06    INFO  cron: logrotate finished
+2026-10-07T15:30:52Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:31:36Z web-03    INFO  app: user session created id=0aad96ad
+2026-10-07T15:32:03Z api-02    INFO  nginx: GET /api/v2/orders 200 635ms
+2026-10-07T15:32:31Z web-05    INFO  postgres: checkpoint complete: wrote 3837 buffers
+2026-10-07T15:33:56Z db-01     WARN  app: slow query 168ms (threshold 500ms)
+2026-10-07T15:33:56Z web-03    INFO  app: cache hit ratio 83%
+2026-10-07T15:34:37Z web-03    INFO  app: user session created id=eeb621a3
+2026-10-07T15:34:54Z web-05    INFO  postgres: checkpoint complete: wrote 2304 buffers
+2026-10-07T15:35:04Z web-04    WARN  nginx: upstream timed out (110) after 534ms
+2026-10-07T15:35:44Z cache-01  INFO  postgres: checkpoint complete: wrote 7753 buffers
+2026-10-07T15:35:52Z web-04    INFO  postgres: checkpoint complete: wrote 1017 buffers
+2026-10-07T15:36:02Z web-04    INFO  app: job sync-catalog finished in 1638ms
+2026-10-07T15:36:29Z db-02     INFO  cron: logrotate finished
+2026-10-07T15:36:45Z api-02    INFO  app: user session created id=e928bf26
+2026-10-07T15:36:59Z web-04    WARN  nginx: upstream timed out (110) after 1161ms
+2026-10-07T15:37:04Z web-06    INFO  cron: logrotate finished
+2026-10-07T15:37:59Z db-02     INFO  app: user session created id=44c8c480
+2026-10-07T15:38:21Z api-03    INFO  nginx: GET /health 200 905ms
+2026-10-07T15:38:23Z api-02    INFO  nginx: GET /api/v2/orders 200 533ms
+2026-10-07T15:38:33Z web-06    INFO  app: cache hit ratio 78%
+2026-10-07T15:38:43Z api-01    INFO  app: cache hit ratio 83%
+2026-10-07T15:38:47Z db-02     INFO  nginx: GET /health 200 75ms
+2026-10-07T15:38:54Z api-01    INFO  app: job sync-catalog finished in 1401ms
+2026-10-07T15:38:54Z api-03    INFO  app: user session created id=d7f0aaf9
+2026-10-07T15:39:07Z web-05    INFO  app: job sync-catalog finished in 138ms
+2026-10-07T15:39:58Z api-02    INFO  app: user session created id=75a7cc33
+2026-10-07T15:40:01Z api-02    INFO  app: cache hit ratio 82%
+2026-10-07T15:40:20Z web-01    INFO  cron: logrotate finished
+2026-10-07T15:40:21Z web-03    INFO  app: cache hit ratio 75%
+2026-10-07T15:40:41Z web-05    INFO  app: cache hit ratio 89%
+2026-10-07T15:40:43Z web-06    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:40:45Z cache-01  INFO  app: job sync-catalog finished in 1460ms
+2026-10-07T15:41:40Z db-02     INFO  nginx: GET /health 200 556ms
+2026-10-07T15:41:48Z cache-01  INFO  postgres: checkpoint complete: wrote 6894 buffers
+2026-10-07T15:42:43Z cache-01  INFO  app: user session created id=f56af5ca
+2026-10-07T15:43:07Z web-02    INFO  app: job sync-catalog finished in 1471ms
+2026-10-07T15:43:08Z web-04    WARN  nginx: upstream timed out (110) after 891ms
+2026-10-07T15:43:25Z web-03    INFO  app: user session created id=f54d826b
+2026-10-07T15:43:37Z db-02     INFO  nginx: GET /api/v2/orders 200 1658ms
+2026-10-07T15:44:09Z web-03    INFO  app: cache hit ratio 88%
+2026-10-07T15:44:19Z web-06    INFO  app: job sync-catalog finished in 85ms
+2026-10-07T15:44:26Z api-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:44:32Z web-01    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:44:48Z api-02    INFO  nginx: GET /api/v2/orders 200 940ms
+2026-10-07T15:45:32Z api-02    WARN  app: slow query 658ms (threshold 500ms)
+2026-10-07T15:45:57Z web-02    INFO  cron: logrotate finished
+2026-10-07T15:46:02Z web-01    INFO  nginx: GET /api/v2/orders 200 1449ms
+2026-10-07T15:46:09Z web-02    INFO  app: user session created id=c8793713
+2026-10-07T15:46:39Z web-06    WARN  app: slow query 757ms (threshold 500ms)
+2026-10-07T15:47:31Z api-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:47:34Z web-06    INFO  app: cache hit ratio 74%
+2026-10-07T15:48:08Z web-02    INFO  postgres: checkpoint complete: wrote 8584 buffers
+2026-10-07T15:48:48Z cache-01  INFO  nginx: GET /health 200 750ms
+2026-10-07T15:49:29Z web-04    INFO  nginx: GET /api/v2/orders 200 642ms
+2026-10-07T15:49:36Z web-05    INFO  app: job sync-catalog finished in 431ms
+2026-10-07T15:50:09Z cache-01  INFO  app: user session created id=da1b17e2
+2026-10-07T15:50:11Z web-02    INFO  cron: logrotate finished
+2026-10-07T15:50:36Z web-04    WARN  app: slow query 1400ms (threshold 500ms)
+2026-10-07T15:51:18Z web-03    INFO  nginx: GET /health 200 983ms
+2026-10-07T15:51:54Z web-04    WARN  nginx: upstream timed out (110) after 308ms
+2026-10-07T15:52:02Z web-03    WARN  nginx: upstream timed out (110) after 62ms
+2026-10-07T15:52:28Z web-05    INFO  app: cache hit ratio 73%
+2026-10-07T15:53:22Z web-05    INFO  nginx: GET /api/v2/orders 200 238ms
+2026-10-07T15:54:02Z cache-01  WARN  nginx: upstream timed out (110) after 201ms
+2026-10-07T15:54:39Z web-03    INFO  kernel: eth0 link up 25000Mb/s
+2026-10-07T15:54:43Z web-04    WARN  nginx: upstream timed out (110) after 787ms
+2026-10-07T15:54:56Z db-02     WARN  nginx: upstream timed out (110) after 1881ms
+2026-10-07T15:55:50Z db-02     INFO  postgres: checkpoint complete: wrote 5111 buffers
+2026-10-07T15:56:05Z api-03    WARN  app: slow query 1692ms (threshold 500ms)
+2026-10-07T15:56:25Z api-01    INFO  postgres: checkpoint complete: wrote 1955 buffers
+2026-10-07T15:57:14Z cache-01  INFO  postgres: checkpoint complete: wrote 5573 buffers
+2026-10-07T15:58:16Z cache-01  INFO  cron: logrotate finished
+2026-10-07T15:58:46Z web-06    INFO  nginx: GET /api/v2/orders 200 1829ms
+2026-10-07T15:59:36Z db-02     INFO  app: user session created id=caafcf7b
+2026-10-07T15:59:46Z db-01     INFO  postgres: checkpoint complete: wrote 5462 buffers
+2026-10-07T15:59:54Z web-02    INFO  nginx: GET /api/v2/orders 200 591ms
+2026-10-07T15:59:57Z web-05    INFO  app: user session created id=1c147fda

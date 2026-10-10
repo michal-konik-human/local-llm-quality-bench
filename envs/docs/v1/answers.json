@@ -1,0 +1,87 @@
+{
+ "incident-log": {
+  "first_disk_error_host": "cache-01",
+  "db02_errors_14h": 42,
+  "fix_service": "pgbouncer",
+  "lines": 641
+ },
+ "contract": {
+  "allowance_min": 216.0,
+  "counted_min": 395,
+  "started_hours": 3,
+  "penalty_before_credit": 4320.0,
+  "answer_pln": 3520.0
+ },
+ "minutes": {
+  "in_force": [
+   "D-01",
+   "D-05",
+   "D-06",
+   "D-07",
+   "D-09",
+   "D-12",
+   "D-13",
+   "D-14",
+   "D-15",
+   "D-17"
+  ]
+ },
+ "financial": {
+  "cloud_2025_restated": 38.9,
+  "cloud_2026_adjusted": 49.1,
+  "growth_pct": 26.2
+ },
+ "policy": {
+  "differ": [
+   "3.2",
+   "5.1",
+   "7.4",
+   "9.1"
+  ]
+ },
+ "thread": {
+  "open": [
+   "A-03",
+   "A-06",
+   "A-07",
+   "A-09",
+   "A-11"
+  ],
+  "owner_A-07": "Piotr Zieliński",
+  "owner_A-03": "Aleksandra Mazur"
+ },
+ "regulation": {
+  "days": 21,
+  "oncall_days": 4,
+  "rate": 12,
+  "cap": 220,
+  "oncall": 5,
+  "answer_pln": 240
+ },
+ "reconciliation": {
+  "follow_up": [
+   "Z-0009",
+   "Z-0022",
+   "Z-0058",
+   "Z-0077",
+   "Z-0121",
+   "Z-0144",
+   "Z-0150",
+   "Z-0366",
+   "Z-0478"
+  ],
+  "missing": [
+   "Z-0022",
+   "Z-0077",
+   "Z-0150",
+   "Z-0366"
+  ],
+  "mismatch": [
+   "Z-0009",
+   "Z-0058",
+   "Z-0121",
+   "Z-0144",
+   "Z-0478"
+  ]
+ }
+}

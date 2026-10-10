@@ -17,6 +17,7 @@ LANGS = ("pl", "en")
 FAMILIES = (
     "tool_calling", "agentic", "web_shopping", "instruction_following",
     "writing", "reasoning", "coding",
+    "web_research", "long_context",   # hard suite
 )
 ITEM_TYPES = {"parallel": {"pl", "en"}, "native-pl": {"pl"}, "native-en": {"en"}}
 REVIEW_STATES = ("pending-owner", "frozen")
@@ -27,6 +28,10 @@ SCORER_NAMES = (
     "env_state", "answer", "code_tests", "rubric",
 )
 ENV_TYPES = ("shop", "assistant", "stub")
+# A suite is a directory of cases. Scores of different suites are never mixed.
+SUITES = {"core": "cases", "hard": "cases-hard"}
+DOC_RE = re.compile(r"\{\{doc:([A-Za-z0-9_-]+)\}\}")
+DOCS_ROOT = os.path.join(REPO, "envs")
 
 
 class Case(dict):
@@ -59,14 +64,53 @@ def case_hash(text):
     return sha256_bytes(REVIEW_LINE_RE.sub("review: *", text).encode("utf-8"))
 
 
+def doc_path(case, name, lang):
+    """Absolute path of a document referenced as {{doc:name}} (paths in `documents` are relative to envs/)."""
+    ref = resolve((case.get("documents") or {}).get(name), lang)
+    return os.path.join(DOCS_ROOT, ref) if ref else None
+
+
+def render(case, text, lang):
+    """Replace {{doc:name}} placeholders with the document text."""
+    def sub(m):
+        p = doc_path(case, m.group(1), lang)
+        if not p or not os.path.exists(p):
+            raise ValueError(f"{case.get('id')}: document {m.group(1)!r} not found for {lang}")
+        with open(p, encoding="utf-8") as f:
+            return f.read().rstrip("\n")
+    return DOC_RE.sub(sub, text or "")
+
+
 def prompt_hash(case):
-    """sha256 of everything the MODEL sees: per-language system + messages, tools, environment and
-    turn limit. Checks, references and notes are excluded, so a corrected expected answer is a grading
-    change (re-grade old samples) while any change to the prompt is a new test (re-run)."""
-    from .util import sha256_json
-    return sha256_json({"langs": {l: {"system": (v or {}).get("system"), "messages": (v or {}).get("messages")}
-                                  for l, v in (case.get("langs") or {}).items()},
-                        "tools": case.get("tools"), "env": case.get("env"), "max_turns": case.get("max_turns")})
+    """sha256 of everything the MODEL sees: per-language system + messages, the documents they include,
+    tools, environment and turn limit. Checks, references and notes are excluded, so a corrected expected
+    answer is a grading change (re-grade old samples) while any change to the prompt is a new test (re-run)."""
+    from .util import sha256_file, sha256_json
+    docs = {}
+    for name in sorted(case.get("documents") or {}):
+        for l in (case.get("langs") or {}):
+            p = doc_path(case, name, l)
+            docs[f"{name}:{l}"] = sha256_file(p) if p and os.path.exists(p) else None
+    blob = {"langs": {l: {"system": (v or {}).get("system"), "messages": (v or {}).get("messages")}
+                      for l, v in (case.get("langs") or {}).items()},
+            "tools": case.get("tools"), "env": case.get("env"), "max_turns": case.get("max_turns")}
+    # keys added after v1 of the bench go in only when used, so the hashes of older cases do not change
+    if docs:
+        blob["documents"] = docs
+    if case.get("max_tokens"):
+        blob["max_tokens"] = case["max_tokens"]
+    web = {}
+    for l in (case.get("langs") or {}):
+        e = resolve(case.get("env"), l) or {}
+        if isinstance(e, dict) and e.get("type") == "shop":
+            from .envs.shop import snapshot_path
+            ver = e.get("snapshot", "v1")
+            p = snapshot_path(ver, l)
+            if os.path.dirname(p) != os.path.join(REPO, "envs", "shop", ver):  # per-language webs (v2 onwards)
+                web[l] = sha256_file(p) if os.path.exists(p) else None
+    if web:
+        blob["web"] = web
+    return sha256_json(blob)
 
 
 def load_case(path):
@@ -82,9 +126,11 @@ def load_case(path):
     return case
 
 
-def find_case_files(paths=None):
-    """Expand files/dirs/globs into a sorted list of case YAML files."""
-    paths = paths or [os.path.join(REPO, "cases")]
+def find_case_files(paths=None, suite="core"):
+    """Expand files/dirs/globs into a sorted list of case YAML files (default: the suite's directory)."""
+    if not paths:
+        default = os.path.join(REPO, SUITES[suite])
+        paths = [default] if os.path.isdir(default) else []
     out = []
     for p in paths:
         if os.path.isdir(p):
@@ -96,8 +142,8 @@ def find_case_files(paths=None):
     return sorted(set(os.path.abspath(p) for p in out))
 
 
-def load_cases(paths=None, families=None, ids=None):
-    cases = [load_case(p) for p in find_case_files(paths)]
+def load_cases(paths=None, families=None, ids=None, suite="core"):
+    cases = [load_case(p) for p in find_case_files(paths, suite)]
     if families:
         cases = [c for c in cases if c.get("family") in families]
     if ids:
@@ -156,8 +202,22 @@ def validate(case):
             err("each tool must be {type: function, function: {name, description, parameters}}")
     env = case.get("env")
     if env is not None:
-        if not isinstance(env, dict) or env.get("type") not in ENV_TYPES:
-            err(f"env.type must be one of {ENV_TYPES}")
+        for lang in langs:  # an env may be shared or written per language ({pl: {...}, en: {...}})
+            e = resolve(env, lang)
+            if not isinstance(e, dict) or e.get("type") not in ENV_TYPES:
+                err(f"env.type must be one of {ENV_TYPES} (for {lang})")
+            elif e.get("type") == "shop":
+                from .envs.shop import snapshot_path
+                if not os.path.exists(snapshot_path(e.get("snapshot", "v1"), lang)):
+                    err(f"env: web snapshot {e.get('snapshot', 'v1')!r} has no pages for {lang}")
+    if case.get("max_tokens") is not None and (not isinstance(case["max_tokens"], int) or case["max_tokens"] <= 0):
+        err("max_tokens must be a positive integer")
+    for lang, spec in langs.items():
+        for m in (spec or {}).get("messages") or []:
+            for name in DOC_RE.findall(m.get("content") or ""):
+                p = doc_path(case, name, lang)
+                if not p or not os.path.exists(p):
+                    err(f"langs.{lang}: document {name!r} is referenced but missing (documents.{name})")
     checks = case["checks"]
     if not isinstance(checks, list) or not checks:
         err("checks must be a non-empty list")
