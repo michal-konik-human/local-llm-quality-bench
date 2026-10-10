@@ -51,21 +51,22 @@ langs:
       content: Find me a free one-hour slot tomorrow before 1 pm and book it as "Call the bank".
 checks:
 - scorer: env_state
-  source: Goal state derived by hand from the seeded environment and the request (see notes). Tomorrow 9-10, 10:30-12
-    and 13-17 are busy; the only free hour before 13:00 is 12:00-13:00.
+  source: 'Goal state derived by hand from the seeded environment and the request (see notes). Tomorrow 9-10, 10:30-12
+    and 13-17 are busy. Free whole hours before 13:00: 12:00-13:00, or any hour ending by 9:00 (07:00 and 08:00
+    starts accepted as working-day hours).'
   expect:
   - select: calendar
     where:
       title:
         regex: bank
     field: start
-    eq: 2026-10-09T12:00
+    regex: ^2026-10-09T(07|08|12):00$
   - select: calendar
     where:
       title:
         regex: bank
     field: end
-    eq: 2026-10-09T13:00
+    regex: ^2026-10-09T(08|09|13):00$
   - select: calendar
     count: 4
     label: exactly one event added

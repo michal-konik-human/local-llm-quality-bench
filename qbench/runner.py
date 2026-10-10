@@ -1,7 +1,8 @@
 """Generate samples: one record per (case, language, sample index).
 
 Records are append-only (samples.jsonl). A run that is interrupted resumes where it
-stopped: samples already written without an error are skipped, failed ones are retried.
+stopped: samples with an outcome (an answer, or running out of turns) are skipped; samples
+that failed for transport/server reasons are retried.
 Each record carries the exact request body, so any single sample can be replayed.
 """
 
@@ -17,7 +18,7 @@ from .envs import make_env
 from .manifest import (build_manifest, compare_sampling, effective_sampling, now,
                        save_manifest, server_snapshot)
 from .profiles import NON_OPENAI_KEYS, preset as resolve_preset
-from .util import append_jsonl, read_jsonl, scrub_home, seed_for
+from .util import append_jsonl, error_class, read_jsonl, scrub_home, seed_for
 
 DEFAULT_MAX_TURNS = {"agentic": 10, "web_shopping": 12}
 
@@ -144,7 +145,9 @@ def run_suite(prof, preset_name, cases, k, run_dir, langs=None, client=None, arg
     else:
         manifest = build_manifest(run_id, prof, preset, cases, k, langs, list(argv))
     save_manifest(run_dir, manifest)
-    done = {(r["case"], r["lang"], r["sample"]) for r in read_jsonl(samples_path) if not r.get("error")}
+    # done = has an outcome (a normal answer, or the model ran out of turns: that is its behaviour, not a
+    # glitch, so it must not be re-rolled on resume). Transport/server errors are retried.
+    done = {(r["case"], r["lang"], r["sample"]) for r in read_jsonl(samples_path) if error_class(r) != "transport"}
     todo = [(c, lang, i) for c in cases for lang in c.langs() if lang in langs for i in range(k)
             if (c.id, lang, i) not in done]
     log(f"[run] {prof['name']} / preset {preset['name']}: {len(todo)} samples to generate "

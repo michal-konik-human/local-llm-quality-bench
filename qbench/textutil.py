@@ -6,17 +6,25 @@ import re
 from .util import fold, nfc
 
 PL_DIACRITICS = set("ąćęłńóśźżĄĆĘŁŃÓŚŹŻ")
-PL_STOP = set("i w na z że się nie do to jest jak po o co a dla od ale czy przez już tak są być jego jej "
-              "lub oraz może który która które ten ta tego także bardzo tylko jeszcze gdy więc też tym mam "
-              "pan pani państwo proszę dzień dobry dziękuję".split())
-EN_STOP = set("the and of to in is that for it with as was on be are this by not or have an at "
-              "from you your which can will would there their they we our if but all please thank "
-              "dear regards".split())
+# Stop words that exist in ONE language only. Tokens shared with English ("a", "i", "to", "do",
+# "on", "po", "co", "jak", "pan", "ten", "we") are deliberately left out.
+PL_STOP = set("w z że się nie jest na dla od ale czy przez już tak są być jego jej lub oraz może który która "
+              "które tego także bardzo tylko jeszcze gdy więc też tym jako przy bez aby żeby ze sobie jestem "
+              "będzie można mnie mi ich tej tych tu tutaj gdzie kiedy dlaczego dziś jutro proszę dziękuję "
+              "dzień dobry pani państwo szanowni szanowna szanowny pozdrawiam pozdrowienia oraz albo".split())
+EN_STOP = set("the and of is that for with as was be are this by not or have an at from you your which can "
+              "will would there their they our if but all please thank dear regards it in my me what when "
+              "where why how should could has had been were do does did into than then".split())
 ABBREV = {
-    "pl": ["np.", "tzw.", "m.in.", "itd.", "itp.", "ok.", "godz.", "ul.", "r.", "dr.", "prof.", "mgr.", "inż.",
-           "tj.", "zob.", "wg.", "tel.", "nr.", "pt.", "św.", "al.", "pl.", "zł.", "gr.", "min.", "max.", "str.", "s."],
-    "en": ["e.g.", "i.e.", "etc.", "mr.", "mrs.", "ms.", "dr.", "prof.", "vs.", "approx.", "no.", "st.", "inc.",
-           "ltd.", "jr.", "sr.", "fig.", "p.", "pp."],
+    # never end a sentence: they precede a name, a number or a noun
+    "pl": ["np.", "tzw.", "m.in.", "dr.", "prof.", "mgr.", "inż.", "ul.", "al.", "św.", "nr.", "tel.", "zob.",
+           "wg.", "tj.", "pt."],
+    "en": ["e.g.", "i.e.", "mr.", "mrs.", "ms.", "dr.", "prof.", "vs.", "approx.", "no.", "st.", "fig.", "p.", "pp."],
+}
+# may end a sentence ("urodził się w 1473 r. Zmarł..."): only protected when NOT followed by a capital letter
+ABBREV_SOFT = {
+    "pl": ["r.", "itd.", "itp.", "ok.", "godz.", "zł.", "gr.", "min.", "max.", "str.", "s.", "tys.", "mln."],
+    "en": ["etc.", "inc.", "ltd.", "jr.", "sr.", "min.", "max."],
 }
 WORD_RE = re.compile(r"[^\W\d_]+(?:[-'’][^\W\d_]+)*", re.U)
 
@@ -26,11 +34,13 @@ def words(text):
 
 
 def detect_language(text):
-    """'pl' | 'en' | 'unknown'. Stop-word + diacritics heuristic, enough to catch wrong-language replies."""
-    ws = [w.casefold() for w in words(text)]
+    """'pl' | 'en' | 'unknown'. One-language-only stop words, plus lowercase words with Polish
+    diacritics (capitalised names such as Kraków or Michał do not count), as shares of all words."""
+    raw = words(text)
+    ws = [w.casefold() for w in raw]
     if len(ws) < 3:
         return "unknown"
-    pl = sum(w in PL_STOP for w in ws) + 2 * sum(ch in PL_DIACRITICS for ch in text)
+    pl = sum(w in PL_STOP for w in ws) + sum(1 for w in raw if w[:1].islower() and any(ch in PL_DIACRITICS for ch in w))
     en = sum(w in EN_STOP for w in ws)
     if pl == en:
         return "unknown"
@@ -45,13 +55,17 @@ def diacritic_ratio(text):
 
 
 def sentences(text, lang="en"):
-    """Count-friendly sentence split that does not break on Polish/English abbreviations."""
+    """Count-friendly sentence split that does not break on abbreviations of the answer's language
+    (hard ones always protected; soft ones such as "r." only when no capital letter follows)."""
     t = " " + nfc(text).replace("\n", " ") + " "
-    protected = t
-    for ab in ABBREV.get(lang, []) + ABBREV["en" if lang == "pl" else "pl"]:
-        protected = re.sub(r"(?i)(?<=[\s(])" + re.escape(ab), lambda m: m.group(0).replace(".", "\u2024"), protected)
-    protected = re.sub(r"(\d)\.(\d)", "\\1\u2024\\2", protected)
-    parts = re.split(r"(?<=[.!?…])\s+", protected.strip())
+    dot = "\u2024"
+    for ab in ABBREV.get(lang, []):
+        t = re.sub(r"(?i)(?<=[\s(])" + re.escape(ab), lambda m: m.group(0).replace(".", dot), t)
+    for ab in ABBREV_SOFT.get(lang, []):
+        t = re.sub(r"(?<=[\s(\d])" + re.escape(ab) + r"(?=\s+[^\sA-ZĄĆĘŁŃÓŚŹŻ])",  # case-sensitive on purpose
+                   lambda m: m.group(0).replace(".", dot), t)
+    t = re.sub(r"(\d)\.(\d)", "\\1" + dot + "\\2", t)
+    parts = re.split(r"(?<=[.!?…])\s+", t.strip())
     return [p for p in (x.strip() for x in parts) if any(ch.isalnum() for ch in p)]
 
 

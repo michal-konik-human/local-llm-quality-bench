@@ -47,5 +47,7 @@ checks:
       en:
       - (does not|doesn't|no information|not (mention|specif|cover|contain|includ|address|state)|isn't (mention|cover))
     not_regex:
-    - \b(14|2) dni ojcowskiego
-    - \b(14|2) (days|weeks) of paternity
+      pl:
+      - (\b(14|2|dwa|dwóch|czternaście)\b[^.\n]{0,40}ojcowsk|ojcowsk[^.\n]{0,40}\b(14|2|dwa|dwóch|czternaście)\b)
+      en:
+      - (\b(14|2|two|fourteen)\b[^.\n]{0,40}paternity|paternity[^.\n]{0,40}\b(14|2|two|fourteen)\b)

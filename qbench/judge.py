@@ -18,8 +18,8 @@ import yaml
 from .adapters import normalize
 from .cases import resolve
 from .client import Client
-from .profiles import load_profile, preset as resolve_preset
-from .util import REPO, seed_for, sha256_bytes
+from .profiles import NON_OPENAI_KEYS, load_profile, preset as resolve_preset
+from .util import REPO, seed_for, sha256_bytes, sha256_json
 
 PROMPTS = {
     "en": {
@@ -146,7 +146,10 @@ def parse_verdicts(text, item_ids):
     """Take the LAST {"items": [...]} object in the judge's reply. Missing items -> unknown."""
     verdicts = {}
     for obj in reversed(_json_objects(text)):
-        for it in obj.get("items", []) if isinstance(obj, dict) else []:
+        items = obj.get("items") if isinstance(obj, dict) else None
+        for it in items if isinstance(items, list) else []:
+            if not isinstance(it, dict):
+                continue
             v = str(it.get("verdict", "")).strip().lower().replace(" ", "_").replace("-", "_")
             if it.get("id") in item_ids and v in ("met", "not_met", "unknown"):
                 verdicts[it["id"]] = {"verdict": v, "why": str(it.get("why", ""))[:300]}
@@ -169,7 +172,8 @@ def rubric_score(items, verdicts, threshold=0.8):
     return round(score, 4), (score >= threshold and not critical)
 
 
-def grade(judge, case, check, check_idx, rec, lang):
+def build_body(judge, case, check, check_idx, rec, lang):
+    """The exact request sent to the judge for one (sample, rubric check)."""
     answer = (rec.get("final") or {}).get("content") or ""
     msgs = build_prompt(case, check, lang, answer, judge.cfg.get("prompt_lang", "match"))
     body = {"model": judge.prof["endpoint"]["model"], "messages": msgs, "stream": False,
@@ -177,20 +181,39 @@ def grade(judge, case, check, check_idx, rec, lang):
             "seed": seed_for("judge", rec["run_id"], rec["case"], lang, rec["sample"], check_idx)}
     body.update(judge.preset["sampling"])
     body.update(judge.preset["extra_body"])
+    if judge.prof["endpoint"].get("strict_openai"):
+        for k in NON_OPENAI_KEYS:
+            body.pop(k, None)
+    return body
+
+
+def verdict_key(body, check):
+    """Cache key for a verdict: everything that can change it (rendered prompt incl. rubric, reference
+    and answer; judge model, samplers and mode; pass threshold and item weights). Not the seed."""
+    return sha256_json({"body": {k: v for k, v in body.items() if k != "seed"},
+                        "threshold": check.get("pass_threshold", 0.8),
+                        "items": [(it["id"], it["weight"], bool(it.get("critical"))) for it in check["items"]]})
+
+
+def grade(judge, case, check, check_idx, rec, lang, body=None):
+    body = body or build_body(judge, case, check, check_idx, rec, lang)
     try:
         resp = judge.client.chat(body)
-    except Exception as e:  # judge failures must not kill a long grading run
-        return {"score": None, "passed": False, "detail": f"judge error: {type(e).__name__}: {e}"[:300],
+        norm = normalize(resp)
+        text = norm["content"] or ""
+        ids = [it["id"] for it in check["items"]]
+        verdicts = parse_verdicts(text, ids)
+        if all(v["verdict"] == "unknown" for v in verdicts.values()) and norm["reasoning"]:
+            verdicts = parse_verdicts(norm["reasoning"] + "\n" + text, ids)
+    except Exception as e:  # a judge failure must never kill a long grading run
+        return {"score": None, "passed": None, "detail": f"judge error: {type(e).__name__}: {e}"[:300],
                 "judge": judge.name, "verdicts": None}
-    norm = normalize(resp)
-    text = norm["content"] or ""
-    ids = [it["id"] for it in check["items"]]
-    verdicts = parse_verdicts(text, ids)
-    if all(v["verdict"] == "unknown" for v in verdicts.values()) and norm["reasoning"]:
-        verdicts = parse_verdicts(norm["reasoning"] + "\n" + text, ids)
     score, passed = rubric_score(check["items"], verdicts, float(check.get("pass_threshold", 0.8)))
     met = [i for i, v in verdicts.items() if v["verdict"] == "met"]
     unk = [i for i, v in verdicts.items() if v["verdict"] == "unknown"]
     detail = f"met: {met}" + (f"; unknown: {unk}" if unk else "")
+    if score is None:
+        passed = None
+        detail = "judge could not decide any quality item; " + detail
     return {"score": score, "passed": passed, "detail": detail, "judge": judge.name, "verdicts": verdicts,
             "judge_usage": resp.get("usage")}

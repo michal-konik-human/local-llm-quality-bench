@@ -94,7 +94,13 @@ def summarize_run(run_dir):
     out["cost"] = {"median_completion_tokens": statistics.median(toks) if toks else None,
                    "median_decode_tps": round(statistics.median(tps), 1) if tps else None,
                    "median_latency_s": round(statistics.median(lat), 2) if lat else None}
+    out["checks_revised"] = gmeta.get("checks_revised") or []
+    out["grader"] = gmeta.get("grader")
     out["health"] = {"samples": len(grades), "errors": sum(1 for g in grades if g.get("error")),
+                     "excluded": sum(1 for g in grades if g.get("excluded")),
+                     "max_turns": sum(1 for g in grades if g.get("error_class") == "max_turns"),
+                     "unparseable": sum(1 for g in grades if g.get("error_class") == "unparseable"),
+                     "truncated": sum(1 for g in grades if g.get("finish_reason") == "length"),
                      "pending": sum(1 for g in grades if g.get("pending")),
                      "tool_parse_fallback": sum(1 for g in grades if g.get("tool_parse") == "fallback"),
                      "cases_pending_review": len({g["case"] for g in grades if g.get("review") != "frozen"}),
@@ -129,10 +135,16 @@ def render_report(summary, manifest, grades):
           f"| Samplers sent | `{json.dumps(p['sampling'])}`, max_tokens {p['max_tokens']}"
           + (f", extra `{json.dumps(p['extra_body'], ensure_ascii=False)}`" if p.get("extra_body") else "") + " |",
           f"| Preset source | {p.get('source') or '–'} |",
-          f"| Samples | k = {summary['k']} per item, {h['samples']} total, {h['errors']} errors, {h['pending']} pending grades |",
+          f"| Samples | k = {summary['k']} per item, {h['samples']} total; {h['excluded']} excluded (server/transport errors), "
+          f"{h['max_turns']} ran out of turns, {h['unparseable']} unparseable output (rejected by the server's parser, scored 0), "
+          f"{h['truncated']} hit max_tokens, {h['pending']} pending grades |",
           f"| Judge | {summary.get('judge') or 'none'}" + (f", calibrated κ = {cal['kappa']:.2f} on {cal['n']} labels" if cal and cal.get('kappa') is not None else ", **not yet calibrated against human labels**" if summary.get('judge') else "") + " |",
           f"| Suite | {manifest['suite']['n_cases']} cases, sha256 `{manifest['suite']['suite_sha256'][:16]}…`, bench commit `{(manifest['bench'].get('commit') or '?')[:10]}`{' (dirty)' if manifest['bench'].get('dirty') else ''} |",
           ""]
+    if summary.get("checks_revised"):
+        L += [f"> ✏️ Checks revised after generation (prompts unchanged, so the samples stay valid): "
+              f"{', '.join('`' + c + '`' for c in summary['checks_revised'])}. Graded with bench commit "
+              f"`{((summary.get('grader') or {}).get('commit') or '?')[:10]}`.", ""]
     if h["cases_pending_review"]:
         L += [f"> {h['cases_pending_review']} of {h['cases']} cases are still `review: pending-owner` "
               "(written by the bench author, not yet frozen by a native-speaker review).", ""]
@@ -142,15 +154,19 @@ def render_report(summary, manifest, grades):
         L += [f"> ℹ️ {h['tool_parse_fallback']} samples had tool calls returned as text and parsed by qbench "
               "(the server's template parser did not recognise them). Scored normally, flagged here.", ""]
     L += ["## Scores (0–100, mean with 95% cluster-bootstrap CI)", "",
-          "| Family | 🇵🇱 PL | 🇬🇧 EN | PL pass^1 | EN pass^1 | PL pass^k | EN pass^k |", "|---|---|---|---|---|---|---|"]
+          "| Family | 🇵🇱 PL | 🇬🇧 EN | PL pass^1 | EN pass^1 | PL pass^k | EN pass^k | PL worst@k | EN worst@k |",
+          "|---|---|---|---|---|---|---|---|---|"]
     pl, en = summary["langs"].get("pl", {}), summary["langs"].get("en", {})
     for fam in FAMILIES:
         a, b = (pl.get("families") or {}).get(fam), (en.get("families") or {}).get(fam)
         if not a and not b:
             continue
         L.append(f"| {FAMILY_LABEL[fam]} | {pct_ci(a)} | {pct_ci(b)} | {pct((a or {}).get('pass1'))} | "
-                 f"{pct((b or {}).get('pass1'))} | {pct((a or {}).get('pass_k'))} | {pct((b or {}).get('pass_k'))} |")
-    L.append(f"| **Overall** (mean of families) | **{pct_ci(pl.get('overall'))}** | **{pct_ci(en.get('overall'))}** | | | | |")
+                 f"{pct((b or {}).get('pass1'))} | {pct((a or {}).get('pass_k'))} | {pct((b or {}).get('pass_k'))} | "
+                 f"{pct((a or {}).get('worst_k'))} | {pct((b or {}).get('worst_k'))} |")
+    L.append(f"| **Overall** (mean of families) | **{pct_ci(pl.get('overall'))}** | **{pct_ci(en.get('overall'))}** | | | | | | |")
+    L += ["", "_pass^1: share of samples that pass every check. pass^k: chance that all k samples of a task pass. "
+          "worst@k: expected score of the worst of k samples._"]
     gap = summary["lang_gap"]
     L += ["", f"**PL − EN gap** on parallel tasks: {pct_ci({'mean': gap['gap'], 'ci': gap['ci']})} points "
           f"({gap['n_cases']} paired tasks; negative = worse in Polish).", ""]

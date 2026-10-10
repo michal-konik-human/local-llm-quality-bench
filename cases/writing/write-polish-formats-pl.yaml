@@ -22,7 +22,7 @@ checks:
   - check: required_patterns
     patterns:
     - 1\s?234,50\s?zł
-    - (5 listopada 2026|05\.11\.2026)
+    - (5 listopada 2026|0?5\.11\.2026)
   - check: regex_absent
     patterns:
     - 1234\.5

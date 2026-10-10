@@ -59,6 +59,16 @@ def case_hash(text):
     return sha256_bytes(REVIEW_LINE_RE.sub("review: *", text).encode("utf-8"))
 
 
+def prompt_hash(case):
+    """sha256 of everything the MODEL sees: per-language system + messages, tools, environment and
+    turn limit. Checks, references and notes are excluded, so a corrected expected answer is a grading
+    change (re-grade old samples) while any change to the prompt is a new test (re-run)."""
+    from .util import sha256_json
+    return sha256_json({"langs": {l: {"system": (v or {}).get("system"), "messages": (v or {}).get("messages")}
+                                  for l, v in (case.get("langs") or {}).items()},
+                        "tools": case.get("tools"), "env": case.get("env"), "max_turns": case.get("max_turns")})
+
+
 def load_case(path):
     with open(path, encoding="utf-8") as f:
         text = f.read()
@@ -68,6 +78,7 @@ def load_case(path):
     case = Case(data)
     case.path = os.path.abspath(path)
     case.sha256 = case_hash(text)
+    case.prompt_sha256 = prompt_hash(case)
     return case
 
 

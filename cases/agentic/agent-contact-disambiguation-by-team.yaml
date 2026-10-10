@@ -71,5 +71,6 @@ checks:
   - select: sent
     field: body
     regex:
-      pl: (urlop|wolne)
-      en: (day off|leave|vacation|holiday|off tomorrow)
+      pl: (urlop|wolne|wolnego)
+      en: (day off|leave|vacation|holiday|off tomorrow|tomorrow off|time off|\bPTO\b|out of (the )?office|not (be
+        )?(in|working))

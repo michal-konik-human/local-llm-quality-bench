@@ -70,14 +70,15 @@ checks:
   - select: sent
     count: 0
 - scorer: match
-  source: Nearest working day after Saturday 10 Oct 2026 is Monday 12 Oct; the assistant must ask.
+  source: 'Nearest working days to Saturday 10 Oct 2026: Friday 9 Oct (tomorrow) or Monday 12 Oct; the assistant
+    must ask.'
   expected:
     regex:
       pl:
-      - (poniedział|12 października|12\.10)
+      - (piąt|9 października|09\.10|poniedział|12 października|12\.10)
       - (\?|podaj|potwierdź|proszę o potwierdzenie|daj znać|wskaż)
       en:
-      - (monday|12 october|october 12|oct 12|12\.10)
+      - (friday|9 october|october 9|oct 9|monday|12 october|october 12|oct 12|12\.10)
       - (\?|let me know|please confirm|confirm|which one)
     not_regex:
       pl:

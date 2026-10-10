@@ -16,6 +16,7 @@ import tempfile
 
 HARNESS = r'''
 import json, sys
+marker = sys.argv[1]
 src = open("solution.py", encoding="utf-8").read()
 tests = json.load(open("tests.json", encoding="utf-8"))
 ns = {"__name__": "solution"}
@@ -32,7 +33,8 @@ if out["loaded"]:
             out["results"].append([t, True, ""])
         except BaseException as e:
             out["results"].append([t, False, f"{type(e).__name__}: {e}"[:300]])
-sys.stdout.write("\n@@RESULT@@" + json.dumps(out))
+sys.stdout.write("\n" + marker + json.dumps(out) + "\n")
+sys.stdout.flush()
 '''
 
 _UNSHARE = None
@@ -67,38 +69,58 @@ def _limits(cpu_s, mem_mb):
 
 
 def run_python(code, tests, timeout=15, mem_mb=1024):
-    """-> {loaded, passed, total, results[[test, ok, err]], error, network_isolated}"""
+    """-> {loaded, passed, total, results[[test, ok, err]], error, network_isolated}
+
+    Results are read after a random per-run marker, only the tests we passed in are counted
+    (a model cannot add its own "passing" results), and `passed` is clipped to the total."""
+    import secrets
+    import signal
+    tests = list(tests)
+    marker = "@@QBENCH-" + secrets.token_hex(16) + "@@"
     with tempfile.TemporaryDirectory(prefix="qbench-sbx-") as d:
         with open(os.path.join(d, "solution.py"), "w", encoding="utf-8") as f:
             f.write(code)
         with open(os.path.join(d, "tests.json"), "w", encoding="utf-8") as f:
-            json.dump(list(tests), f)
+            json.dump(tests, f)
         with open(os.path.join(d, "harness.py"), "w", encoding="utf-8") as f:
             f.write(HARNESS)
         prefix = _unshare_prefix()
-        cmd = prefix + [sys.executable, "-I", "harness.py"]
+        cmd = prefix + [sys.executable, "-I", "harness.py", marker]
         preexec = _limits(timeout, mem_mb) if os.name == "posix" else None
+        base = {"loaded": False, "passed": 0, "total": len(tests), "results": [], "network_isolated": bool(prefix)}
+        proc = subprocess.Popen(cmd, cwd=d, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, text=True, env={"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"},
+                                preexec_fn=preexec)
         try:
-            r = subprocess.run(cmd, cwd=d, capture_output=True, text=True, timeout=timeout + 5,
-                               env={"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"}, preexec_fn=preexec)
-            raw = r.stdout
+            raw, err = proc.communicate(timeout=timeout + 5)
         except subprocess.TimeoutExpired:
-            return {"loaded": False, "passed": 0, "total": len(tests), "results": [],
-                    "error": f"timeout after {timeout}s", "network_isolated": bool(prefix)}
-        if "@@RESULT@@" not in raw:
-            return {"loaded": False, "passed": 0, "total": len(tests), "results": [],
-                    "error": (r.stderr or "no output")[-500:], "network_isolated": bool(prefix)}
-        out = json.loads(raw.rsplit("@@RESULT@@", 1)[1])
-        out["passed"] = sum(1 for _, ok, _ in out["results"] if ok)
-        out["total"] = len(tests)
-        out["network_isolated"] = bool(prefix)
-        return out
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)  # the child called setsid(): kill its whole group
+            except (OSError, AttributeError):
+                proc.kill()
+            proc.communicate()
+            return {**base, "error": f"timeout after {timeout}s"}
+        if marker not in raw:
+            return {**base, "error": (err or "no output")[-500:]}
+        try:
+            out = json.loads(raw.split(marker, 1)[1].splitlines()[0])
+        except (ValueError, IndexError):
+            return {**base, "error": "unparseable harness output"}
+        got = {t: (ok, e) for t, ok, e in out.get("results", []) if t in tests}
+        results = [[t, bool(got.get(t, (False, ""))[0]), got.get(t, (False, "not run"))[1]] for t in tests]
+        return {**base, "loaded": bool(out.get("loaded")), "error": out.get("error"), "results": results,
+                "passed": min(len(tests), sum(1 for _, ok, _ in results if ok))}
 
 
-def extract_code(text):
-    """The last ```python fenced block, else the last fenced block, else the whole text."""
+def extract_code(text, entry=None):
+    """The last ```python block that defines `entry` (so a trailing usage example is skipped),
+    else the last python block, else the last fenced block, else the whole text."""
     import re
     blocks = re.findall(r"```(?:python|py)\s*\n(.*?)```", text or "", re.S)
     if not blocks:
         blocks = re.findall(r"```[\w-]*\s*\n(.*?)```", text or "", re.S)
+    if entry:
+        defining = [b for b in blocks if re.search(rf"^\s*def\s+{re.escape(entry)}\s*\(", b, re.M)]
+        if defining:
+            return defining[-1]
     return blocks[-1] if blocks else (text or "")

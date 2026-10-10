@@ -40,7 +40,7 @@ checks:
     contains_all:
     - '4471'
     regex:
-    - 10 ?%
+    - (10 ?%|10[- ]procent|dziesięcioprocent|10 percent|ten percent|ten-percent)
 - scorer: rubric
   source: Rubric written for this bench; reference notes describe what a good answer contains.
   weight: 2

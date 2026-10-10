@@ -36,8 +36,11 @@ class Env:
                 result = {"error": f"bad arguments: {e}"}
             except (KeyError, ValueError) as e:
                 result = {"error": str(e)}
-        self.calls.append({"name": name, "arguments": args, "result": result})
-        return json.dumps(result, ensure_ascii=False)
+            except Exception as e:  # odd argument types (url=None, url=[...]) must not crash the run
+                result = {"error": f"{type(e).__name__}: {e}"}
+        text = json.dumps(result, ensure_ascii=False)
+        self.calls.append({"name": name, "arguments": args, "result": json.loads(text)})  # snapshot, not a live reference
+        return text
 
     def state(self):
         return {}

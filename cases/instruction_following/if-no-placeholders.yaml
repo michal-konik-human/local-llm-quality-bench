@@ -27,6 +27,6 @@ checks:
   - check: required_patterns
     patterns:
     - '17'
-    - (16:00|16\.00|4 ?pm|4:00)
+    - (16:00|16\.00|\bo (godz\w*\.? )?16\b|4 ?p\.?m|4:00)
     - Pod Lipami
   - check: language

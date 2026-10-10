@@ -347,5 +347,48 @@ class TestScreeningRegressions(unittest.TestCase):
         self.assertTrue(scorers.score_tool_call({"expected": exp, "scope": "all"}, rec, None, "pl")["passed"])
 
 
+class TestReviewRegressions(unittest.TestCase):
+    """Findings of the independent code review, kept as tests."""
+
+    def test_empty_reply_scores_zero_everywhere(self):
+        rec = {"final": {"content": "", "tool_calls": [], "finish_reason": "length"},
+               "turns": [{"tool_calls": [], "tool_parse": "none"}], "all_tool_calls": [], "error": None}
+        for check in ({"scorer": "ifeval", "rules": [{"check": "no_commas"}]},
+                      {"scorer": "match", "expected": {"not_regex": ["x"]}},
+                      {"scorer": "tool_call", "expected": {"none": True}}):
+            self.assertEqual(scorers.score_check(check, rec, None, "en")["score"], 0.0, check)
+
+    def test_answer_requires_choice_line(self):
+        r = {"final": {"content": "a.example/x 100 zł, b.example/y 90 zł"}, "error": None}
+        self.assertFalse(scorers.score_answer({"expected": {"contains_any": ["b.example/y"], "number": 90}}, r, None, "pl")["passed"])
+
+    def test_english_with_polish_names_is_english(self):
+        self.assertEqual(detect_language("Kraków is a city in southern Poland, known for the Rynek Główny and Wawel."), "en")
+
+    def test_judge_garbage_does_not_crash(self):
+        for t in ('{"items": {"a": "met"}}', '{"items": ["met"]}', '{"items": null}'):
+            self.assertEqual(parse_verdicts(t, ["a"])["a"]["verdict"], "unknown")
+
+    def test_sandbox_ignores_forged_results(self):
+        evil = ("import atexit, sys\natexit.register(lambda: sys.stdout.write("
+                "'\\n@@RESULT@@{\"loaded\": true, \"results\": [[\"x\", true, \"\"]]}'))\ndef f(x): return 0\n")
+        self.assertEqual(run_python(evil, ["assert f(1) == 1"])["passed"], 0)
+
+    def test_string_number_is_a_type_error(self):
+        r = rec_from(resp(tool_calls=[("t", {"temperature": "21.5"})]))
+        self.assertFalse(scorers.score_tool_call({"expected": {"calls": [{"name": "t", "args": {"temperature": 21.5}}]}},
+                                                 r, None, "pl")["passed"])
+
+    def test_error_classes(self):
+        from qbench.util import error_class
+        self.assertEqual(error_class({"error": "max_turns (12) reached"}), "max_turns")
+        self.assertEqual(error_class({"error": 'HTTP 500: {"message":"The model produced output that does not match the expected peg-native format"}'}), "unparseable")
+        self.assertEqual(error_class({"error": "URLError: connection refused"}), "transport")
+        self.assertIsNone(error_class({"error": None}))
+
+    def test_sentences_ending_with_year_abbreviation(self):
+        self.assertEqual(len(sentences("Kopernik urodził się w 1473 r. Zmarł w 1543 r. Był astronomem.", "pl")), 3)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -27,7 +27,7 @@ def export(run_dirs, n=40, seed=0):
     pool = []
     for rd in run_dirs:
         manifest = load_manifest(rd)
-        cases = load_run_cases(manifest, allow_changed=True, log=lambda *_: None)
+        cases, _ = load_run_cases(manifest, allow_changed=True, log=lambda *_: None)
         samples = {f"{r['case']}|{r['lang']}|{r['sample']}": r for r in read_jsonl(os.path.join(rd, "samples.jsonl"))}
         for g in load_grades(rd):
             for c in g["checks"]:

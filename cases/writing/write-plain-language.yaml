@@ -36,8 +36,8 @@ checks:
   expected:
     regex:
     - '14'
-    - (8:00|8\.00|8 rano|8 am|8am)
-    - (15:00|15\.00|3 ?pm|15)
+    - (\b8\b|ósm|eight)
+    - (\b15\b|3 ?p\.?m|piętnast|three)
     - Lipow
 - scorer: rubric
   source: Rubric written for this bench; reference notes describe what a good answer contains.

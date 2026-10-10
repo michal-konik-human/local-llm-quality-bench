@@ -89,7 +89,7 @@ def cmd_grade(a):
     from .grade import grade_run
     judges = _judges(a)
     for r in a.runs:
-        grade_run(_run_dir(r), judges=judges, allow_changed=a.allow_changed)
+        grade_run(_run_dir(r), judges=judges, allow_changed=a.allow_changed, trust_code=a.trust_code)
     return 0
 
 
@@ -219,7 +219,10 @@ def main(argv=None):
     s.add_argument("--judge", action="append", help="judge model profile(s), in preference order")
     s.add_argument("--judge-config", help="judge config (default judges/default.yaml)")
     s.add_argument("--no-judge", action="store_true", help="skip rubric checks (they stay pending)")
-    s.add_argument("--allow-changed", action="store_true", help="grade even if case files changed since the run")
+    s.add_argument("--allow-changed", action="store_true",
+                   help="grade even if a case's PROMPT changed since the run (changed checks alone are always fine)")
+    s.add_argument("--trust-code", action="store_true",
+                   help="execute code_tests for a run generated on another host (runs that run's model output)")
     s.set_defaults(fn=cmd_grade)
 
     s = sub.add_parser("report", help="write report.md/summary.json; --publish copies into results/ + leaderboard")
