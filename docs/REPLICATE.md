@@ -1,6 +1,6 @@
 # Replicating a result
 
-Every published run (for the reference rig: [local-llm-bench-results/quality](https://github.com/michal-konik-human/local-llm-bench-results/tree/main/quality))
+Every published run (for the reference rig: [local-llm-bench-results/quality](https://github.com/michal-koniu/local-llm-bench-results/tree/main/quality))
 can be reproduced from what is in that run's folder and in this repository, plus the same model
 weights and a server that speaks the OpenAI chat-completions API.
 

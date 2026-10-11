@@ -35,7 +35,7 @@ well-written case with a clear correct answer is worth more than a clever scorer
 ## Development setup
 
 ```bash
-git clone https://github.com/michal-konik-human/local-llm-quality-bench.git && cd local-llm-quality-bench
+git clone https://github.com/michal-koniu/local-llm-quality-bench.git && cd local-llm-quality-bench
 python3 -m pip install -r requirements.txt     # PyYAML
 python3 -m unittest discover -s tests          # 47 tests, ~3 s
 python3 -m qbench validate                     # schema-check all cases and profiles
