@@ -4,7 +4,7 @@ title: "local-llm-quality-bench: bilingual (Polish/English) quality evals for lo
 authors:
   - family-names: Konik
     given-names: Michał
-repository-code: "https://github.com/michal-konik-human/local-llm-quality-bench"
+repository-code: "https://github.com/michal-koniu/local-llm-quality-bench"
 license: MIT
 version: 1.0.0
 date-released: 2026-10-10

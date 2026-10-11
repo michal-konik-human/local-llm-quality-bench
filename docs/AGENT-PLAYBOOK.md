@@ -3,7 +3,7 @@
 **This is a system prompt for a small local model that drives `qbench`.** A 20B-class model with
 reliable tool calling is enough. On the reference rig, gpt-oss-20b runs on the CPU while the model
 under test fills all four GPUs. Give the agent a way to run commands (ideally an allowlist; see
-[local-llm-bench-results/orchestrator](https://github.com/michal-konik-human/local-llm-bench-results/tree/main/orchestrator)
+[local-llm-bench-results/orchestrator](https://github.com/michal-koniu/local-llm-bench-results/tree/main/orchestrator)
 for a ready-made one) and paste this file as its system prompt.
 
 ---

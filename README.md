@@ -21,19 +21,19 @@ file, server build, chat-template hash, every sampler, the seed and the exact re
 outsider can reproduce any single number on their own machine.
 
 > 📊 **Results** from the reference rig (4× Radeon AI PRO R9700, llama.cpp + llama-swap) live in their own
-> repo, **[local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results)**: the
+> repo, **[local-llm-bench-results](https://github.com/michal-koniu/local-llm-bench-results)**: the
 > leaderboard, every transcript, and quality next to speed. This repo is just the tool, so you can point it at
 > your own models and keep your own results.
 
 ```bash
-git clone https://github.com/michal-konik-human/local-llm-quality-bench.git && cd local-llm-quality-bench
+git clone https://github.com/michal-koniu/local-llm-quality-bench.git && cd local-llm-quality-bench
 python3 -m qbench run --model gpt-oss-20b --k 3           # generate: 115 items x 3 samples
 python3 -m qbench run --model gpt-oss-20b --suite hard --k 3   # the hard suite: 40 items x 3
 python3 -m qbench grade runs/<run-id>                     # score: code checks + LLM judge
 python3 -m qbench report runs/<run-id> --publish          # report.md + leaderboard.md in $QBENCH_RESULTS
 ```
 
-Speed is measured by the sibling repo **[local-llm-perf-bench](https://github.com/michal-konik-human/local-llm-perf-bench)**
+Speed is measured by the sibling repo **[local-llm-perf-bench](https://github.com/michal-koniu/local-llm-perf-bench)**
 on the same machine and the same serving stack. Quality and speed together answer *which model,
 at which settings, for which job*.
 
@@ -45,10 +45,10 @@ Four repos, one job each:
 
 | Repo | What it is | It changes when… |
 |---|---|---|
-| [local-llm-perf-bench](https://github.com/michal-konik-human/local-llm-perf-bench) | **Tool**: how fast a model runs (llama.cpp, any GGUF, 1–n GPUs) | the way speed is measured changes |
-| [local-llm-quality-bench](https://github.com/michal-konik-human/local-llm-quality-bench) | **Tool**: how good a model is as an agent/assistant, in Polish and English | cases, scorers or model profiles change |
-| [local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results) | **Data**: everything measured on the reference rig, quality next to speed | a benchmark run finishes |
-| [radeon-r9700-rocm-notes](https://github.com/michal-konik-human/radeon-r9700-rocm-notes) | **Platform**: making 4× Radeon AI PRO R9700 + ROCm work (setup, traps, monitoring, tuning) | hardware, drivers or the serving stack change, or a new trap is found |
+| [local-llm-perf-bench](https://github.com/michal-koniu/local-llm-perf-bench) | **Tool**: how fast a model runs (llama.cpp, any GGUF, 1–n GPUs) | the way speed is measured changes |
+| [local-llm-quality-bench](https://github.com/michal-koniu/local-llm-quality-bench) | **Tool**: how good a model is as an agent/assistant, in Polish and English | cases, scorers or model profiles change |
+| [local-llm-bench-results](https://github.com/michal-koniu/local-llm-bench-results) | **Data**: everything measured on the reference rig, quality next to speed | a benchmark run finishes |
+| [radeon-r9700-rocm-notes](https://github.com/michal-koniu/radeon-r9700-rocm-notes) | **Platform**: making 4× Radeon AI PRO R9700 + ROCm work (setup, traps, monitoring, tuning) | hardware, drivers or the serving stack change, or a new trap is found |
 
 ## Why another eval?
 
@@ -189,7 +189,7 @@ the machine. Before trusting a new judge, calibrate it against your own labels:
 | [docs/REPLICATE.md](docs/REPLICATE.md) | Reproduce one sample by hand, or a whole run on your machine |
 | [docs/AGENT-PLAYBOOK.md](docs/AGENT-PLAYBOOK.md) | System prompt for a small model that runs evaluations for you |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Good first contributions, ground rules, dev setup |
-| [local-llm-bench-results](https://github.com/michal-konik-human/local-llm-bench-results) | The reference rig's published runs and leaderboard |
+| [local-llm-bench-results](https://github.com/michal-koniu/local-llm-bench-results) | The reference rig's published runs and leaderboard |
 
 ## Limitations, stated plainly
 
@@ -231,7 +231,7 @@ If you use the bench or its cases, please cite it (GitHub's "Cite this repositor
   author = {Konik, Michał},
   title  = {local-llm-quality-bench: bilingual (Polish/English) quality evals for locally served LLMs},
   year   = {2026},
-  url    = {https://github.com/michal-konik-human/local-llm-quality-bench}
+  url    = {https://github.com/michal-koniu/local-llm-quality-bench}
 }
 ```
 
